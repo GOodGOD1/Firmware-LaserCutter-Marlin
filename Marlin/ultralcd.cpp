@@ -196,6 +196,7 @@ static void lcd_status_screen()
         lcd_status_update_delay--;
     else
         lcdDrawUpdate = 1;
+    
     if (lcdDrawUpdate)
     {
         lcd_implementation_status_screen();

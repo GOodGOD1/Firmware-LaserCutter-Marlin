@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=avr-gcc
-CCC=avr-g++
-CXX=avr-g++
+CC=gcc
+CCC=g++
+CXX=g++
 FC=gfortran
-AS=avr-as
+AS=as
 
 # Macros
-CND_PLATFORM=Arduino-Windows
+CND_PLATFORM=Cygwin-Windows
 CND_DLIB_EXT=dll
 CND_CONF=Release
 CND_DISTDIR=dist
@@ -35,129 +35,129 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/_ext/fbe134af/Base64.o \
-	${OBJECTDIR}/_ext/fbe134af/ConfigurationStore.o \
-	${OBJECTDIR}/_ext/fbe134af/LiquidCrystalRus.o \
-	${OBJECTDIR}/_ext/fbe134af/MarlinSerial.o \
-	${OBJECTDIR}/_ext/fbe134af/Marlin_main.o \
-	${OBJECTDIR}/_ext/fbe134af/Sd2Card.o \
-	${OBJECTDIR}/_ext/fbe134af/SdBaseFile.o \
-	${OBJECTDIR}/_ext/fbe134af/SdFatUtil.o \
-	${OBJECTDIR}/_ext/fbe134af/SdFile.o \
-	${OBJECTDIR}/_ext/fbe134af/SdVolume.o \
-	${OBJECTDIR}/_ext/fbe134af/Servo.o \
-	${OBJECTDIR}/_ext/fbe134af/U8glib.o \
-	${OBJECTDIR}/_ext/fbe134af/cardreader.o \
-	${OBJECTDIR}/_ext/fbe134af/laser.o \
-	${OBJECTDIR}/_ext/fbe134af/motion_control.o \
-	${OBJECTDIR}/_ext/fbe134af/planner.o \
-	${OBJECTDIR}/_ext/fbe134af/stepper.o \
-	${OBJECTDIR}/_ext/fbe134af/temperature.o \
-	${OBJECTDIR}/_ext/fbe134af/ultralcd.o \
-	${OBJECTDIR}/_ext/d7b1e40c/chessengine.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_bitmap.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_circle.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_clip.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_api.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_api_16gr.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_attiny85_hw_spi.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_common.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_fast_parallel.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_hw_spi.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_hw_usart_spi.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_no_en_parallel.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_parallel.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_port_d_wr.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_ssd_i2c.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_st7920_custom.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_st7920_hw_spi.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_st7920_spi.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_std_sw_spi.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_sw_spi.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_t6963.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_hw_spi.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_parallel.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_st7920_hw_spi.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_st7920_spi.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_sw_spi.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_i2c.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_io.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_com_null.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_cursor.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_delay.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_a2_micro_printer.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_flipdisc_2x7.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_gprof.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ht1632.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ili9325d_320x240.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ks0108_128x64.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_160x80.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_240x128.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_240x64.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_320x64.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_null.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_pcd8544_84x48.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_pcf8812_96x65.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_sbn1661_122x32.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1306_128x32.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1306_128x64.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1309_128x64.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1322_nhd31oled_bw.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1322_nhd31oled_gr.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_bw.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_bw_new.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_gr.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_gr_new.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1327_96x96_gr.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1351_128x128.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_64128n.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_dogm128.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_dogm132.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_lm6059.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_lm6063.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_nhd_c12832.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_nhd_c12864.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7687_c144mvgd.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7920_128x64.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7920_192x32.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7920_202x32.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_t6963_128x64.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_t6963_240x128.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_t6963_240x64.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_tls8204_84x48.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1601_c128032.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1610_dogxl160.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1701_dogs102.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1701_mini12864.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_ellipse.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_font.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_font_data.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_line.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_ll_api.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_page.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb14v1.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16h1.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16h2.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16v1.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16v2.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb32h1.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h1.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h1f.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h2.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h8.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8v1.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8v2.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pbxh16.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_pbxh24.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_rect.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_rot.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_scale.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_state.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_u16toa.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_u8toa.o \
-	${OBJECTDIR}/_ext/d7b1e40c/u8g_virtual_screen.o \
-	${OBJECTDIR}/_ext/fbe134af/watchdog.o
+	${OBJECTDIR}/Base64.o \
+	${OBJECTDIR}/ConfigurationStore.o \
+	${OBJECTDIR}/LiquidCrystalRus.o \
+	${OBJECTDIR}/MarlinSerial.o \
+	${OBJECTDIR}/Marlin_main.o \
+	${OBJECTDIR}/Sd2Card.o \
+	${OBJECTDIR}/SdBaseFile.o \
+	${OBJECTDIR}/SdFatUtil.o \
+	${OBJECTDIR}/SdFile.o \
+	${OBJECTDIR}/SdVolume.o \
+	${OBJECTDIR}/Servo.o \
+	${OBJECTDIR}/U8glib.o \
+	${OBJECTDIR}/cardreader.o \
+	${OBJECTDIR}/laser.o \
+	${OBJECTDIR}/motion_control.o \
+	${OBJECTDIR}/planner.o \
+	${OBJECTDIR}/stepper.o \
+	${OBJECTDIR}/temperature.o \
+	${OBJECTDIR}/ultralcd.o \
+	${OBJECTDIR}/utility/chessengine.o \
+	${OBJECTDIR}/utility/u8g_bitmap.o \
+	${OBJECTDIR}/utility/u8g_circle.o \
+	${OBJECTDIR}/utility/u8g_clip.o \
+	${OBJECTDIR}/utility/u8g_com_api.o \
+	${OBJECTDIR}/utility/u8g_com_api_16gr.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_attiny85_hw_spi.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_common.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_fast_parallel.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_hw_spi.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_hw_usart_spi.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_no_en_parallel.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_parallel.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_port_d_wr.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_ssd_i2c.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_st7920_custom.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_st7920_hw_spi.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_st7920_spi.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_std_sw_spi.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_sw_spi.o \
+	${OBJECTDIR}/utility/u8g_com_arduino_t6963.o \
+	${OBJECTDIR}/utility/u8g_com_atmega_hw_spi.o \
+	${OBJECTDIR}/utility/u8g_com_atmega_parallel.o \
+	${OBJECTDIR}/utility/u8g_com_atmega_st7920_hw_spi.o \
+	${OBJECTDIR}/utility/u8g_com_atmega_st7920_spi.o \
+	${OBJECTDIR}/utility/u8g_com_atmega_sw_spi.o \
+	${OBJECTDIR}/utility/u8g_com_i2c.o \
+	${OBJECTDIR}/utility/u8g_com_io.o \
+	${OBJECTDIR}/utility/u8g_com_null.o \
+	${OBJECTDIR}/utility/u8g_cursor.o \
+	${OBJECTDIR}/utility/u8g_delay.o \
+	${OBJECTDIR}/utility/u8g_dev_a2_micro_printer.o \
+	${OBJECTDIR}/utility/u8g_dev_flipdisc_2x7.o \
+	${OBJECTDIR}/utility/u8g_dev_gprof.o \
+	${OBJECTDIR}/utility/u8g_dev_ht1632.o \
+	${OBJECTDIR}/utility/u8g_dev_ili9325d_320x240.o \
+	${OBJECTDIR}/utility/u8g_dev_ks0108_128x64.o \
+	${OBJECTDIR}/utility/u8g_dev_lc7981_160x80.o \
+	${OBJECTDIR}/utility/u8g_dev_lc7981_240x128.o \
+	${OBJECTDIR}/utility/u8g_dev_lc7981_240x64.o \
+	${OBJECTDIR}/utility/u8g_dev_lc7981_320x64.o \
+	${OBJECTDIR}/utility/u8g_dev_null.o \
+	${OBJECTDIR}/utility/u8g_dev_pcd8544_84x48.o \
+	${OBJECTDIR}/utility/u8g_dev_pcf8812_96x65.o \
+	${OBJECTDIR}/utility/u8g_dev_sbn1661_122x32.o \
+	${OBJECTDIR}/utility/u8g_dev_ssd1306_128x32.o \
+	${OBJECTDIR}/utility/u8g_dev_ssd1306_128x64.o \
+	${OBJECTDIR}/utility/u8g_dev_ssd1309_128x64.o \
+	${OBJECTDIR}/utility/u8g_dev_ssd1322_nhd31oled_bw.o \
+	${OBJECTDIR}/utility/u8g_dev_ssd1322_nhd31oled_gr.o \
+	${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_bw.o \
+	${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_bw_new.o \
+	${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_gr.o \
+	${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_gr_new.o \
+	${OBJECTDIR}/utility/u8g_dev_ssd1327_96x96_gr.o \
+	${OBJECTDIR}/utility/u8g_dev_ssd1351_128x128.o \
+	${OBJECTDIR}/utility/u8g_dev_st7565_64128n.o \
+	${OBJECTDIR}/utility/u8g_dev_st7565_dogm128.o \
+	${OBJECTDIR}/utility/u8g_dev_st7565_dogm132.o \
+	${OBJECTDIR}/utility/u8g_dev_st7565_lm6059.o \
+	${OBJECTDIR}/utility/u8g_dev_st7565_lm6063.o \
+	${OBJECTDIR}/utility/u8g_dev_st7565_nhd_c12832.o \
+	${OBJECTDIR}/utility/u8g_dev_st7565_nhd_c12864.o \
+	${OBJECTDIR}/utility/u8g_dev_st7687_c144mvgd.o \
+	${OBJECTDIR}/utility/u8g_dev_st7920_128x64.o \
+	${OBJECTDIR}/utility/u8g_dev_st7920_192x32.o \
+	${OBJECTDIR}/utility/u8g_dev_st7920_202x32.o \
+	${OBJECTDIR}/utility/u8g_dev_t6963_128x64.o \
+	${OBJECTDIR}/utility/u8g_dev_t6963_240x128.o \
+	${OBJECTDIR}/utility/u8g_dev_t6963_240x64.o \
+	${OBJECTDIR}/utility/u8g_dev_tls8204_84x48.o \
+	${OBJECTDIR}/utility/u8g_dev_uc1601_c128032.o \
+	${OBJECTDIR}/utility/u8g_dev_uc1610_dogxl160.o \
+	${OBJECTDIR}/utility/u8g_dev_uc1701_dogs102.o \
+	${OBJECTDIR}/utility/u8g_dev_uc1701_mini12864.o \
+	${OBJECTDIR}/utility/u8g_ellipse.o \
+	${OBJECTDIR}/utility/u8g_font.o \
+	${OBJECTDIR}/utility/u8g_font_data.o \
+	${OBJECTDIR}/utility/u8g_line.o \
+	${OBJECTDIR}/utility/u8g_ll_api.o \
+	${OBJECTDIR}/utility/u8g_page.o \
+	${OBJECTDIR}/utility/u8g_pb.o \
+	${OBJECTDIR}/utility/u8g_pb14v1.o \
+	${OBJECTDIR}/utility/u8g_pb16h1.o \
+	${OBJECTDIR}/utility/u8g_pb16h2.o \
+	${OBJECTDIR}/utility/u8g_pb16v1.o \
+	${OBJECTDIR}/utility/u8g_pb16v2.o \
+	${OBJECTDIR}/utility/u8g_pb32h1.o \
+	${OBJECTDIR}/utility/u8g_pb8h1.o \
+	${OBJECTDIR}/utility/u8g_pb8h1f.o \
+	${OBJECTDIR}/utility/u8g_pb8h2.o \
+	${OBJECTDIR}/utility/u8g_pb8h8.o \
+	${OBJECTDIR}/utility/u8g_pb8v1.o \
+	${OBJECTDIR}/utility/u8g_pb8v2.o \
+	${OBJECTDIR}/utility/u8g_pbxh16.o \
+	${OBJECTDIR}/utility/u8g_pbxh24.o \
+	${OBJECTDIR}/utility/u8g_rect.o \
+	${OBJECTDIR}/utility/u8g_rot.o \
+	${OBJECTDIR}/utility/u8g_scale.o \
+	${OBJECTDIR}/utility/u8g_state.o \
+	${OBJECTDIR}/utility/u8g_u16toa.o \
+	${OBJECTDIR}/utility/u8g_u8toa.o \
+	${OBJECTDIR}/utility/u8g_virtual_screen.o \
+	${OBJECTDIR}/watchdog.o
 
 
 # C Compiler Flags
@@ -184,620 +184,620 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/marlin.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/marlin ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/_ext/fbe134af/Base64.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/Base64.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/Base64.o: Base64.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/Base64.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/Base64.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Base64.o Base64.cpp
 
-${OBJECTDIR}/_ext/fbe134af/ConfigurationStore.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/ConfigurationStore.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/ConfigurationStore.o: ConfigurationStore.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/ConfigurationStore.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/ConfigurationStore.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConfigurationStore.o ConfigurationStore.cpp
 
-${OBJECTDIR}/_ext/fbe134af/LiquidCrystalRus.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/LiquidCrystalRus.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/LiquidCrystalRus.o: LiquidCrystalRus.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/LiquidCrystalRus.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/LiquidCrystalRus.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LiquidCrystalRus.o LiquidCrystalRus.cpp
 
-${OBJECTDIR}/_ext/fbe134af/MarlinSerial.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/MarlinSerial.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/MarlinSerial.o: MarlinSerial.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/MarlinSerial.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/MarlinSerial.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MarlinSerial.o MarlinSerial.cpp
 
-${OBJECTDIR}/_ext/fbe134af/Marlin_main.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/Marlin_main.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/Marlin_main.o: Marlin_main.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/Marlin_main.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/Marlin_main.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Marlin_main.o Marlin_main.cpp
 
-${OBJECTDIR}/_ext/fbe134af/Sd2Card.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/Sd2Card.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/Sd2Card.o: Sd2Card.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/Sd2Card.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/Sd2Card.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Sd2Card.o Sd2Card.cpp
 
-${OBJECTDIR}/_ext/fbe134af/SdBaseFile.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/SdBaseFile.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/SdBaseFile.o: SdBaseFile.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/SdBaseFile.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/SdBaseFile.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdBaseFile.o SdBaseFile.cpp
 
-${OBJECTDIR}/_ext/fbe134af/SdFatUtil.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/SdFatUtil.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/SdFatUtil.o: SdFatUtil.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/SdFatUtil.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/SdFatUtil.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdFatUtil.o SdFatUtil.cpp
 
-${OBJECTDIR}/_ext/fbe134af/SdFile.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/SdFile.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/SdFile.o: SdFile.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/SdFile.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/SdFile.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdFile.o SdFile.cpp
 
-${OBJECTDIR}/_ext/fbe134af/SdVolume.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/SdVolume.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/SdVolume.o: SdVolume.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/SdVolume.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/SdVolume.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdVolume.o SdVolume.cpp
 
-${OBJECTDIR}/_ext/fbe134af/Servo.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/Servo.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/Servo.o: Servo.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/Servo.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/Servo.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Servo.o Servo.cpp
 
-${OBJECTDIR}/_ext/fbe134af/U8glib.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/U8glib.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/U8glib.o: U8glib.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/U8glib.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/U8glib.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/U8glib.o U8glib.cpp
 
-${OBJECTDIR}/_ext/fbe134af/cardreader.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/cardreader.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/cardreader.o: cardreader.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/cardreader.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/cardreader.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/cardreader.o cardreader.cpp
 
-${OBJECTDIR}/_ext/fbe134af/laser.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/laser.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/laser.o: laser.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/laser.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/laser.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/laser.o laser.cpp
 
-${OBJECTDIR}/_ext/fbe134af/motion_control.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/motion_control.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/motion_control.o: motion_control.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/motion_control.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/motion_control.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/motion_control.o motion_control.cpp
 
-${OBJECTDIR}/_ext/fbe134af/planner.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/planner.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/planner.o: planner.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/planner.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/planner.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/planner.o planner.cpp
 
-${OBJECTDIR}/_ext/fbe134af/stepper.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/stepper.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/stepper.o: stepper.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/stepper.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/stepper.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/stepper.o stepper.cpp
 
-${OBJECTDIR}/_ext/fbe134af/temperature.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/temperature.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/temperature.o: temperature.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/temperature.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/temperature.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/temperature.o temperature.cpp
 
-${OBJECTDIR}/_ext/fbe134af/ultralcd.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/ultralcd.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/ultralcd.o: ultralcd.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/ultralcd.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/ultralcd.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ultralcd.o ultralcd.cpp
 
-${OBJECTDIR}/_ext/d7b1e40c/chessengine.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/chessengine.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/chessengine.o: utility/chessengine.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/chessengine.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/chessengine.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/chessengine.o utility/chessengine.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_bitmap.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_bitmap.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_bitmap.o: utility/u8g_bitmap.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_bitmap.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_bitmap.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_bitmap.o utility/u8g_bitmap.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_circle.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_circle.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_circle.o: utility/u8g_circle.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_circle.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_circle.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_circle.o utility/u8g_circle.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_clip.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_clip.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_clip.o: utility/u8g_clip.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_clip.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_clip.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_clip.o utility/u8g_clip.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_api.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_api.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_api.o: utility/u8g_com_api.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_api.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_api.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_api.o utility/u8g_com_api.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_api_16gr.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_api_16gr.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_api_16gr.o: utility/u8g_com_api_16gr.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_api_16gr.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_api_16gr.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_api_16gr.o utility/u8g_com_api_16gr.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_attiny85_hw_spi.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_attiny85_hw_spi.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_attiny85_hw_spi.o: utility/u8g_com_arduino_attiny85_hw_spi.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_attiny85_hw_spi.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_attiny85_hw_spi.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_attiny85_hw_spi.o utility/u8g_com_arduino_attiny85_hw_spi.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_common.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_common.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_common.o: utility/u8g_com_arduino_common.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_common.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_common.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_common.o utility/u8g_com_arduino_common.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_fast_parallel.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_fast_parallel.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_fast_parallel.o: utility/u8g_com_arduino_fast_parallel.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_fast_parallel.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_fast_parallel.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_fast_parallel.o utility/u8g_com_arduino_fast_parallel.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_hw_spi.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_hw_spi.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_hw_spi.o: utility/u8g_com_arduino_hw_spi.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_hw_spi.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_hw_spi.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_hw_spi.o utility/u8g_com_arduino_hw_spi.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_hw_usart_spi.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_hw_usart_spi.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_hw_usart_spi.o: utility/u8g_com_arduino_hw_usart_spi.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_hw_usart_spi.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_hw_usart_spi.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_hw_usart_spi.o utility/u8g_com_arduino_hw_usart_spi.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_no_en_parallel.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_no_en_parallel.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_no_en_parallel.o: utility/u8g_com_arduino_no_en_parallel.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_no_en_parallel.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_no_en_parallel.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_no_en_parallel.o utility/u8g_com_arduino_no_en_parallel.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_parallel.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_parallel.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_parallel.o: utility/u8g_com_arduino_parallel.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_parallel.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_parallel.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_parallel.o utility/u8g_com_arduino_parallel.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_port_d_wr.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_port_d_wr.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_port_d_wr.o: utility/u8g_com_arduino_port_d_wr.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_port_d_wr.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_port_d_wr.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_port_d_wr.o utility/u8g_com_arduino_port_d_wr.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_ssd_i2c.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_ssd_i2c.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_ssd_i2c.o: utility/u8g_com_arduino_ssd_i2c.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_ssd_i2c.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_ssd_i2c.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_ssd_i2c.o utility/u8g_com_arduino_ssd_i2c.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_st7920_custom.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_st7920_custom.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_st7920_custom.o: utility/u8g_com_arduino_st7920_custom.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_st7920_custom.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_st7920_custom.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_st7920_custom.o utility/u8g_com_arduino_st7920_custom.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_st7920_hw_spi.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_st7920_hw_spi.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_st7920_hw_spi.o: utility/u8g_com_arduino_st7920_hw_spi.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_st7920_hw_spi.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_st7920_hw_spi.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_st7920_hw_spi.o utility/u8g_com_arduino_st7920_hw_spi.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_st7920_spi.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_st7920_spi.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_st7920_spi.o: utility/u8g_com_arduino_st7920_spi.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_st7920_spi.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_st7920_spi.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_st7920_spi.o utility/u8g_com_arduino_st7920_spi.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_std_sw_spi.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_std_sw_spi.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_std_sw_spi.o: utility/u8g_com_arduino_std_sw_spi.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_std_sw_spi.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_std_sw_spi.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_std_sw_spi.o utility/u8g_com_arduino_std_sw_spi.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_sw_spi.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_sw_spi.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_sw_spi.o: utility/u8g_com_arduino_sw_spi.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_sw_spi.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_sw_spi.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_sw_spi.o utility/u8g_com_arduino_sw_spi.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_t6963.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_t6963.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_arduino_t6963.o: utility/u8g_com_arduino_t6963.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_arduino_t6963.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_arduino_t6963.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_arduino_t6963.o utility/u8g_com_arduino_t6963.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_hw_spi.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_atmega_hw_spi.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_atmega_hw_spi.o: utility/u8g_com_atmega_hw_spi.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_hw_spi.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_atmega_hw_spi.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_atmega_hw_spi.o utility/u8g_com_atmega_hw_spi.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_parallel.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_atmega_parallel.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_atmega_parallel.o: utility/u8g_com_atmega_parallel.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_parallel.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_atmega_parallel.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_atmega_parallel.o utility/u8g_com_atmega_parallel.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_st7920_hw_spi.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_atmega_st7920_hw_spi.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_atmega_st7920_hw_spi.o: utility/u8g_com_atmega_st7920_hw_spi.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_st7920_hw_spi.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_atmega_st7920_hw_spi.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_atmega_st7920_hw_spi.o utility/u8g_com_atmega_st7920_hw_spi.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_st7920_spi.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_atmega_st7920_spi.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_atmega_st7920_spi.o: utility/u8g_com_atmega_st7920_spi.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_st7920_spi.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_atmega_st7920_spi.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_atmega_st7920_spi.o utility/u8g_com_atmega_st7920_spi.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_sw_spi.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_atmega_sw_spi.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_atmega_sw_spi.o: utility/u8g_com_atmega_sw_spi.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_atmega_sw_spi.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_atmega_sw_spi.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_atmega_sw_spi.o utility/u8g_com_atmega_sw_spi.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_i2c.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_i2c.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_i2c.o: utility/u8g_com_i2c.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_i2c.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_i2c.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_i2c.o utility/u8g_com_i2c.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_io.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_io.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_io.o: utility/u8g_com_io.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_io.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_io.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_io.o utility/u8g_com_io.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_com_null.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_null.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_com_null.o: utility/u8g_com_null.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_com_null.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_com_null.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_com_null.o utility/u8g_com_null.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_cursor.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_cursor.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_cursor.o: utility/u8g_cursor.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_cursor.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_cursor.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_cursor.o utility/u8g_cursor.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_delay.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_delay.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_delay.o: utility/u8g_delay.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_delay.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_delay.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_delay.o utility/u8g_delay.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_a2_micro_printer.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_a2_micro_printer.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_a2_micro_printer.o: utility/u8g_dev_a2_micro_printer.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_a2_micro_printer.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_a2_micro_printer.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_a2_micro_printer.o utility/u8g_dev_a2_micro_printer.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_flipdisc_2x7.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_flipdisc_2x7.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_flipdisc_2x7.o: utility/u8g_dev_flipdisc_2x7.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_flipdisc_2x7.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_flipdisc_2x7.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_flipdisc_2x7.o utility/u8g_dev_flipdisc_2x7.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_gprof.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_gprof.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_gprof.o: utility/u8g_dev_gprof.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_gprof.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_gprof.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_gprof.o utility/u8g_dev_gprof.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ht1632.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ht1632.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ht1632.o: utility/u8g_dev_ht1632.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ht1632.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ht1632.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ht1632.o utility/u8g_dev_ht1632.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ili9325d_320x240.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ili9325d_320x240.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ili9325d_320x240.o: utility/u8g_dev_ili9325d_320x240.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ili9325d_320x240.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ili9325d_320x240.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ili9325d_320x240.o utility/u8g_dev_ili9325d_320x240.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ks0108_128x64.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ks0108_128x64.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ks0108_128x64.o: utility/u8g_dev_ks0108_128x64.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ks0108_128x64.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ks0108_128x64.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ks0108_128x64.o utility/u8g_dev_ks0108_128x64.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_160x80.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_lc7981_160x80.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_lc7981_160x80.o: utility/u8g_dev_lc7981_160x80.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_160x80.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_lc7981_160x80.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_lc7981_160x80.o utility/u8g_dev_lc7981_160x80.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_240x128.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_lc7981_240x128.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_lc7981_240x128.o: utility/u8g_dev_lc7981_240x128.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_240x128.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_lc7981_240x128.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_lc7981_240x128.o utility/u8g_dev_lc7981_240x128.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_240x64.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_lc7981_240x64.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_lc7981_240x64.o: utility/u8g_dev_lc7981_240x64.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_240x64.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_lc7981_240x64.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_lc7981_240x64.o utility/u8g_dev_lc7981_240x64.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_320x64.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_lc7981_320x64.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_lc7981_320x64.o: utility/u8g_dev_lc7981_320x64.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_lc7981_320x64.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_lc7981_320x64.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_lc7981_320x64.o utility/u8g_dev_lc7981_320x64.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_null.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_null.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_null.o: utility/u8g_dev_null.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_null.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_null.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_null.o utility/u8g_dev_null.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_pcd8544_84x48.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_pcd8544_84x48.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_pcd8544_84x48.o: utility/u8g_dev_pcd8544_84x48.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_pcd8544_84x48.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_pcd8544_84x48.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_pcd8544_84x48.o utility/u8g_dev_pcd8544_84x48.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_pcf8812_96x65.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_pcf8812_96x65.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_pcf8812_96x65.o: utility/u8g_dev_pcf8812_96x65.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_pcf8812_96x65.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_pcf8812_96x65.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_pcf8812_96x65.o utility/u8g_dev_pcf8812_96x65.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_sbn1661_122x32.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_sbn1661_122x32.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_sbn1661_122x32.o: utility/u8g_dev_sbn1661_122x32.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_sbn1661_122x32.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_sbn1661_122x32.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_sbn1661_122x32.o utility/u8g_dev_sbn1661_122x32.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1306_128x32.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1306_128x32.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ssd1306_128x32.o: utility/u8g_dev_ssd1306_128x32.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1306_128x32.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1306_128x32.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ssd1306_128x32.o utility/u8g_dev_ssd1306_128x32.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1306_128x64.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1306_128x64.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ssd1306_128x64.o: utility/u8g_dev_ssd1306_128x64.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1306_128x64.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1306_128x64.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ssd1306_128x64.o utility/u8g_dev_ssd1306_128x64.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1309_128x64.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1309_128x64.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ssd1309_128x64.o: utility/u8g_dev_ssd1309_128x64.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1309_128x64.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1309_128x64.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ssd1309_128x64.o utility/u8g_dev_ssd1309_128x64.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1322_nhd31oled_bw.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1322_nhd31oled_bw.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ssd1322_nhd31oled_bw.o: utility/u8g_dev_ssd1322_nhd31oled_bw.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1322_nhd31oled_bw.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1322_nhd31oled_bw.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ssd1322_nhd31oled_bw.o utility/u8g_dev_ssd1322_nhd31oled_bw.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1322_nhd31oled_gr.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1322_nhd31oled_gr.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ssd1322_nhd31oled_gr.o: utility/u8g_dev_ssd1322_nhd31oled_gr.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1322_nhd31oled_gr.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1322_nhd31oled_gr.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ssd1322_nhd31oled_gr.o utility/u8g_dev_ssd1322_nhd31oled_gr.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_bw.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1325_nhd27oled_bw.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_bw.o: utility/u8g_dev_ssd1325_nhd27oled_bw.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_bw.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1325_nhd27oled_bw.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_bw.o utility/u8g_dev_ssd1325_nhd27oled_bw.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_bw_new.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1325_nhd27oled_bw_new.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_bw_new.o: utility/u8g_dev_ssd1325_nhd27oled_bw_new.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_bw_new.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1325_nhd27oled_bw_new.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_bw_new.o utility/u8g_dev_ssd1325_nhd27oled_bw_new.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_gr.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1325_nhd27oled_gr.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_gr.o: utility/u8g_dev_ssd1325_nhd27oled_gr.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_gr.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1325_nhd27oled_gr.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_gr.o utility/u8g_dev_ssd1325_nhd27oled_gr.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_gr_new.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1325_nhd27oled_gr_new.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_gr_new.o: utility/u8g_dev_ssd1325_nhd27oled_gr_new.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1325_nhd27oled_gr_new.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1325_nhd27oled_gr_new.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ssd1325_nhd27oled_gr_new.o utility/u8g_dev_ssd1325_nhd27oled_gr_new.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1327_96x96_gr.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1327_96x96_gr.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ssd1327_96x96_gr.o: utility/u8g_dev_ssd1327_96x96_gr.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1327_96x96_gr.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1327_96x96_gr.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ssd1327_96x96_gr.o utility/u8g_dev_ssd1327_96x96_gr.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1351_128x128.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1351_128x128.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_ssd1351_128x128.o: utility/u8g_dev_ssd1351_128x128.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_ssd1351_128x128.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_ssd1351_128x128.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_ssd1351_128x128.o utility/u8g_dev_ssd1351_128x128.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_64128n.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_64128n.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_st7565_64128n.o: utility/u8g_dev_st7565_64128n.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_64128n.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_64128n.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_st7565_64128n.o utility/u8g_dev_st7565_64128n.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_dogm128.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_dogm128.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_st7565_dogm128.o: utility/u8g_dev_st7565_dogm128.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_dogm128.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_dogm128.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_st7565_dogm128.o utility/u8g_dev_st7565_dogm128.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_dogm132.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_dogm132.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_st7565_dogm132.o: utility/u8g_dev_st7565_dogm132.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_dogm132.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_dogm132.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_st7565_dogm132.o utility/u8g_dev_st7565_dogm132.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_lm6059.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_lm6059.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_st7565_lm6059.o: utility/u8g_dev_st7565_lm6059.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_lm6059.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_lm6059.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_st7565_lm6059.o utility/u8g_dev_st7565_lm6059.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_lm6063.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_lm6063.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_st7565_lm6063.o: utility/u8g_dev_st7565_lm6063.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_lm6063.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_lm6063.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_st7565_lm6063.o utility/u8g_dev_st7565_lm6063.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_nhd_c12832.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_nhd_c12832.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_st7565_nhd_c12832.o: utility/u8g_dev_st7565_nhd_c12832.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_nhd_c12832.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_nhd_c12832.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_st7565_nhd_c12832.o utility/u8g_dev_st7565_nhd_c12832.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_nhd_c12864.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_nhd_c12864.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_st7565_nhd_c12864.o: utility/u8g_dev_st7565_nhd_c12864.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7565_nhd_c12864.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7565_nhd_c12864.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_st7565_nhd_c12864.o utility/u8g_dev_st7565_nhd_c12864.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7687_c144mvgd.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7687_c144mvgd.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_st7687_c144mvgd.o: utility/u8g_dev_st7687_c144mvgd.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7687_c144mvgd.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7687_c144mvgd.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_st7687_c144mvgd.o utility/u8g_dev_st7687_c144mvgd.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7920_128x64.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7920_128x64.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_st7920_128x64.o: utility/u8g_dev_st7920_128x64.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7920_128x64.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7920_128x64.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_st7920_128x64.o utility/u8g_dev_st7920_128x64.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7920_192x32.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7920_192x32.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_st7920_192x32.o: utility/u8g_dev_st7920_192x32.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7920_192x32.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7920_192x32.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_st7920_192x32.o utility/u8g_dev_st7920_192x32.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7920_202x32.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7920_202x32.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_st7920_202x32.o: utility/u8g_dev_st7920_202x32.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_st7920_202x32.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_st7920_202x32.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_st7920_202x32.o utility/u8g_dev_st7920_202x32.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_t6963_128x64.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_t6963_128x64.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_t6963_128x64.o: utility/u8g_dev_t6963_128x64.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_t6963_128x64.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_t6963_128x64.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_t6963_128x64.o utility/u8g_dev_t6963_128x64.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_t6963_240x128.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_t6963_240x128.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_t6963_240x128.o: utility/u8g_dev_t6963_240x128.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_t6963_240x128.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_t6963_240x128.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_t6963_240x128.o utility/u8g_dev_t6963_240x128.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_t6963_240x64.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_t6963_240x64.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_t6963_240x64.o: utility/u8g_dev_t6963_240x64.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_t6963_240x64.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_t6963_240x64.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_t6963_240x64.o utility/u8g_dev_t6963_240x64.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_tls8204_84x48.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_tls8204_84x48.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_tls8204_84x48.o: utility/u8g_dev_tls8204_84x48.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_tls8204_84x48.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_tls8204_84x48.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_tls8204_84x48.o utility/u8g_dev_tls8204_84x48.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1601_c128032.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_uc1601_c128032.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_uc1601_c128032.o: utility/u8g_dev_uc1601_c128032.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1601_c128032.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_uc1601_c128032.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_uc1601_c128032.o utility/u8g_dev_uc1601_c128032.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1610_dogxl160.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_uc1610_dogxl160.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_uc1610_dogxl160.o: utility/u8g_dev_uc1610_dogxl160.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1610_dogxl160.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_uc1610_dogxl160.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_uc1610_dogxl160.o utility/u8g_dev_uc1610_dogxl160.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1701_dogs102.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_uc1701_dogs102.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_uc1701_dogs102.o: utility/u8g_dev_uc1701_dogs102.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1701_dogs102.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_uc1701_dogs102.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_uc1701_dogs102.o utility/u8g_dev_uc1701_dogs102.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1701_mini12864.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_uc1701_mini12864.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_dev_uc1701_mini12864.o: utility/u8g_dev_uc1701_mini12864.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_dev_uc1701_mini12864.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_dev_uc1701_mini12864.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_dev_uc1701_mini12864.o utility/u8g_dev_uc1701_mini12864.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_ellipse.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_ellipse.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_ellipse.o: utility/u8g_ellipse.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_ellipse.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_ellipse.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_ellipse.o utility/u8g_ellipse.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_font.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_font.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_font.o: utility/u8g_font.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_font.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_font.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_font.o utility/u8g_font.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_font_data.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_font_data.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_font_data.o: utility/u8g_font_data.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_font_data.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_font_data.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_font_data.o utility/u8g_font_data.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_line.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_line.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_line.o: utility/u8g_line.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_line.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_line.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_line.o utility/u8g_line.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_ll_api.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_ll_api.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_ll_api.o: utility/u8g_ll_api.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_ll_api.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_ll_api.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_ll_api.o utility/u8g_ll_api.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_page.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_page.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_page.o: utility/u8g_page.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_page.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_page.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_page.o utility/u8g_page.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb.o: utility/u8g_pb.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb.o utility/u8g_pb.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb14v1.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb14v1.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb14v1.o: utility/u8g_pb14v1.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb14v1.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb14v1.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb14v1.o utility/u8g_pb14v1.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16h1.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb16h1.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb16h1.o: utility/u8g_pb16h1.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16h1.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb16h1.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb16h1.o utility/u8g_pb16h1.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16h2.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb16h2.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb16h2.o: utility/u8g_pb16h2.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16h2.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb16h2.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb16h2.o utility/u8g_pb16h2.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16v1.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb16v1.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb16v1.o: utility/u8g_pb16v1.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16v1.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb16v1.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb16v1.o utility/u8g_pb16v1.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16v2.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb16v2.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb16v2.o: utility/u8g_pb16v2.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb16v2.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb16v2.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb16v2.o utility/u8g_pb16v2.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb32h1.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb32h1.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb32h1.o: utility/u8g_pb32h1.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb32h1.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb32h1.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb32h1.o utility/u8g_pb32h1.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h1.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8h1.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb8h1.o: utility/u8g_pb8h1.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h1.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8h1.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb8h1.o utility/u8g_pb8h1.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h1f.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8h1f.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb8h1f.o: utility/u8g_pb8h1f.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h1f.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8h1f.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb8h1f.o utility/u8g_pb8h1f.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h2.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8h2.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb8h2.o: utility/u8g_pb8h2.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h2.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8h2.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb8h2.o utility/u8g_pb8h2.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h8.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8h8.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb8h8.o: utility/u8g_pb8h8.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8h8.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8h8.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb8h8.o utility/u8g_pb8h8.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8v1.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8v1.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb8v1.o: utility/u8g_pb8v1.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8v1.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8v1.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb8v1.o utility/u8g_pb8v1.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8v2.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8v2.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pb8v2.o: utility/u8g_pb8v2.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pb8v2.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pb8v2.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pb8v2.o utility/u8g_pb8v2.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pbxh16.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pbxh16.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pbxh16.o: utility/u8g_pbxh16.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pbxh16.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pbxh16.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pbxh16.o utility/u8g_pbxh16.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_pbxh24.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pbxh24.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_pbxh24.o: utility/u8g_pbxh24.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_pbxh24.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_pbxh24.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_pbxh24.o utility/u8g_pbxh24.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_rect.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_rect.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_rect.o: utility/u8g_rect.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_rect.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_rect.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_rect.o utility/u8g_rect.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_rot.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_rot.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_rot.o: utility/u8g_rot.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_rot.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_rot.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_rot.o utility/u8g_rot.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_scale.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_scale.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_scale.o: utility/u8g_scale.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_scale.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_scale.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_scale.o utility/u8g_scale.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_state.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_state.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_state.o: utility/u8g_state.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_state.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_state.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_state.o utility/u8g_state.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_u16toa.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_u16toa.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_u16toa.o: utility/u8g_u16toa.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_u16toa.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_u16toa.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_u16toa.o utility/u8g_u16toa.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_u8toa.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_u8toa.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_u8toa.o: utility/u8g_u8toa.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_u8toa.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_u8toa.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_u8toa.o utility/u8g_u8toa.c
 
-${OBJECTDIR}/_ext/d7b1e40c/u8g_virtual_screen.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_virtual_screen.c 
-	${MKDIR} -p ${OBJECTDIR}/_ext/d7b1e40c
+${OBJECTDIR}/utility/u8g_virtual_screen.o: utility/u8g_virtual_screen.c 
+	${MKDIR} -p ${OBJECTDIR}/utility
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -I${INCLUDE} -IC/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d7b1e40c/u8g_virtual_screen.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/utility/u8g_virtual_screen.c
+	$(COMPILE.c) -O2 -I${INCLUDE} -I/cygdrive/C/Arduino/hardware/arduino/avr/cores/arduino -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/utility/u8g_virtual_screen.o utility/u8g_virtual_screen.c
 
-${OBJECTDIR}/_ext/fbe134af/watchdog.o: //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/watchdog.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/fbe134af
+${OBJECTDIR}/watchdog.o: watchdog.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/fbe134af/watchdog.o //admfs1/IHADMVOL/home/JAVI/Desktop/buildlog-lasercutter-marlin/Marlin/watchdog.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/watchdog.o watchdog.cpp
 
 # Subprojects
 .build-subprojects:

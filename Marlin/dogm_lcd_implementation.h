@@ -33,6 +33,7 @@
 #define LCD_CLICKED (buttons&EN_C)
 #endif
 
+#include "Marlin.h"
 #include "U8glib.h"
 #include "DOGMbitmaps.h"
 #include "dogm_font_data_marlin.h"
@@ -92,6 +93,8 @@ U8GLIB_NHD_C12864 u8g(DOGLCD_CS, DOGLCD_A0);
 U8GLIB_DOGM128 u8g(DOGLCD_CS, DOGLCD_A0);	// HW-SPI Com: CS, A0
 #endif
 
+static void lcd_printPGM (const char* str );
+
 static void lcd_implementation_init()
 {
 #ifdef LCD_PIN_BL
@@ -123,28 +126,150 @@ static void lcd_implementation_init()
 #ifdef LCD_SCREEN_ROT_270
 	u8g.setRot270();	// Rotate screen by 270°
 #endif
-
    
 	u8g.firstPage();
+        
 	do {
-			// RepRap init bmp
-			u8g.drawBitmapP(0,0,START_BMPBYTEWIDTH,START_BMPHEIGHT,start_bmp);
-			// Welcome message
-			u8g.setFont(u8g_font_6x10_marlin);
-			u8g.drawStr(62,10,"MARLIN"); 
-			u8g.setFont(u8g_font_5x8);
-			u8g.drawStr(62,19,"V1.0.0 RC2-mm");
-			u8g.setFont(u8g_font_6x10_marlin);
-			u8g.drawStr(62,28,"by ErikZalm");
-			u8g.drawStr(62,41,"DOGM128 LCD");
-			u8g.setFont(u8g_font_5x8);
-			u8g.drawStr(62,48,"enhancements");
-			u8g.setFont(u8g_font_5x8);
-			u8g.drawStr(62,55,"by STB, MM");
-			u8g.drawStr(62,61,"uses u");
-			u8g.drawStr90(92,57,"8");
-			u8g.drawStr(100,61,"glib");
-	   } while( u8g.nextPage() );
+            // RepRap init bmp
+            u8g.drawBitmapP(0,3,START_BMPBYTEWIDTH,START_BMPHEIGHT,start_bmp);
+            
+            // Welcome message
+            u8g.setFont(u8g_font_7x13B);
+            u8g.drawStr(42,14,NAME_STRING);                         
+            u8g.setFont(u8g_font_5x8);
+            u8g.drawStr(50,30,FIRMWARE_STRING);
+            u8g.drawStr(52,40,VERSION_STRING);
+
+            u8g.setFont(u8g_font_6x9);
+            u8g.drawStr(43,60,BY_STRING);
+        } while( u8g.nextPage() );
+}
+
+static void lcd_implementation_status_screen()
+{
+
+    static unsigned char fan_rot = 0;
+
+    u8g.setColorIndex(1);	// black on white
+    
+// LASER  **********************************************************************
+    u8g.setFont(FONT_STATUSMENU);
+    u8g.setColorIndex(1);
+    
+    //Laser Temperature
+    u8g.setPrintPos(2,25);
+    lcd_printPGM(PSTR("30\xB0"));
+    
+    if (current_block->laser_status == LASER_ON) {
+        u8g.drawBitmapP(5,3, ICON_BYTEWIDTH, ICON_HEIGHT, laseron_bmp);
+        
+        //Laser Power %
+        u8g.setPrintPos(23,10);
+        u8g.print(itostr3(current_block->laser_intensity));
+        lcd_printPGM(PSTR("%"));    
+        
+    } else {
+        u8g.drawBitmapP(5,3, ICON_BYTEWIDTH, ICON_HEIGHT, laseroff_bmp);
+        
+        //Laser Power %
+        u8g.setPrintPos(23,10);      
+        lcd_printPGM(PSTR("---%"));
+        
+        //Laser Current
+        u8g.setPrintPos(23,20);
+        lcd_printPGM(PSTR("2.5A"));
+    }
+    
+#ifdef LASER_PERIPHERALS
+    if (laser_peripherals_ok()) 
+    {
+        u8g.drawBitmapP(29,4, LASERENABLE_BYTEWIDTH, LASERENABLE_HEIGHT, laserenable_bmp);
+    }
+#endif // LASER_PERIPHERALS
+    
+//SD Card Symbol  **************************************************************    
+#ifdef SDSUPPORT
+    
+    u8g.drawBox(42,42,8,7);
+    u8g.drawBox(50,44,2,5);
+    u8g.drawFrame(42,49,10,4);
+    u8g.drawPixel(50,43);
+    
+    // Progress bar
+    u8g.drawFrame(54,49,73,4);
+
+    // SD Card Progress bar and clock
+    u8g.setFont(FONT_STATUSMENU);
+
+    if (IS_SD_PRINTING)
+    {
+        // Progress bar
+        u8g.drawBox(55,50, (unsigned int)( (71 * card.percentDone())/100) ,2);
+    }
+    else {
+                         // do nothing
+    }
+    u8g.setPrintPos(80,47);
+    if(starttime != 0)
+    {
+        uint16_t time = millis()/60000 - starttime/60000;
+        u8g.print(itostr2(time/60));
+        u8g.print(':');
+        u8g.print(itostr2(time%60));
+    }else{
+        lcd_printPGM(PSTR("--:--"));
+    }
+    
+#endif
+ 
+// Fan ************************************************************************
+    u8g.setFont(FONT_STATUSMENU);
+    u8g.setPrintPos(104,27);
+    #if defined(FAN_PIN) && FAN_PIN > -1
+    u8g.print(itostr3(int((fanSpeed*100)/256 + 1)));
+    u8g.print("%");
+    #else
+    u8g.print("---");
+    #endif
+ 
+ // X, Y, Z-Coordinates     ***************************************************
+    u8g.setFont(FONT_STATUSMENU);
+    u8g.drawBox(0,29,128,10);
+    u8g.setColorIndex(0);	// white on black
+    u8g.setPrintPos(2,37);
+    u8g.print("X");
+    u8g.drawPixel(8,33);
+    u8g.drawPixel(8,35);
+    u8g.setPrintPos(10,37);
+    u8g.print(ftostr31ns(current_position[X_AXIS]));
+    u8g.setPrintPos(43,37);
+    lcd_printPGM(PSTR("Y"));
+    u8g.drawPixel(49,33);
+    u8g.drawPixel(49,35);
+    u8g.setPrintPos(51,37);
+    u8g.print(ftostr31ns(current_position[Y_AXIS]));
+    u8g.setPrintPos(83,37);
+    u8g.print("Z");
+    u8g.drawPixel(89,33);
+    u8g.drawPixel(89,35);
+    u8g.setPrintPos(91,37);
+    u8g.print(ftostr31(current_position[Z_AXIS]));
+    u8g.setColorIndex(1);	// black on white
+ 
+ // Feedrate  ******************************************************************
+    u8g.setFont(u8g_font_6x10_marlin);
+    u8g.setPrintPos(3,49);
+    u8g.print(LCD_STR_FEEDRATE[0]);
+    u8g.setFont(FONT_STATUSMENU);
+    u8g.setPrintPos(12,48);
+    u8g.print(itostr3(feedmultiply));
+    u8g.print('%');
+
+// Status line *****************************************************************
+    u8g.setFont(FONT_STATUSMENU);
+    u8g.setPrintPos(0,61);
+    u8g.print(lcd_status_message);
+
 }
 
 static void lcd_implementation_clear()
@@ -169,194 +294,6 @@ static void lcd_printPGM(const char* str)
     {
 			u8g.print(c);
     }
-}
-
-
-static void lcd_implementation_status_screen()
-{
-
- static unsigned char fan_rot = 0;
- 
- u8g.setColorIndex(1);	// black on white
-#ifndef LASER
- // Symbols menu graphics, animated fan
- if ((blink % 2) &&  fanSpeed )	u8g.drawBitmapP(9,1,STATUS_SCREENBYTEWIDTH,STATUS_SCREENHEIGHT,status_screen0_bmp);
-	else u8g.drawBitmapP(9,1,STATUS_SCREENBYTEWIDTH,STATUS_SCREENHEIGHT,status_screen1_bmp);
-#else
- #ifdef LASER_PERIPHERALS
- if (laser_peripherals_ok()) {
-	 u8g.drawBitmapP(29,4, LASERENABLE_BYTEWIDTH, LASERENABLE_HEIGHT, laserenable_bmp);
- }
- #endif // LASER_PERIPHERALS
- u8g.setFont(FONT_STATUSMENU);
- u8g.setColorIndex(1);
- u8g.setPrintPos(3,6);
- if (current_block->laser_status == LASER_ON) {
-	 u8g.drawBitmapP(5,14, ICON_BYTEWIDTH, ICON_HEIGHT, laseron_bmp);
-	 u8g.print(itostr3(current_block->laser_intensity));
-	 lcd_printPGM(PSTR("%"));
- } else {
-	 u8g.drawBitmapP(5,14, ICON_BYTEWIDTH, ICON_HEIGHT, laseroff_bmp);
-	 lcd_printPGM(PSTR("---%"));
- }
-#endif
- #ifdef SDSUPPORT
- //SD Card Symbol
- u8g.drawBox(42,42,8,7);
- u8g.drawBox(50,44,2,5);
- u8g.drawFrame(42,49,10,4);
- u8g.drawPixel(50,43);
- // Progress bar
- u8g.drawFrame(54,49,73,4);
- 
- // SD Card Progress bar and clock
- u8g.setFont(FONT_STATUSMENU);
- 
- if (IS_SD_PRINTING)
-   {
-	// Progress bar
-	u8g.drawBox(55,50, (unsigned int)( (71 * card.percentDone())/100) ,2);
-   }
-    else {
-			// do nothing
-		 }
- 
- u8g.setPrintPos(80,47);
- if(starttime != 0)
-    {
-        uint16_t time = millis()/60000 - starttime/60000;
-
-		u8g.print(itostr2(time/60));
-		u8g.print(':');
-		u8g.print(itostr2(time%60));
-    }else{
-			lcd_printPGM(PSTR("--:--"));
-		 }
- #endif
-#ifndef LASER
- // Extruder 1
- u8g.setFont(FONT_STATUSMENU);
- u8g.setPrintPos(6,6);
- u8g.print(itostr3(int(degTargetHotend(0) + 0.5)));
- lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
- u8g.setPrintPos(6,27);
- u8g.print(itostr3(int(degHotend(0) + 0.5)));
- lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
- if (!isHeatingHotend(0)) u8g.drawBox(13,17,2,2);
-	else
-		{
-		 u8g.setColorIndex(0);	// white on black
-		 u8g.drawBox(13,17,2,2);
-		 u8g.setColorIndex(1);	// black on white
-		}
- 
- // Extruder 2
- u8g.setFont(FONT_STATUSMENU);
- #if EXTRUDERS > 1
- u8g.setPrintPos(31,6);
- u8g.print(itostr3(int(degTargetHotend(1) + 0.5)));
- lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
- u8g.setPrintPos(31,27);
- u8g.print(itostr3(int(degHotend(1) + 0.5)));
- lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
- if (!isHeatingHotend(1)) u8g.drawBox(38,17,2,2);
-	else
-		{
-		 u8g.setColorIndex(0);	// white on black
-		 u8g.drawBox(38,17,2,2);
-		 u8g.setColorIndex(1);	// black on white
-		}
- #else
- u8g.setPrintPos(31,27);
- u8g.print("---");
- #endif
- 
- // Extruder 3
- u8g.setFont(FONT_STATUSMENU);
- # if EXTRUDERS > 2
- u8g.setPrintPos(55,6);
- u8g.print(itostr3(int(degTargetHotend(2) + 0.5)));
- lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
- u8g.setPrintPos(55,27);
- u8g.print(itostr3(int(degHotend(2) + 0.5)));
- lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
- if (!isHeatingHotend(2)) u8g.drawBox(62,17,2,2);
-	else
-		{
-		 u8g.setColorIndex(0);	// white on black
-		 u8g.drawBox(62,17,2,2);
-		 u8g.setColorIndex(1);	// black on white
-		}
- #else
- u8g.setPrintPos(55,27);
- u8g.print("---");
- #endif
- 
- // Heatbed
- u8g.setFont(FONT_STATUSMENU);
- u8g.setPrintPos(81,6);
- u8g.print(itostr3(int(degTargetBed() + 0.5)));
- lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
- u8g.setPrintPos(81,27);
- u8g.print(itostr3(int(degBed() + 0.5)));
- lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
- if (!isHeatingBed()) u8g.drawBox(88,18,2,2);
-	else
-		{
-		 u8g.setColorIndex(0);	// white on black
-		 u8g.drawBox(88,18,2,2);
-		 u8g.setColorIndex(1);	// black on white
-		}
-#endif
- // Fan
- u8g.setFont(FONT_STATUSMENU);
- u8g.setPrintPos(104,27);
- #if defined(FAN_PIN) && FAN_PIN > -1
- u8g.print(itostr3(int((fanSpeed*100)/256 + 1)));
- u8g.print("%");
- #else
- u8g.print("---");
- #endif
- 
- 
- // X, Y, Z-Coordinates
- u8g.setFont(FONT_STATUSMENU);
- u8g.drawBox(0,29,128,10);
- u8g.setColorIndex(0);	// white on black
- u8g.setPrintPos(2,37);
- u8g.print("X");
- u8g.drawPixel(8,33);
- u8g.drawPixel(8,35);
- u8g.setPrintPos(10,37);
- u8g.print(ftostr31ns(current_position[X_AXIS]));
- u8g.setPrintPos(43,37);
- lcd_printPGM(PSTR("Y"));
- u8g.drawPixel(49,33);
- u8g.drawPixel(49,35);
- u8g.setPrintPos(51,37);
- u8g.print(ftostr31ns(current_position[Y_AXIS]));
- u8g.setPrintPos(83,37);
- u8g.print("Z");
- u8g.drawPixel(89,33);
- u8g.drawPixel(89,35);
- u8g.setPrintPos(91,37);
- u8g.print(ftostr31(current_position[Z_AXIS]));
- u8g.setColorIndex(1);	// black on white
- 
- // Feedrate
- u8g.setFont(u8g_font_6x10_marlin);
- u8g.setPrintPos(3,49);
- u8g.print(LCD_STR_FEEDRATE[0]);
- u8g.setFont(FONT_STATUSMENU);
- u8g.setPrintPos(12,48);
- u8g.print(itostr3(feedmultiply));
- u8g.print('%');
-
- // Status line
- u8g.setFont(FONT_STATUSMENU);
- u8g.setPrintPos(0,61);
- u8g.print(lcd_status_message);
-
 }
 
 static void lcd_implementation_drawmenu_generic(uint8_t row, const char* pstr, char pre_char, char post_char)

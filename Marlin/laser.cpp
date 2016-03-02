@@ -28,7 +28,7 @@
 laser_t laser;
 
 void timer3_init(int pin) {
-  pinMode(pin, OUTPUT);
+    pinMode(pin, OUTPUT);
     analogWrite(pin, 1);  // let Arduino setup do it's thing to the PWM pin
 
     TCCR3B = 0x00;  // stop Timer4 clock for register updates
@@ -70,6 +70,7 @@ void laser_init()
     if (LASER_FIRING_PIN == 2 || LASER_FIRING_PIN == 3 || LASER_FIRING_PIN == 5) timer3_init(LASER_FIRING_PIN);
     if (LASER_FIRING_PIN == 6 || LASER_FIRING_PIN == 7 || LASER_FIRING_PIN == 8) timer4_init(LASER_FIRING_PIN);
   #endif
+
   #if LASER_CONTROL == 2
     if (LASER_INTENSITY_PIN == 2 || LASER_INTENSITY_PIN == 3 || LASER_INTENSITY_PIN == 5) timer3_init(LASER_INTENSITY_PIN);
     if (LASER_INTENSITY_PIN == 6 || LASER_INTENSITY_PIN == 7 || LASER_INTENSITY_PIN == 8) timer4_init(LASER_INTENSITY_PIN);
@@ -89,62 +90,71 @@ void laser_init()
     pinMode(LASER_EXHAUST, OUTPUT);
   #endif // LASER_PERIPHERALS
 
-  // initialize state to some sane defaults
-  laser.intensity = 100.0;
-  laser.ppm = 0.0;
-  laser.duration = 0;
-  laser.status = LASER_OFF;
-  laser.firing = LASER_OFF;
-  laser.mode = CONTINUOUS;
-  laser.last_firing = 0;
-  laser.diagnostics = false;
-  laser.time = 0;
-  #ifdef LASER_RASTER
-    laser.raster_aspect_ratio = LASER_RASTER_ASPECT_RATIO;
-    laser.raster_mm_per_pulse = LASER_RASTER_MM_PER_PULSE;
-    laser.raster_direction = 1;
-  #endif // LASER_RASTER
-  #ifdef MUVE_Z_PEEL
-    laser.peel_distance = 2.0;
-    laser.peel_speed = 2.0;
-    laser.peel_pause = 0.0;
-  #endif // MUVE_Z_PEEL
+    // initialize state to some sane defaults
+    laser.intensity   = 100.0;
+    laser.ppm         = 0.0;
+    laser.duration    = 0;
+    laser.status      = LASER_OFF;
+    laser.firing      = LASER_OFF;
+    laser.mode        = CONTINUOUS;
+    laser.last_firing = 0;
+    laser.diagnostics = false;
+    laser.time        = 0;
+    #ifdef LASER_RASTER
+      laser.raster_aspect_ratio   = LASER_RASTER_ASPECT_RATIO;
+      laser.raster_mm_per_pulse   = LASER_RASTER_MM_PER_PULSE;
+      laser.raster_direction      = 1;
+    #endif // LASER_RASTER
+    #ifdef MUVE_Z_PEEL
+      laser.peel_distance = 2.0;
+      laser.peel_speed = 2.0;
+      laser.peel_pause = 0.0;
+    #endif // MUVE_Z_PEEL
 
-  laser_extinguish();
+    laser_extinguish();     //Switch off laser
 }
-void laser_fire(int intensity = 100.0){
+
+void laser_fire (int intensity = 100.0)
+{
     laser.firing = LASER_ON;
     laser.last_firing = micros(); // microseconds of last laser firing
+    
     if (intensity > 100.0) intensity = 100.0; // restrict intensity between 0 and 100
     if (intensity < 0) intensity = 0;
 
     pinMode(LASER_FIRING_PIN, OUTPUT);
+    
     #if LASER_CONTROL == 1
-    analogWrite(LASER_FIRING_PIN, labs((intensity / 100.0)*(F_CPU / LASER_PWM)));
+        analogWrite(LASER_FIRING_PIN, labs((intensity / 100.0)*(F_CPU / LASER_PWM)));
     #endif
+
     #if LASER_CONTROL == 2
-      analogWrite(LASER_INTENSITY_PIN, labs((intensity / 100.0)*(F_CPU / LASER_PWM)));
-      digitalWrite(LASER_FIRING_PIN, HIGH);
+        analogWrite(LASER_INTENSITY_PIN, labs((intensity / 100.0)*(F_CPU / LASER_PWM)));
+        digitalWrite(LASER_FIRING_PIN, HIGH);
     #endif
 
     if (laser.diagnostics) {
-    SERIAL_ECHOLN("Laser fired");
+        SERIAL_ECHOLN("Laser fired");
     }
 }
 void laser_extinguish(){
-  if (laser.firing == LASER_ON) {
-    laser.firing = LASER_OFF;
 
-    // Engage the pullup resistor for TTL laser controllers which don't turn off entirely without it.
-    digitalWrite(LASER_FIRING_PIN, LOW);
-    laser.time += millis() - (laser.last_firing / 1000);
+    if (laser.firing == LASER_ON) 
+    {
+        laser.firing = LASER_OFF;
 
-    if (laser.diagnostics) {
-      SERIAL_ECHOLN("Laser extinguished");
+        // Engage the pullup resistor for TTL laser controllers which don't turn off entirely without it.
+        digitalWrite(LASER_FIRING_PIN, LOW);
+        laser.time += millis() - (laser.last_firing / 1000);
+
+        if (laser.diagnostics) {
+            SERIAL_ECHOLN("Laser extinguished");
+        }
     }
-  }
 }
-void laser_set_mode(int mode){
+
+void laser_set_mode(int mode)
+{    
   switch(mode){
     case 0:
       laser.mode = CONTINUOUS;
@@ -157,6 +167,7 @@ void laser_set_mode(int mode){
       return;
   }
 }
+
 #ifdef LASER_PERIPHERALS
 bool laser_peripherals_ok(){
   return true;
@@ -167,12 +178,14 @@ void laser_peripherals_on(){
   digitalWrite(LASER_POWER, LOW);
   digitalWrite(LASER_EXHAUST, LOW);
 
-  if (laser.diagnostics) {
-    SERIAL_ECHO_START;
-    SERIAL_ECHOLNPGM("Laser Peripherals Enabled");
+    if (laser.diagnostics) {
+        SERIAL_ECHO_START;
+        SERIAL_ECHOLNPGM("Laser Peripherals Enabled");
     }
 }
-void laser_peripherals_off(){
+
+void laser_peripherals_off()
+{
   if (laser_peripherals_ok()) {
     digitalWrite(LASER_COOLANT, HIGH);
     digitalWrite(LASER_AIR, HIGH);
@@ -186,6 +199,7 @@ void laser_peripherals_off(){
     }
 }
 void laser_wait_for_peripherals() {
+    
   unsigned long timeout = millis() + LASER_PERIPHERALS_TIMEOUT;
   if (laser.diagnostics) {
     SERIAL_ECHO_START;

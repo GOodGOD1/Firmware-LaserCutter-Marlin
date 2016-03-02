@@ -4,6 +4,12 @@
 #ifndef MARLIN_H
 #define MARLIN_H
 
+#define NAME_STRING         "Laser Cutter"
+#define FIRMWARE_STRING     "Laser-Marlin"
+#define VERSION_STRING      "Ver 1.0.0"
+#define BY_STRING           "By FreakyAttic"
+
+
 #define  FORCE_INLINE __attribute__((always_inline)) inline
 
 #include <math.h>

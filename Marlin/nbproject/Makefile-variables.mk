@@ -15,13 +15,13 @@ CND_PACKAGE_DIR_Debug=dist/Debug/Arduino-Windows/package
 CND_PACKAGE_NAME_Debug=marlin.tar
 CND_PACKAGE_PATH_Debug=dist/Debug/Arduino-Windows/package/marlin.tar
 # Release configuration
-CND_PLATFORM_Release=Arduino-Windows
-CND_ARTIFACT_DIR_Release=dist/Release/Arduino-Windows
+CND_PLATFORM_Release=Cygwin-Windows
+CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
 CND_ARTIFACT_NAME_Release=marlin
-CND_ARTIFACT_PATH_Release=dist/Release/Arduino-Windows/marlin
-CND_PACKAGE_DIR_Release=dist/Release/Arduino-Windows/package
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/marlin
+CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
 CND_PACKAGE_NAME_Release=marlin.tar
-CND_PACKAGE_PATH_Release=dist/Release/Arduino-Windows/package/marlin.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/marlin.tar
 #
 # include compiler specific variables
 #

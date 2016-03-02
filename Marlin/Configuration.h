@@ -17,8 +17,8 @@
 #define SERIAL_PORT 0
 
 // This determines the communication speed of the printer
-//#define BAUDRATE 250000
-#define BAUDRATE 115200
+#define BAUDRATE 250000
+//#define BAUDRATE 115200
 
 //// The following define selects which electronics board you have. Please choose the one that matches your setup
 // 10 = Gen7 custom (Alfons3 Version) "https://github.com/Alfons3/Generation_7_Electronics"
@@ -75,28 +75,28 @@
 //
 // Laser control is used by the Muve1 3D printer and the Buildlog.net laser cutter
 //
-#define LASER
+    #define LASER
 
 //// The following define selects how to control the laser.  Please choose the one that matches your setup.
 // 1 = Single pin control - LOW when off, HIGH when on, PWM to adjust intensity
 // 2 = Two pin control - A firing pin for which LOW = off, HIGH = on, and a seperate intensity pin which carries a constant PWM signal and adjusts duty cycle to control intensity
-#define LASER_CONTROL       1
+    #define LASER_CONTROL       1
 
 //// The following defines select which G codes tell the laser to fire.  It's OK to uncomment more than one.
-#define LASER_FIRE_G1       10 // fire the laser on a G1 move, extinguish when the move ends
-#define LASER_FIRE_SPINDLE  11 // fire the laser on M3, extinguish on M5
-#define LASER_FIRE_E        12 // fire the laser when the E axis moves
+    #define LASER_FIRE_G1       10 // fire the laser on a G1 move, extinguish when the move ends
+    #define LASER_FIRE_SPINDLE  11 // fire the laser on M3, extinguish on M5
+    #define LASER_FIRE_E        12 // fire the laser when the E axis moves
 
 //// Raster mode enables the laser to etch bitmap data at high speeds.  Increases command buffer size substantially.
-#define LASER_RASTER
-#define LASER_MAX_RASTER_LINE       68 // maximum number of base64 encoded pixels per raster gcode command
-#define LASER_RASTER_ASPECT_RATIO   1 // pixels aren't square on most displays, 1.33 == 4:3 aspect ratio
-#define LASER_RASTER_MM_PER_PULSE   0.2 //Can be overridden by providing an R value in M649 command : M649 S17 B2 D0 R0.1 F4000
+    #define LASER_RASTER
+    #define LASER_MAX_RASTER_LINE       68  // maximum number of base64 encoded pixels per raster gcode command
+    #define LASER_RASTER_ASPECT_RATIO   1   // pixels aren't square on most displays, 1.33 == 4:3 aspect ratio
+    #define LASER_RASTER_MM_PER_PULSE   0.2 //Can be overridden by providing an R value in M649 command : M649 S17 B2 D0 R0.1 F4000
 
 //// Uncomment the following if the laser cutter is equipped with a peripheral relay board
 //// to control power to an exhaust fan, water pump, laser power supply, etc.
-#define LASER_PERIPHERALS
-#define LASER_PERIPHERALS_TIMEOUT   30000  // Number of milliseconds to wait for status signal from peripheral control board
+    //#define LASER_PERIPHERALS
+    #define LASER_PERIPHERALS_TIMEOUT   30000  // Number of milliseconds to wait for status signal from peripheral control board
 
 //// Uncomment the following line to enable cubic bezier curve movement with the G5 code
 // #define G5_BEZIER
