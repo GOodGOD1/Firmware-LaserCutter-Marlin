@@ -67,7 +67,6 @@
 //// The following define selects which power supply you have. Please choose the one that matches your setup
 // 1 = ATX
 // 2 = X-Box 360 203Watts (the blue wire connected to PS_ON and the red wire to VCC)
-
 #define POWER_SUPPLY 1
 
 //===========================================================================
@@ -81,23 +80,23 @@
 //// The following define selects how to control the laser.  Please choose the one that matches your setup.
 // 1 = Single pin control - LOW when off, HIGH when on, PWM to adjust intensity
 // 2 = Two pin control - A firing pin for which LOW = off, HIGH = on, and a seperate intensity pin which carries a constant PWM signal and adjusts duty cycle to control intensity
-#define LASER_CONTROL 2
+#define LASER_CONTROL       1
 
 //// The following defines select which G codes tell the laser to fire.  It's OK to uncomment more than one.
-#define LASER_FIRE_G1 10 // fire the laser on a G1 move, extinguish when the move ends
-#define LASER_FIRE_SPINDLE 11 // fire the laser on M3, extinguish on M5
-#define LASER_FIRE_E 12 // fire the laser when the E axis moves
+#define LASER_FIRE_G1       10 // fire the laser on a G1 move, extinguish when the move ends
+#define LASER_FIRE_SPINDLE  11 // fire the laser on M3, extinguish on M5
+#define LASER_FIRE_E        12 // fire the laser when the E axis moves
 
 //// Raster mode enables the laser to etch bitmap data at high speeds.  Increases command buffer size substantially.
 #define LASER_RASTER
-#define LASER_MAX_RASTER_LINE 68 // maximum number of base64 encoded pixels per raster gcode command
-#define LASER_RASTER_ASPECT_RATIO 1 // pixels aren't square on most displays, 1.33 == 4:3 aspect ratio
-#define LASER_RASTER_MM_PER_PULSE 0.2 //Can be overridden by providing an R value in M649 command : M649 S17 B2 D0 R0.1 F4000
+#define LASER_MAX_RASTER_LINE       68 // maximum number of base64 encoded pixels per raster gcode command
+#define LASER_RASTER_ASPECT_RATIO   1 // pixels aren't square on most displays, 1.33 == 4:3 aspect ratio
+#define LASER_RASTER_MM_PER_PULSE   0.2 //Can be overridden by providing an R value in M649 command : M649 S17 B2 D0 R0.1 F4000
 
 //// Uncomment the following if the laser cutter is equipped with a peripheral relay board
 //// to control power to an exhaust fan, water pump, laser power supply, etc.
 #define LASER_PERIPHERALS
-#define LASER_PERIPHERALS_TIMEOUT 30000  // Number of milliseconds to wait for status signal from peripheral control board
+#define LASER_PERIPHERALS_TIMEOUT   30000  // Number of milliseconds to wait for status signal from peripheral control board
 
 //// Uncomment the following line to enable cubic bezier curve movement with the G5 code
 // #define G5_BEZIER
@@ -110,11 +109,12 @@
 // #define MUVE_Z_PEEL // The mUVe 1 uses a special peel maneuver between each layer, it requires independent control of each Z motor
 
 // Uncomment these options for the Buildlog.net laser cutter, and other similar models
-#define CUSTOM_MENDEL_NAME "Laser Cutter"
-#define LASER_WATTS 40.0
-#define LASER_DIAMETER 0.1 // milimeters
-#define LASER_PWM 25000 // hertz
-#define LASER_FOCAL_HEIGHT 74.50 // z axis position at which the laser is focused
+
+#define CUSTOM_MENDEL_NAME      "Laser Cutter"
+#define LASER_WATTS             40.0
+#define LASER_DIAMETER          0.1 // milimeters
+#define LASER_PWM               25000 // hertz
+#define LASER_FOCAL_HEIGHT      74.50 // z axis position at which the laser is focused
 
 //===========================================================================
 //=============================Thermal Settings  ============================
@@ -148,35 +148,35 @@
 
 // changes made in ULTRA_LCD_IMPLEMENTATION_HITACHI_HD44780.H line 473 to allow temperature display 
 // instead of Z position, set to 1 for temperature, 0 for no temperature.
-#define TEMP_SENSOR_0 0
-#define TEMP_SENSOR_1 0
-#define TEMP_SENSOR_2 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_0       0
+#define TEMP_SENSOR_1       0
+#define TEMP_SENSOR_2       0
+#define TEMP_SENSOR_BED     0
 
 // This makes temp sensor 1 a redundant sensor for sensor 0. If the temperatures difference between these sensors is to high the print will be aborted.
 //#define TEMP_SENSOR_1_AS_REDUNDANT
 #define MAX_REDUNDANT_TEMP_SENSOR_DIFF 10
 
 // Actual temperature must be close to target for this long before M109 returns success
-#define TEMP_RESIDENCY_TIME 10  // (seconds)
-#define TEMP_HYSTERESIS 3       // (degC) range of +/- temperatures considered "close" to the target one
-#define TEMP_WINDOW     1       // (degC) Window around target to start the residency timer x degC early.
+#define TEMP_RESIDENCY_TIME     10  // (seconds)
+#define TEMP_HYSTERESIS         3   // (degC) range of +/- temperatures considered "close" to the target one
+#define TEMP_WINDOW             1   // (degC) Window around target to start the residency timer x degC early.
 
 // The minimal temperature defines the temperature below which the heater will not be enabled It is used
 // to check that the wiring to the thermistor is not broken.
 // Otherwise this would lead to the heater being powered on all the time.
-#define HEATER_0_MINTEMP 5
-#define HEATER_1_MINTEMP 5
-#define HEATER_2_MINTEMP 5
-#define BED_MINTEMP 5
+#define HEATER_0_MINTEMP        5
+#define HEATER_1_MINTEMP        5
+#define HEATER_2_MINTEMP        5
+#define BED_MINTEMP             5
 
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
 // You should use MINTEMP for thermistor short/failure protection.
-#define HEATER_0_MAXTEMP 275
-#define HEATER_1_MAXTEMP 275
-#define HEATER_2_MAXTEMP 275
-#define BED_MAXTEMP 150
+#define HEATER_0_MAXTEMP        275
+#define HEATER_1_MAXTEMP        275
+#define HEATER_2_MAXTEMP        275
+#define BED_MAXTEMP             150
 
 // If your bed has low resistance e.g. .6 ohm and throws the fuse you can duty cycle it to reduce the
 // average current. The value should be an integer and the heat bed will be turned on for 1 interval of
@@ -457,7 +457,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
 // ==> REMEMBER TO INSTALL U8glib to your ARDUINO library folder: http://code.google.com/p/u8glib/wiki/u8glib
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+
 
 // The RepRapWorld REPRAPWORLD_KEYPAD v1.1
 // http://reprapworld.com/?products_details&products_id=202&cPath=1591_1626

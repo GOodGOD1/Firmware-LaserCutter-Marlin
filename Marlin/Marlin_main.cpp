@@ -165,7 +165,7 @@
 //=============================public variables=============================
 //===========================================================================
 #ifdef SDSUPPORT
-CardReader card;
+    CardReader card;
 #endif
 float homing_feedrate[] = HOMING_FEEDRATE;
 bool axis_relative_modes[] = AXIS_RELATIVE_MODES;

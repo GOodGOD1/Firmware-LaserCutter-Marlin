@@ -4,7 +4,7 @@
 */
 
 #ifndef	_FASTIO_ARDUINO_H
-#define	_FASTIO_ARDUINO_H
+    #define	_FASTIO_ARDUINO_H
 
 #include <avr/io.h>
 
@@ -1403,29 +1403,29 @@ pins
 #define DIO72_DDR		DDRJ
 #define DIO72_PWM		NULL
 
-#define DIO73_PIN		PINJ3
+#define DIO73_PIN	PINJ3
 #define DIO73_RPORT	PINJ
 #define DIO73_WPORT	PORTJ
-#define DIO73_DDR		DDRJ
-#define DIO73_PWM		NULL
+#define DIO73_DDR	DDRJ
+#define DIO73_PWM	NULL
 
-#define DIO74_PIN		PINJ7
+#define DIO74_PIN	PINJ7
 #define DIO74_RPORT	PINJ
 #define DIO74_WPORT	PORTJ
-#define DIO74_DDR		DDRJ
-#define DIO74_PWM		NULL
+#define DIO74_DDR	DDRJ
+#define DIO74_PWM	NULL
 
-#define DIO73_PIN		PINJ4
-#define DIO73_RPORT	PINJ
-#define DIO73_WPORT	PORTJ
-#define DIO73_DDR		DDRJ
-#define DIO73_PWM		NULL
+#define DIO75_PIN	PINJ4   //BUG DIO73 name??
+#define DIO75_RPORT	PINJ
+#define DIO75_WPORT	PORTJ
+#define DIO75_DDR	DDRJ
+#define DIO75_PWM	NULL
 
-#define DIO76_PIN		PINJ5
+#define DIO76_PIN	PINJ5
 #define DIO76_RPORT	PINJ
 #define DIO76_WPORT	PORTJ
-#define DIO76_DDR		DDRJ
-#define DIO76_PWM		NULL
+#define DIO76_DDR	DDRJ
+#define DIO76_PWM	NULL
 
 #define DIO77_PIN		PINJ6
 #define DIO77_RPORT	PINJ
