@@ -3,8 +3,14 @@ RepRap Laser firmware (Turnkey k40 laser project)
 ==========================================
 
 Firmware forked from original repository https://github.com/lansing-makers-network/buildlog-lasercutter-marlin
+
 Based off Marlin for 3D printers, for more info see https://github.com/MarlinFirmware/Marlin
+
 It includes the Graphic Libraries U8glib source code from http://code.google.com/p/u8glib/wiki/u8glib
+
+This firmware is tested and configured for the RAMPS 1.4 + Arduino Mega + Smart LCD controller, but it could work on any other RepRap compatible hardware.
+![](https://github.com/freakyattic/buildlog-lasercutter-marlin/blob/master/ArduinoAddons/ramps.jpg)
+
 
 This copy implements the following modifications from orignal sourcecode:
    - Support to be opened with Netbeans 8.1 + Arduino plugin. Easier to be modified.
