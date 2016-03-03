@@ -221,14 +221,7 @@
           </incDir>
           <commandLine>${FLAGS_GPP}</commandLine>
           <preprocessorList>
-            <Elem>DOGLCD</Elem>
-            <Elem>LASER</Elem>
-            <Elem>NEWPANEL</Elem>
-            <Elem>REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER</Elem>
-            <Elem>REPRAP_DISCOUNT_SMART_CONTROLLER</Elem>
-            <Elem>U8GLIB_ST7920</Elem>
-            <Elem>ULTIPANEL</Elem>
-            <Elem>ULTRA_LCD</Elem>
+            <Elem>__DEBUG</Elem>
           </preprocessorList>
           <warningLevel>0</warningLevel>
         </ccTool>

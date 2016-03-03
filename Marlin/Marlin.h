@@ -6,8 +6,8 @@
 
 //String definitions ---------------------------------------------------
     #define CUSTOM_MENDEL_NAME  "Laser Cutter"
-    #define FIRMWARE_STRING     "Laser-Marlin"
-    #define VERSION_STRING      "Ver 1.0.0"
+    #define FIRMWARE_STRING     "Marlin-Laser"
+    #define VERSION_STRING      "Ver 1.0.0-002"
     #define BY_STRING           "By FreakyAttic"
 
 
@@ -60,9 +60,13 @@
 #define SERIAL_PROTOCOL(x) (MYSERIAL.print(x))
 #define SERIAL_PROTOCOL_F(x,y) (MYSERIAL.print(x,y))
 #define SERIAL_PROTOCOLPGM(x) (serialprintPGM(PSTR(x)))
-#define SERIAL_PROTOCOLLN(x) (MYSERIAL.print(x),MYSERIAL.write('\n'))
-#define SERIAL_PROTOCOLLNPGM(x) (serialprintPGM(PSTR(x)),MYSERIAL.write('\n'))
-
+#ifdef __DEBUG
+    #define SERIAL_PROTOCOLLN(x) (MYSERIAL.print(x),MYSERIAL.print("\r\n"))
+    #define SERIAL_PROTOCOLLNPGM(x) (serialprintPGM(PSTR(x)),MYSERIAL.print("\r\n"))
+#else
+    #define SERIAL_PROTOCOLLN(x) (MYSERIAL.print(x),MYSERIAL.write('\n'))
+    #define SERIAL_PROTOCOLLNPGM(x) (serialprintPGM(PSTR(x)),MYSERIAL.write('\n'))
+#endif  
 
 const char errormagic[] PROGMEM ="Error:";
 const char echomagic[] PROGMEM ="echo:";

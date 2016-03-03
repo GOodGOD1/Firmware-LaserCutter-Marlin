@@ -97,6 +97,7 @@
   #define LCD_ALERTMESSAGEPGM(x) 
 #endif 
 
+char *itostr12(const uint8_t &x);
 char *itostr2(const uint8_t &x);
 char *itostr21(const uint8_t &x);
 char *itostr31(const int &xx);

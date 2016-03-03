@@ -187,97 +187,97 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/marlin.exe: ${OBJECTFILES}
 ${OBJECTDIR}/Base64.o: Base64.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Base64.o Base64.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Base64.o Base64.cpp
 
 ${OBJECTDIR}/ConfigurationStore.o: ConfigurationStore.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConfigurationStore.o ConfigurationStore.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConfigurationStore.o ConfigurationStore.cpp
 
 ${OBJECTDIR}/LiquidCrystalRus.o: LiquidCrystalRus.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LiquidCrystalRus.o LiquidCrystalRus.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LiquidCrystalRus.o LiquidCrystalRus.cpp
 
 ${OBJECTDIR}/MarlinSerial.o: MarlinSerial.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MarlinSerial.o MarlinSerial.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MarlinSerial.o MarlinSerial.cpp
 
 ${OBJECTDIR}/Marlin_main.o: Marlin_main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Marlin_main.o Marlin_main.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Marlin_main.o Marlin_main.cpp
 
 ${OBJECTDIR}/Sd2Card.o: Sd2Card.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Sd2Card.o Sd2Card.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Sd2Card.o Sd2Card.cpp
 
 ${OBJECTDIR}/SdBaseFile.o: SdBaseFile.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdBaseFile.o SdBaseFile.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdBaseFile.o SdBaseFile.cpp
 
 ${OBJECTDIR}/SdFatUtil.o: SdFatUtil.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdFatUtil.o SdFatUtil.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdFatUtil.o SdFatUtil.cpp
 
 ${OBJECTDIR}/SdFile.o: SdFile.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdFile.o SdFile.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdFile.o SdFile.cpp
 
 ${OBJECTDIR}/SdVolume.o: SdVolume.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdVolume.o SdVolume.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SdVolume.o SdVolume.cpp
 
 ${OBJECTDIR}/Servo.o: Servo.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Servo.o Servo.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Servo.o Servo.cpp
 
 ${OBJECTDIR}/U8glib.o: U8glib.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/U8glib.o U8glib.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/U8glib.o U8glib.cpp
 
 ${OBJECTDIR}/cardreader.o: cardreader.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/cardreader.o cardreader.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/cardreader.o cardreader.cpp
 
 ${OBJECTDIR}/laser.o: laser.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/laser.o laser.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/laser.o laser.cpp
 
 ${OBJECTDIR}/motion_control.o: motion_control.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/motion_control.o motion_control.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/motion_control.o motion_control.cpp
 
 ${OBJECTDIR}/planner.o: planner.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/planner.o planner.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/planner.o planner.cpp
 
 ${OBJECTDIR}/stepper.o: stepper.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/stepper.o stepper.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/stepper.o stepper.cpp
 
 ${OBJECTDIR}/temperature.o: temperature.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/temperature.o temperature.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/temperature.o temperature.cpp
 
 ${OBJECTDIR}/ultralcd.o: ultralcd.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ultralcd.o ultralcd.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ultralcd.o ultralcd.cpp
 
 ${OBJECTDIR}/utility/chessengine.o: utility/chessengine.c 
 	${MKDIR} -p ${OBJECTDIR}/utility
@@ -797,7 +797,7 @@ ${OBJECTDIR}/utility/u8g_virtual_screen.o: utility/u8g_virtual_screen.c
 ${OBJECTDIR}/watchdog.o: watchdog.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -w -DDOGLCD -DLASER -DNEWPANEL -DREPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER -DREPRAP_DISCOUNT_SMART_CONTROLLER -DU8GLIB_ST7920 -DULTIPANEL -DULTRA_LCD -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/watchdog.o watchdog.cpp
+	$(COMPILE.cc) -g -w -D__DEBUG -I${INCLUDE} -I.\  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/watchdog.o watchdog.cpp
 
 # Subprojects
 .build-subprojects:

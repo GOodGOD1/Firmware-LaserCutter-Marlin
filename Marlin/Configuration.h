@@ -9,7 +9,7 @@
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
-#define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(FreakyAttic.com, For Lasers)" // Who made the changes.
 
 // SERIAL_PORT selects which serial port should be used for communication with the host.
 // This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -410,8 +410,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
 // ==> REMEMBER TO INSTALL U8glib to your ARDUINO library folder: http://code.google.com/p/u8glib/wiki/u8glib
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
-
+#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 // The RepRapWorld REPRAPWORLD_KEYPAD v1.1
 // http://reprapworld.com/?products_details&products_id=202&cPath=1591_1626
@@ -583,7 +582,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 
     // The following define selects how to control the laser.  Please choose the one that matches your setup.
     // NOTE: check <pins.h> for the pin numbers of LASER_FIRING_PIN and LASER_INTENSITY_PIN for your board.
-    //      1 = Single pin control - LOW when off, HIGH when on, PWM to adjust intensity
+    //      1 = Single pin control - LOW when off, HIGH when on, PWM to adjust intensity. Only used pin LASER_FIRING_PIN
     //      2 = Two pin control - A firing pin for which LOW = off, HIGH = on, and a seperate intensity pin which carries a constant PWM signal and adjusts duty cycle to control intensity
         #define LASER_CONTROL       1
 
@@ -611,14 +610,16 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 #ifdef  LASER_JTECHPHOT
 
     #define LASER_PWM               3000 // hertz - PWM control freq.
+    #define LASER_POWER             2.5  // Laser Power
     #define LASER_FOCAL_HEIGHT      0 // z axis position at which the laser is focused
 
     // Configuration for the JTech Photonics Laser board. Enable to display laser current.
-    #define     LASER_JTECHPHOT_PIN_VIN     10      //Analog input for input voltage
-    #define     LASER_JTECHPHOT_PIN_VLASER  10      //Analog input for laser voltage
+    #define     LASER_JTECHPHOT_PIN_VIN     3      //Analog input for input voltage
+    #define     LASER_JTECHPHOT_PIN_VLASER  4      //Analog input for laser voltage
 #else
 
     //Generic Laser.
+    #define LASER_POWER             40  // Laser Power
     #define LASER_PWM               25000 // hertz - PWM control freq.
     #define LASER_FOCAL_HEIGHT      74.50 // z axis position at which the laser is focused
 

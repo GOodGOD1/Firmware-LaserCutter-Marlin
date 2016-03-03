@@ -693,8 +693,9 @@ static void updateTemperaturesFromRawValues()
 #ifdef  LASER_JTECHPHOT
     float temp;
     //Calculate the Voltage and current of the laser.
-    current_laser_current   = ((float)temp_laser_voltlaser*3.3 / 1023.0)*3.61;  // voltage at laser
-    current_laser_current   = ((float)temp_laser_voltin*3.3 / 1023.0)*3.61;  // current at laser
+    //current_laser_voltage   = ((float)temp_laser_voltlaser*3.3 / 1023.0)*3.61;  // voltage at laser    //
+    current_laser_voltage   = ((float)temp_laser_voltlaser*5.0 / 1023.0);   // voltage at laser
+    current_laser_current   = ((float)temp_laser_voltin*5.0 / 1023.0);      // current at laser
     
     //Calculate the Laser current.
     temp = (current_laser_current - current_laser_current);
@@ -1230,7 +1231,7 @@ ISR(TIMER0_COMPB_vect)
             temp_count++;
             break;
 #else
-            temp_state = 8;
+            temp_state++;   //Go to next state
             break;
             
         case 8: // Prepare Laser Vin
@@ -1242,12 +1243,12 @@ ISR(TIMER0_COMPB_vect)
             ADMUX = ((1 << REFS0) | (LASER_JTECHPHOT_PIN_VIN & 0x07));
             ADCSRA |= 1<<ADSC; // Start conversion
             lcd_buttons_update();
-            temp_state = 9;
+            temp_state++;   //Go to next state
             break;
             
         case 9: // Measure Laser Vin
             raw_laser_vin += ADC;
-            temp_state = 10;
+            temp_state++;   //Go to next state
             break;
             
         case 10: // Prepare Laser Vlaser
@@ -1259,14 +1260,14 @@ ISR(TIMER0_COMPB_vect)
             ADMUX = ((1 << REFS0) | (LASER_JTECHPHOT_PIN_VLASER & 0x07));
             ADCSRA |= 1<<ADSC; // Start conversion
             lcd_buttons_update();
-            temp_state = 11;
+            temp_state++;   //Go to next state
             break;
             
         case 11: // Measure Laser Vin
             raw_laser_vlaser += ADC;
             
             //Go to ini
-            temp_state = 9;
+            temp_state = 0;
             temp_count++;
             break;
 #endif 

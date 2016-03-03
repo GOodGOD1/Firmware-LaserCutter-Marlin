@@ -402,6 +402,10 @@ void setup()
   setup_killpin();
   setup_powerhold();
   MYSERIAL.begin(BAUDRATE);
+  
+  SERIAL_ECHOLNPGM("");
+  SERIAL_ECHOLNPGM("");
+  SERIAL_ECHOLNPGM("");
   SERIAL_PROTOCOLLNPGM("start");
   SERIAL_ECHO_START;
 
@@ -414,8 +418,12 @@ void setup()
   if(mcu & 32) SERIAL_ECHOLNPGM(MSG_SOFTWARE_RESET);
   MCUSR=0;
 
-  SERIAL_ECHOPGM(MSG_MARLIN);
+  SERIAL_ECHO_START;
+  SERIAL_ECHOPGM(" Firmware: ");
+  SERIAL_ECHOPGM(FIRMWARE_STRING);
+  SERIAL_ECHOPGM(" ");
   SERIAL_ECHOLNPGM(VERSION_STRING);
+  
   #ifdef STRING_VERSION_CONFIG_H
     #ifdef STRING_CONFIG_H_AUTHOR
       SERIAL_ECHO_START;
@@ -423,10 +431,9 @@ void setup()
       SERIAL_ECHOPGM(STRING_VERSION_CONFIG_H);
       SERIAL_ECHOPGM(MSG_AUTHOR);
       SERIAL_ECHOLNPGM(STRING_CONFIG_H_AUTHOR);
-      SERIAL_ECHOPGM("Compiled: ");
-      SERIAL_ECHOLNPGM(__DATE__);
     #endif
   #endif
+
   SERIAL_ECHO_START;
   SERIAL_ECHOPGM(MSG_FREE_MEMORY);
   SERIAL_ECHO(freeMemory());
@@ -436,6 +443,7 @@ void setup()
   {
     fromsd[i] = false;
   }
+  SERIAL_ECHOLNPGM("");
 
   // loads data from EEPROM if available else uses defaults (and resets step acceleration rate)
   Config_RetrieveSettings();
@@ -448,7 +456,8 @@ void setup()
   servo_init();
 
   lcd_init();
-  _delay_ms(2000);	// wait 1sec to display the splash screen
+  
+  _delay_ms(3000);	// wait 1sec to display the splash screen
 
   #if defined(CONTROLLERFAN_PIN) && CONTROLLERFAN_PIN > -1
     SET_OUTPUT(CONTROLLERFAN_PIN); //Set pin used for driver cooling fan

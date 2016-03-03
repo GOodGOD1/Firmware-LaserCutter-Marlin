@@ -1373,6 +1373,18 @@ char *ftostr3(const float &x)
   return itostr3((int)x);
 }
 
+char *itostr12(const uint8_t &x)
+{
+  //sprintf(conv,"%5.1f",x);
+  int xx=x;
+  conv[0]=(xx/100)%10+'0';
+  conv[1]='.';
+  conv[2]=(xx/10)%10+'0';
+  conv[3]=(xx)%10+'0';
+  conv[4]=0;
+  return conv;
+}    
+
 char *itostr2(const uint8_t &x)
 {
   //sprintf(conv,"%5.1f",x);
@@ -1387,8 +1399,8 @@ char *itostr21(const uint8_t &x)
 {
   //sprintf(conv,"%5.1f",x);
   int xx=x;
-  conv[0]=(xx/10)%10+'0';
-  conv[1]=(xx)%10+'0';
+  conv[0]=(xx/100)%10+'0';
+  conv[1]=(xx/10)%10+'0';
   conv[2]='.';
   conv[3]=(xx)%10+'0';
   conv[4]=0;

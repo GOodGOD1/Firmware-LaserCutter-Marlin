@@ -37,7 +37,7 @@ LIB_LIBS_DIR = lib/libs
 ARDUINO_LIB_CORE = ${LIB_CORE_DIR}/arduinocore.a
 ARDUINO_LIB_LIBS = ${LIB_LIBS_DIR}/arduinolibs.a
 #AVR_DUDE = ${ARDUINO_BASE_DIR}/hardware/tools/avr/bin/avrdude -C ${ARDUINO_BASE_DIR}/hardware/tools/avr/etc/avrdude.conf
-AVR_DUDE = avrdude -C ${ARDUINO_BASE_DIR}/hardware/tools/avr/etc/avrdude.conf
+AVR_DUDE = avrdude -V -C ${ARDUINO_BASE_DIR}/hardware/tools/avr/etc/avrdude.conf
 	
 INCLUDE = -c -g \
 -I${ARDUINO_CORE_DIR} \

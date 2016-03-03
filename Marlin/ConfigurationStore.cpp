@@ -33,7 +33,7 @@ void _EEPROM_readData(int &pos, uint8_t* value, uint8_t size)
 // the default values are used whenever there is a change to the data, to prevent
 // wrong data being written to the variables.
 // ALSO:  always make sure the variables in the Store and retrieve sections are in the same order.
-#define     EEPROM_VERSION      "V11"
+#define     EEPROM_VERSION      "V10"
 
 #ifdef EEPROM_SETTINGS
 void Config_StoreSettings()
@@ -160,16 +160,15 @@ void Config_PrintSettings()
     SERIAL_ECHOLN("");
 #endif
 #ifdef LASER
-	SERIAL_ECHO_START;
-	SERIAL_ECHOLNPGM("Laser lifetime usage:");
-	SERIAL_ECHO_START;
-    SERIAL_ECHOPAIR(" Hours: ",(unsigned long)labs(laser.lifetime / 60));
-    SERIAL_ECHOLN("");
-    SERIAL_ECHOPAIR(" Minutes: ",(unsigned long)laser.lifetime % 60);
-    SERIAL_ECHOLN("");
+    SERIAL_ECHO_START;
+    SERIAL_ECHOLNPGM("Laser lifetime usage:");
+    SERIAL_ECHO_START;
+    SERIAL_ECHOPAIR(" Hours=",(unsigned long)labs(laser.lifetime / 60));
+    SERIAL_ECHOPAIR(" Minutes= ",(unsigned long)laser.lifetime % 60);
+    SERIAL_ECHOPAIR(", Power=", (float)LASER_POWER);
+    SERIAL_ECHOPAIR(", PWM-Freq=",(unsigned long)LASER_PWM);
     #ifdef LASER_JTECHPHOT
-        SERIAL_ECHOPAIR(" Jtech-Phot CurrentLimit Value: ",(unsigned long)laser.jtech_Res);
-        SERIAL_ECHOLN("");
+        SERIAL_ECHOPAIR(", Jtech Value=",(unsigned long)laser.jtech_Res);
     #endif   
 #endif
     
