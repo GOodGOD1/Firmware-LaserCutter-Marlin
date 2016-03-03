@@ -25,18 +25,18 @@
 
 // split into planned and status
 typedef struct {
-    int             fired; // method used to ask the laser to fire - LASER_FIRE_G1, LASER_FIRE_SPINDLE, LASER_FIRE_E, etc
-    float           intensity; // Laser firing instensity 0.0 - 100.0
-    float           ppm; // pulses per millimeter, for pulsed firing mode
-    unsigned long   duration; // laser firing duration in microseconds, for pulsed firing mode
-    unsigned long   dur; // instantaneous duration
-    bool            status; // LASER_ON / LASER_OFF - buffered
-    bool            firing; // LASER_ON / LASER_OFF - instantaneous
-    uint8_t         mode; // CONTINUOUS, PULSED, RASTER
-    unsigned long   last_firing; // microseconds since last laser firing
-    bool            diagnostics; // Verbose debugging output over serial
-    unsigned int    time; // temporary counter to limit eeprom writes
-    unsigned int    lifetime; // laser lifetime firing counter in minutes
+    int             fired;          // method used to ask the laser to fire - LASER_FIRE_G1, LASER_FIRE_SPINDLE, LASER_FIRE_E, etc
+    float           intensity;      // Laser firing instensity 0.0 - 100.0
+    float           ppm;            // pulses per millimeter, for pulsed firing mode
+    unsigned long   duration;       // laser firing duration in microseconds, for pulsed firing mode
+    unsigned long   dur;            // instantaneous duration
+    bool            status;         // LASER_ON / LASER_OFF - buffered
+    bool            firing;         // LASER_ON / LASER_OFF - instantaneous
+    uint8_t         mode;           // CONTINUOUS, PULSED, RASTER
+    unsigned long   last_firing;    // microseconds since last laser firing
+    bool            diagnostics;    // Verbose debugging output over serial
+    unsigned int    time;           // temporary counter to limit eeprom writes
+    unsigned int    lifetime;       // laser lifetime firing counter in minutes
     #ifdef LASER_RASTER
     unsigned char   raster_data[LASER_MAX_RASTER_LINE];
     unsigned char   rasterlaserpower;
@@ -51,6 +51,9 @@ typedef struct {
     float           peel_speed;
     float           peel_pause;
     #endif // MUVE_Z_PEEL
+#ifdef  LASER_JTECHPHOT
+    uint8_t         jtech_Res;      // Current Resistor limit jumper 0: 0.5A 5.5Ohm, 1: 1A 2.75Ohm, 2: 1.5A 1.83Ohm, 3: 2A 1.38Ohm, 4: 2.5A 1.1Ohm
+#endif
 } laser_t;
 
     extern  laser_t laser;

@@ -70,53 +70,6 @@
 #define POWER_SUPPLY 1
 
 //===========================================================================
-//============================= Laser Settings ==============================
-//===========================================================================
-//
-// Laser control is used by the Muve1 3D printer and the Buildlog.net laser cutter
-//
-    #define LASER
-
-//// The following define selects how to control the laser.  Please choose the one that matches your setup.
-// 1 = Single pin control - LOW when off, HIGH when on, PWM to adjust intensity
-// 2 = Two pin control - A firing pin for which LOW = off, HIGH = on, and a seperate intensity pin which carries a constant PWM signal and adjusts duty cycle to control intensity
-    #define LASER_CONTROL       1
-
-//// The following defines select which G codes tell the laser to fire.  It's OK to uncomment more than one.
-    #define LASER_FIRE_G1       10 // fire the laser on a G1 move, extinguish when the move ends
-    #define LASER_FIRE_SPINDLE  11 // fire the laser on M3, extinguish on M5
-    #define LASER_FIRE_E        12 // fire the laser when the E axis moves
-
-//// Raster mode enables the laser to etch bitmap data at high speeds.  Increases command buffer size substantially.
-    #define LASER_RASTER
-    #define LASER_MAX_RASTER_LINE       68  // maximum number of base64 encoded pixels per raster gcode command
-    #define LASER_RASTER_ASPECT_RATIO   1   // pixels aren't square on most displays, 1.33 == 4:3 aspect ratio
-    #define LASER_RASTER_MM_PER_PULSE   0.2 //Can be overridden by providing an R value in M649 command : M649 S17 B2 D0 R0.1 F4000
-
-//// Uncomment the following if the laser cutter is equipped with a peripheral relay board
-//// to control power to an exhaust fan, water pump, laser power supply, etc.
-    //#define LASER_PERIPHERALS
-    #define LASER_PERIPHERALS_TIMEOUT   30000  // Number of milliseconds to wait for status signal from peripheral control board
-
-//// Uncomment the following line to enable cubic bezier curve movement with the G5 code
-// #define G5_BEZIER
-
-// Uncomment these options for the mUVe 1 3D printer
-// #define CUSTOM_MENDEL_NAME "mUVe1 Printer"
-// #define LASER_WATTS 0.05
-// #define LASER_DIAMETER 0.1 // milimeters
-// #define LASER_PWM 8000 // hertz
-// #define MUVE_Z_PEEL // The mUVe 1 uses a special peel maneuver between each layer, it requires independent control of each Z motor
-
-// Uncomment these options for the Buildlog.net laser cutter, and other similar models
-
-#define CUSTOM_MENDEL_NAME      "Laser Cutter"
-#define LASER_WATTS             40.0
-#define LASER_DIAMETER          0.1 // milimeters
-#define LASER_PWM               25000 // hertz
-#define LASER_FOCAL_HEIGHT      74.50 // z axis position at which the laser is focused
-
-//===========================================================================
 //=============================Thermal Settings  ============================
 //===========================================================================
 //
@@ -617,6 +570,59 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 //
 //#define SERVO_ENDSTOPS {-1, -1, 0} // Servo index for X, Y, Z. Disable with -1
 //#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 70,0} // X,Y,Z Axis Extend and Retract angles
+
+
+//===========================================================================
+//============================= Laser Settings ==============================
+//===========================================================================
+
+    // Laser control is used by the Muve1 3D printer and the Buildlog.net laser cutter
+    // Uncomment to disable it.
+        #define LASER
+        #define LASER_JTECHPHOT     // Attached to a JTech Phonotincs Laser board - Measure laser current.
+
+    // The following define selects how to control the laser.  Please choose the one that matches your setup.
+    // NOTE: check <pins.h> for the pin numbers of LASER_FIRING_PIN and LASER_INTENSITY_PIN for your board.
+    //      1 = Single pin control - LOW when off, HIGH when on, PWM to adjust intensity
+    //      2 = Two pin control - A firing pin for which LOW = off, HIGH = on, and a seperate intensity pin which carries a constant PWM signal and adjusts duty cycle to control intensity
+        #define LASER_CONTROL       1
+
+    // The following defines select which G codes tell the laser to fire.  It's OK to uncomment more than one.
+        #define LASER_FIRE_G1       10 // fire the laser on a G1 move, extinguish when the move ends
+        #define LASER_FIRE_SPINDLE  11 // fire the laser on M3, extinguish on M5
+        // #define LASER_FIRE_E        12 // fire the laser when the E axis moves
+
+    // Raster mode enables the laser to etch bitmap data at high speeds.  Increases command buffer size substantially.
+    // Comment to disable raster.
+        #define LASER_RASTER
+        #define LASER_MAX_RASTER_LINE       68  // maximum number of base64 encoded pixels per raster gcode command
+        #define LASER_RASTER_ASPECT_RATIO   1   // pixels aren't square on most displays, 1.33 == 4:3 aspect ratio
+        #define LASER_RASTER_MM_PER_PULSE   0.2 //Can be overridden by providing an R value in M649 command : M649 S17 B2 D0 R0.1 F4000
+
+    // Uncomment the following if the laser cutter is equipped with a peripheral relay board
+    // to control power to an exhaust fan, water pump, laser power supply, etc.
+        //#define LASER_PERIPHERALS
+        //#define LASER_PERIPHERALS_TIMEOUT   30000  // Number of milliseconds to wait for status signal from peripheral control board
+
+    //// Uncomment the following line to enable cubic bezier curve movement with the G5 code
+    // #define G5_BEZIER
+
+    // Laser driver configurations - Change it for your laser.
+#ifdef  LASER_JTECHPHOT
+
+    #define LASER_PWM               3000 // hertz - PWM control freq.
+    #define LASER_FOCAL_HEIGHT      0 // z axis position at which the laser is focused
+
+    // Configuration for the JTech Photonics Laser board. Enable to display laser current.
+    #define     LASER_JTECHPHOT_PIN_VIN     10      //Analog input for input voltage
+    #define     LASER_JTECHPHOT_PIN_VLASER  10      //Analog input for laser voltage
+#else
+
+    //Generic Laser.
+    #define LASER_PWM               25000 // hertz - PWM control freq.
+    #define LASER_FOCAL_HEIGHT      74.50 // z axis position at which the laser is focused
+
+#endif
 
 #include "Configuration_adv.h"
 #include "thermistortables.h"

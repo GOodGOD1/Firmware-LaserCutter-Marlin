@@ -5,12 +5,12 @@
 
 #ifdef ULTRA_LCD
 
-  void lcd_update();
-  void lcd_init();
-  void lcd_setstatus(const char* message);
-  void lcd_setstatuspgm(const char* message);
-  void lcd_setalertstatuspgm(const char* message);
-  void lcd_reset_alert_level();
+  void  lcd_update               ();
+  void  lcd_init                 ();
+  void  lcd_setstatus            (const char* message);
+  void  lcd_setstatuspgm         (const char* message);
+  void  lcd_setalertstatuspgm    (const char* message);
+  void  lcd_reset_alert_level    ( ) ;
 
 #ifdef DOGLCD
   extern int lcd_contrast;
@@ -19,10 +19,10 @@
 
   static unsigned char blink = 0;	// Variable for visualisation of fan rotation in GLCD
 
-  #define LCD_MESSAGEPGM(x) lcd_setstatuspgm(PSTR(x))
-  #define LCD_ALERTMESSAGEPGM(x) lcd_setalertstatuspgm(PSTR(x))
+  #define LCD_MESSAGEPGM(x)         lcd_setstatuspgm(PSTR(x))
+  #define LCD_ALERTMESSAGEPGM(x)    lcd_setalertstatuspgm(PSTR(x))
 
-  #define LCD_UPDATE_INTERVAL 100
+  #define LCD_UPDATE_INTERVAL 1 00
   #define LCD_TIMEOUT_TO_STATUS 15000
 
   #ifdef ULTIPANEL
@@ -98,6 +98,7 @@
 #endif 
 
 char *itostr2(const uint8_t &x);
+char *itostr21(const uint8_t &x);
 char *itostr31(const int &xx);
 char *itostr3(const int &xx);
 char *itostr3left(const int &xx);

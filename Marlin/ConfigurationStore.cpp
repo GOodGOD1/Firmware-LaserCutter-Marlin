@@ -26,18 +26,14 @@ void _EEPROM_readData(int &pos, uint8_t* value, uint8_t size)
 #define EEPROM_READ_VAR(pos, value) _EEPROM_readData(pos, (uint8_t*)&value, sizeof(value))
 //======================================================================================
 
-
-
-
 #define EEPROM_OFFSET 100
-
 
 // IMPORTANT:  Whenever there are changes made to the variables stored in EEPROM
 // in the functions below, also increment the version number. This makes sure that
 // the default values are used whenever there is a change to the data, to prevent
 // wrong data being written to the variables.
 // ALSO:  always make sure the variables in the Store and retrieve sections are in the same order.
-#define EEPROM_VERSION "V10"
+#define     EEPROM_VERSION      "V11"
 
 #ifdef EEPROM_SETTINGS
 void Config_StoreSettings()
@@ -60,9 +56,12 @@ void Config_StoreSettings()
   #ifdef DELTA
   EEPROM_WRITE_VAR(i,endstop_adj);
   #endif
-  #ifdef LASER
+#ifdef LASER
   EEPROM_WRITE_VAR(i,laser.lifetime);
-  #endif
+    #ifdef LASER_JTECHPHOT
+      EEPROM_WRITE_VAR(i,laser.jtech_Res);
+    #endif  
+#endif
   #ifndef ULTIPANEL
   int plaPreheatHotendTemp = PLA_PREHEAT_HOTEND_TEMP, plaPreheatHPBTemp = PLA_PREHEAT_HPB_TEMP, plaPreheatFanSpeed = PLA_PREHEAT_FAN_SPEED;
   int absPreheatHotendTemp = ABS_PREHEAT_HOTEND_TEMP, absPreheatHPBTemp = ABS_PREHEAT_HPB_TEMP, absPreheatFanSpeed = ABS_PREHEAT_FAN_SPEED;
@@ -168,7 +167,12 @@ void Config_PrintSettings()
     SERIAL_ECHOLN("");
     SERIAL_ECHOPAIR(" Minutes: ",(unsigned long)laser.lifetime % 60);
     SERIAL_ECHOLN("");
+    #ifdef LASER_JTECHPHOT
+        SERIAL_ECHOPAIR(" Jtech-Phot CurrentLimit Value: ",(unsigned long)laser.jtech_Res);
+        SERIAL_ECHOLN("");
+    #endif   
 #endif
+    
 #ifdef PIDTEMP
     SERIAL_ECHO_START;
     SERIAL_ECHOLNPGM("PID settings:");
@@ -214,6 +218,9 @@ void Config_RetrieveSettings()
         #endif
         #ifdef LASER
         EEPROM_READ_VAR(i,laser.lifetime);
+            #ifdef LASER_JTECHPHOT
+              EEPROM_READ_VAR(i,laser.jtech_Res);
+            #endif          
         #endif
         #ifndef ULTIPANEL
         int plaPreheatHotendTemp, plaPreheatHPBTemp, plaPreheatFanSpeed;
@@ -303,6 +310,10 @@ void Config_ResetDefault()
 #endif//PID_ADD_EXTRUSION_RATE
 #endif//PIDTEMP
 
+#ifdef LASER_JTECHPHOT
+    laser.jtech_Res = 2;
+#endif    
+    
 SERIAL_ECHO_START;
 SERIAL_ECHOLNPGM("Hardcoded Default Settings Loaded");
 

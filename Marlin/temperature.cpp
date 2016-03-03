@@ -37,23 +37,33 @@
 //===========================================================================
 //=============================public variables============================
 //===========================================================================
-int target_temperature[EXTRUDERS] = { 0 };
-int target_temperature_bed = 0;
-int current_temperature_raw[EXTRUDERS] = { 0 };
-float current_temperature[EXTRUDERS] = { 0.0 };
-int current_temperature_bed_raw = 0;
-float current_temperature_bed = 0.0;
+    int     target_temperature[EXTRUDERS]       = { 0 };
+    int     target_temperature_bed              = 0;
+    int     current_temperature_raw[EXTRUDERS]  = { 0 };
+    float   current_temperature[EXTRUDERS]      = { 0.0 };
+    int     current_temperature_bed_raw         = 0;
+    float   current_temperature_bed             = 0.0;
+    
+#ifdef  LASER_JTECHPHOT   // Laser voltage and current
+    float   current_laser_voltage   = 0.0;  // voltage at laser
+    float   current_laser_current   = 0.0;  // current at laser
+    
+    int     temp_laser_voltin = 0;          // ADC temp values
+    int     temp_laser_voltlaser = 0;
+#endif      
+    
 #ifdef TEMP_SENSOR_1_AS_REDUNDANT
-  int redundant_temperature_raw = 0;
-  float redundant_temperature = 0.0;
+    int     redundant_temperature_raw           = 0;
+    float   redundant_temperature               = 0.0;
 #endif
+  
 #ifdef PIDTEMP
-  float Kp=DEFAULT_Kp;
-  float Ki=(DEFAULT_Ki*PID_dT);
-  float Kd=(DEFAULT_Kd/PID_dT);
-  #ifdef PID_ADD_EXTRUSION_RATE
-    float Kc=DEFAULT_Kc;
-  #endif
+    float   Kp      = DEFAULT_Kp;
+    float   Ki      = (DEFAULT_Ki*PID_dT);
+    float   Kd      = (DEFAULT_Kd/PID_dT);
+    #ifdef PID_ADD_EXTRUSION_RATE
+    float   Kc      = DEFAULT_Kc;
+    #endif
 #endif //PIDTEMP
 
 #ifdef PIDTEMPBED
@@ -203,6 +213,7 @@ void PID_autotune(float temp, int extruder, int ncycles)
  for(;;) {
 
     if(temp_meas_ready == true) { // temp sample ready
+        
       updateTemperaturesFromRawValues();
 
       input = (extruder<0)?current_temperature_bed:current_temperature[extruder];
@@ -678,6 +689,37 @@ static void updateTemperaturesFromRawValues()
     #ifdef TEMP_SENSOR_1_AS_REDUNDANT
       redundant_temperature = analog2temp(redundant_temperature_raw, 1);
     #endif
+
+#ifdef  LASER_JTECHPHOT
+    float temp;
+    //Calculate the Voltage and current of the laser.
+    current_laser_current   = ((float)temp_laser_voltlaser*3.3 / 1023.0)*3.61;  // voltage at laser
+    current_laser_current   = ((float)temp_laser_voltin*3.3 / 1023.0)*3.61;  // current at laser
+    
+    //Calculate the Laser current.
+    temp = (current_laser_current - current_laser_current);
+    switch(laser.jtech_Res) // Current Resistor limit jumper
+    {
+        case 0: //0.5A 5.5Ohm
+            temp /= 5.5;
+            break;
+        case 1: //1A 2.75Ohm 
+            temp /= 2.75;
+            break;
+        default:
+            laser.jtech_Res = 2;            
+        case 2: //1.5A 1.83Ohm
+            temp /= 1.83;
+            break;
+        case 3: //2A 1.38Ohm
+            temp /= 1.38;
+            break;
+        case 4: //2.5A 1.1Ohm
+            temp /= 1.1;
+            break;
+    }
+#endif
+    
     //Reset the watchdog after we know we have a temperature measurement.
     watchdog_reset();
 
@@ -1023,8 +1065,9 @@ int read_max6675()
 }
 #endif
 
-
-// Timer 0 is shared with millies
+//------------------------------------------------------------------------------
+//          Timer 0 ISR - Is shared with millies
+//------------------------------------------------------------------------------
 ISR(TIMER0_COMPB_vect)
 {
   //these variables are only accesible from the ISR, but static, so they don't lose their value
@@ -1036,223 +1079,301 @@ ISR(TIMER0_COMPB_vect)
   static unsigned char temp_state = 0;
   static unsigned char pwm_count = (1 << SOFT_PWM_SCALE);
   static unsigned char soft_pwm_0;
+#ifdef  LASER_JTECHPHOT  
+  static unsigned long raw_laser_vin = 0;
+  static unsigned long raw_laser_vlaser = 0;
+#endif
+  
   #if EXTRUDERS > 1
   static unsigned char soft_pwm_1;
   #endif
+
   #if EXTRUDERS > 2
   static unsigned char soft_pwm_2;
   #endif
+
   #if HEATER_BED_PIN > -1
   static unsigned char soft_pwm_b;
   #endif
   
-  if(pwm_count == 0){
-    soft_pwm_0 = soft_pwm[0];
-    if(soft_pwm_0 > 0) WRITE(HEATER_0_PIN,1);
+  // PWM : Extruders/bed/fan  -----------------------------------
+    if(pwm_count == 0){
+      
+        //Heater 0 - Extruder 0  
+        soft_pwm_0 = soft_pwm[0];
+        if(soft_pwm_0 > 0) WRITE(HEATER_0_PIN,1);
+        #if EXTRUDERS > 1
+        soft_pwm_1 = soft_pwm[1];
+        if(soft_pwm_1 > 0) WRITE(HEATER_1_PIN,1);
+        #endif
+        #if EXTRUDERS > 2
+        soft_pwm_2 = soft_pwm[2];
+        if(soft_pwm_2 > 0) WRITE(HEATER_2_PIN,1);
+        #endif
+        #if defined(HEATER_BED_PIN) && HEATER_BED_PIN > -1
+        soft_pwm_b = soft_pwm_bed;
+        if(soft_pwm_b > 0) WRITE(HEATER_BED_PIN,1);
+        #endif
+        #ifdef FAN_SOFT_PWM
+        soft_pwm_fan = fanSpeedSoftPwm / 2;
+        if(soft_pwm_fan > 0) WRITE(FAN_PIN,1);
+        #endif
+    }
+  
+    if(soft_pwm_0 <= pwm_count) WRITE(HEATER_0_PIN,0);
     #if EXTRUDERS > 1
-    soft_pwm_1 = soft_pwm[1];
-    if(soft_pwm_1 > 0) WRITE(HEATER_1_PIN,1);
+    if(soft_pwm_1 <= pwm_count) WRITE(HEATER_1_PIN,0);
     #endif
     #if EXTRUDERS > 2
-    soft_pwm_2 = soft_pwm[2];
-    if(soft_pwm_2 > 0) WRITE(HEATER_2_PIN,1);
+    if(soft_pwm_2 <= pwm_count) WRITE(HEATER_2_PIN,0);
     #endif
     #if defined(HEATER_BED_PIN) && HEATER_BED_PIN > -1
-    soft_pwm_b = soft_pwm_bed;
-    if(soft_pwm_b > 0) WRITE(HEATER_BED_PIN,1);
+    if(soft_pwm_b <= pwm_count) WRITE(HEATER_BED_PIN,0);
     #endif
     #ifdef FAN_SOFT_PWM
-    soft_pwm_fan = fanSpeedSoftPwm / 2;
-    if(soft_pwm_fan > 0) WRITE(FAN_PIN,1);
+    if(soft_pwm_fan <= pwm_count) WRITE(FAN_PIN,0);
     #endif
-  }
-  if(soft_pwm_0 <= pwm_count) WRITE(HEATER_0_PIN,0);
-  #if EXTRUDERS > 1
-  if(soft_pwm_1 <= pwm_count) WRITE(HEATER_1_PIN,0);
-  #endif
-  #if EXTRUDERS > 2
-  if(soft_pwm_2 <= pwm_count) WRITE(HEATER_2_PIN,0);
-  #endif
-  #if defined(HEATER_BED_PIN) && HEATER_BED_PIN > -1
-  if(soft_pwm_b <= pwm_count) WRITE(HEATER_BED_PIN,0);
-  #endif
-  #ifdef FAN_SOFT_PWM
-  if(soft_pwm_fan <= pwm_count) WRITE(FAN_PIN,0);
-  #endif
   
-  pwm_count += (1 << SOFT_PWM_SCALE);
-  pwm_count &= 0x7f;
-  
-  switch(temp_state) {
-    case 0: // Prepare TEMP_0
-      #if defined(TEMP_0_PIN) && (TEMP_0_PIN > -1)
-        #if TEMP_0_PIN > 7
-          ADCSRB = 1<<MUX5;
-        #else
-          ADCSRB = 0;
-        #endif
-        ADMUX = ((1 << REFS0) | (TEMP_0_PIN & 0x07));
-        ADCSRA |= 1<<ADSC; // Start conversion
-      #endif
-      lcd_buttons_update();
-      temp_state = 1;
-      break;
-    case 1: // Measure TEMP_0
-      #if defined(TEMP_0_PIN) && (TEMP_0_PIN > -1)
-        raw_temp_0_value += ADC;
-      #endif
-      #ifdef HEATER_0_USES_MAX6675 // TODO remove the blocking
-        raw_temp_0_value = read_max6675();
-      #endif
-      temp_state = 2;
-      break;
-    case 2: // Prepare TEMP_BED
-      #if defined(TEMP_BED_PIN) && (TEMP_BED_PIN > -1)
-        #if TEMP_BED_PIN > 7
-          ADCSRB = 1<<MUX5;
-        #else
-          ADCSRB = 0;
-        #endif
-        ADMUX = ((1 << REFS0) | (TEMP_BED_PIN & 0x07));
-        ADCSRA |= 1<<ADSC; // Start conversion
-      #endif
-      lcd_buttons_update();
-      temp_state = 3;
-      break;
-    case 3: // Measure TEMP_BED
-      #if defined(TEMP_BED_PIN) && (TEMP_BED_PIN > -1)
-        raw_temp_bed_value += ADC;
-      #endif
-      temp_state = 4;
-      break;
-    case 4: // Prepare TEMP_1
-      #if defined(TEMP_1_PIN) && (TEMP_1_PIN > -1)
-        #if TEMP_1_PIN > 7
-          ADCSRB = 1<<MUX5;
-        #else
-          ADCSRB = 0;
-        #endif
-        ADMUX = ((1 << REFS0) | (TEMP_1_PIN & 0x07));
-        ADCSRA |= 1<<ADSC; // Start conversion
-      #endif
-      lcd_buttons_update();
-      temp_state = 5;
-      break;
-    case 5: // Measure TEMP_1
-      #if defined(TEMP_1_PIN) && (TEMP_1_PIN > -1)
-        raw_temp_1_value += ADC;
-      #endif
-      temp_state = 6;
-      break;
-    case 6: // Prepare TEMP_2
-      #if defined(TEMP_2_PIN) && (TEMP_2_PIN > -1)
-        #if TEMP_2_PIN > 7
-          ADCSRB = 1<<MUX5;
-        #else
-          ADCSRB = 0;
-        #endif
-        ADMUX = ((1 << REFS0) | (TEMP_2_PIN & 0x07));
-        ADCSRA |= 1<<ADSC; // Start conversion
-      #endif
-      lcd_buttons_update();
-      temp_state = 7;
-      break;
-    case 7: // Measure TEMP_2
-      #if defined(TEMP_2_PIN) && (TEMP_2_PIN > -1)
-        raw_temp_2_value += ADC;
-      #endif
-      temp_state = 0;
-      temp_count++;
-      break;
-//    default:
-//      SERIAL_ERROR_START;
-//      SERIAL_ERRORLNPGM("Temp measurement error!");
-//      break;
-  }
+    pwm_count += (1 << SOFT_PWM_SCALE);
+    pwm_count &= 0x7f;
     
-  if(temp_count >= 16) // 8 ms * 16 = 128ms.
-  {
-    if (!temp_meas_ready) //Only update the raw values if they have been read. Else we could be updating them during reading.
+// ADC READINGS -----------------------------------
+    switch(temp_state) 
     {
-      current_temperature_raw[0] = raw_temp_0_value;
-#if EXTRUDERS > 1
-      current_temperature_raw[1] = raw_temp_1_value;
-#endif
-#ifdef TEMP_SENSOR_1_AS_REDUNDANT
-      redundant_temperature_raw = raw_temp_1_value;
-#endif
-#if EXTRUDERS > 2
-      current_temperature_raw[2] = raw_temp_2_value;
-#endif
-      current_temperature_bed_raw = raw_temp_bed_value;
-    }
-    
-    temp_meas_ready = true;
-    temp_count = 0;
-    raw_temp_0_value = 0;
-    raw_temp_1_value = 0;
-    raw_temp_2_value = 0;
-    raw_temp_bed_value = 0;
+        case 0: // Prepare TEMP_0
+            #if defined(TEMP_0_PIN) && (TEMP_0_PIN > -1)
+                #if TEMP_0_PIN > 7
+                  ADCSRB = 1<<MUX5;
+                #else
+                  ADCSRB = 0;
+                #endif
+                ADMUX = ((1 << REFS0) | (TEMP_0_PIN & 0x07));
+                ADCSRA |= 1<<ADSC; // Start conversion
+            #endif
+            lcd_buttons_update();
+            temp_state = 1;
+            break;
+            
+        case 1: // Measure TEMP_0
+            #if defined(TEMP_0_PIN) && (TEMP_0_PIN > -1)
+              raw_temp_0_value += ADC;
+            #endif
+            #ifdef HEATER_0_USES_MAX6675 // TODO remove the blocking
+              raw_temp_0_value = read_max6675();
+            #endif
+            temp_state = 2;
+            break;
+            
+        case 2: // Prepare TEMP_BED
+            #if defined(TEMP_BED_PIN) && (TEMP_BED_PIN > -1)
+              #if TEMP_BED_PIN > 7
+                ADCSRB = 1<<MUX5;
+              #else
+                ADCSRB = 0;
+              #endif
+              ADMUX = ((1 << REFS0) | (TEMP_BED_PIN & 0x07));
+              ADCSRA |= 1<<ADSC; // Start conversion
+            #endif
+            lcd_buttons_update();
+            temp_state = 3;
+            break;
+            
+        case 3: // Measure TEMP_BED
+            #if defined(TEMP_BED_PIN) && (TEMP_BED_PIN > -1)
+              raw_temp_bed_value += ADC;
+            #endif
+            temp_state = 4;
+            break;
+            
+        case 4: // Prepare TEMP_1
+            #if defined(TEMP_1_PIN) && (TEMP_1_PIN > -1)
+              #if TEMP_1_PIN > 7
+                ADCSRB = 1<<MUX5;
+              #else
+                ADCSRB = 0;
+              #endif
+              ADMUX = ((1 << REFS0) | (TEMP_1_PIN & 0x07));
+              ADCSRA |= 1<<ADSC; // Start conversion
+            #endif
+            lcd_buttons_update();
+            temp_state = 5;
+            break;
+            
+        case 5: // Measure TEMP_1
+            #if defined(TEMP_1_PIN) && (TEMP_1_PIN > -1)
+              raw_temp_1_value += ADC;
+            #endif
+            temp_state = 6;
+            break;
+            
+        case 6: // Prepare TEMP_2
+            #if defined(TEMP_2_PIN) && (TEMP_2_PIN > -1)
+              #if TEMP_2_PIN > 7
+                ADCSRB = 1<<MUX5;
+              #else
+                ADCSRB = 0;
+              #endif
+              ADMUX = ((1 << REFS0) | (TEMP_2_PIN & 0x07));
+              ADCSRA |= 1<<ADSC; // Start conversion
+            #endif
+            lcd_buttons_update();
+            temp_state = 7;
+            break;
+            
+        case 7: // Measure TEMP_2
+            #if defined(TEMP_2_PIN) && (TEMP_2_PIN > -1)
+              raw_temp_2_value += ADC;
+            #endif
 
-#if HEATER_0_RAW_LO_TEMP > HEATER_0_RAW_HI_TEMP
-    if(current_temperature_raw[0] <= maxttemp_raw[0]) {
+#ifndef  LASER_JTECHPHOT
+            temp_state = 0;
+            temp_count++;
+            break;
 #else
-    if(current_temperature_raw[0] >= maxttemp_raw[0]) {
-#endif
-        max_temp_error(0);
+            temp_state = 8;
+            break;
+            
+        case 8: // Prepare Laser Vin
+            #if LASER_JTECHPHOT_PIN_VIN > 7
+              ADCSRB = 1<<MUX5;
+            #else
+              ADCSRB = 0;
+            #endif
+            ADMUX = ((1 << REFS0) | (LASER_JTECHPHOT_PIN_VIN & 0x07));
+            ADCSRA |= 1<<ADSC; // Start conversion
+            lcd_buttons_update();
+            temp_state = 9;
+            break;
+            
+        case 9: // Measure Laser Vin
+            raw_laser_vin += ADC;
+            temp_state = 10;
+            break;
+            
+        case 10: // Prepare Laser Vlaser
+            #if LASER_JTECHPHOT_PIN_VLASER > 7
+              ADCSRB = 1<<MUX5;
+            #else
+              ADCSRB = 0;
+            #endif
+            ADMUX = ((1 << REFS0) | (LASER_JTECHPHOT_PIN_VLASER & 0x07));
+            ADCSRA |= 1<<ADSC; // Start conversion
+            lcd_buttons_update();
+            temp_state = 11;
+            break;
+            
+        case 11: // Measure Laser Vin
+            raw_laser_vlaser += ADC;
+            
+            //Go to ini
+            temp_state = 9;
+            temp_count++;
+            break;
+#endif 
+            
+    //    default:
+    //      SERIAL_ERROR_START;
+    //      SERIAL_ERRORLNPGM("Temp measurement error!");
+    //      break;
     }
-#if HEATER_0_RAW_LO_TEMP > HEATER_0_RAW_HI_TEMP
-    if(current_temperature_raw[0] >= minttemp_raw[0]) {
-#else
-    if(current_temperature_raw[0] <= minttemp_raw[0]) {
+
+    if(temp_count >= 16) // 8 ms * 16 = 128ms.
+    {
+        if (!temp_meas_ready) //Only update the raw values if they have been read. Else we could be updating them during reading.
+        {
+            current_temperature_raw[0] = raw_temp_0_value;
+        #if EXTRUDERS > 1
+            current_temperature_raw[1] = raw_temp_1_value;
+        #endif
+        #ifdef TEMP_SENSOR_1_AS_REDUNDANT
+            redundant_temperature_raw = raw_temp_1_value;
+        #endif
+        #if EXTRUDERS > 2
+            current_temperature_raw[2] = raw_temp_2_value;
+        #endif
+            current_temperature_bed_raw = raw_temp_bed_value;
+            
+#ifdef  LASER_JTECHPHOT
+        //Save averaged values.
+        temp_laser_voltin       = ( raw_laser_vin / temp_count );      
+        temp_laser_voltlaser    = ( raw_laser_vlaser / temp_count );    
 #endif
-        min_temp_error(0);
-    }
-#if EXTRUDERS > 1
-#if HEATER_1_RAW_LO_TEMP > HEATER_1_RAW_HI_TEMP
-    if(current_temperature_raw[1] <= maxttemp_raw[1]) {
-#else
-    if(current_temperature_raw[1] >= maxttemp_raw[1]) {
-#endif
-        max_temp_error(1);
-    }
-#if HEATER_1_RAW_LO_TEMP > HEATER_1_RAW_HI_TEMP
-    if(current_temperature_raw[1] >= minttemp_raw[1]) {
-#else
-    if(current_temperature_raw[1] <= minttemp_raw[1]) {
-#endif
-        min_temp_error(1);
-    }
-#endif
-#if EXTRUDERS > 2
-#if HEATER_2_RAW_LO_TEMP > HEATER_2_RAW_HI_TEMP
-    if(current_temperature_raw[2] <= maxttemp_raw[2]) {
-#else
-    if(current_temperature_raw[2] >= maxttemp_raw[2]) {
-#endif
-        max_temp_error(2);
-    }
-#if HEATER_2_RAW_LO_TEMP > HEATER_2_RAW_HI_TEMP
-    if(current_temperature_raw[2] >= minttemp_raw[2]) {
-#else
-    if(current_temperature_raw[2] <= minttemp_raw[2]) {
-#endif
-        min_temp_error(2);
-    }
-#endif
-  
-  /* No bed MINTEMP error? */
-#if defined(BED_MAXTEMP) && (TEMP_SENSOR_BED != 0)
-# if HEATER_BED_RAW_LO_TEMP > HEATER_BED_RAW_HI_TEMP
-    if(current_temperature_bed_raw <= bed_maxttemp_raw) {
-#else
-    if(current_temperature_bed_raw >= bed_maxttemp_raw) {
-#endif
-       target_temperature_bed = 0;
-       bed_max_temp_error();
-    }
-#endif
-  }  
+        }
+
+        temp_meas_ready = true;
+        temp_count = 0;
+        raw_temp_0_value = 0;
+        raw_temp_1_value = 0;
+        raw_temp_2_value = 0;
+        raw_temp_bed_value = 0;
+#ifdef  LASER_JTECHPHOT
+        raw_laser_vin = 0;
+        raw_laser_vlaser = 0;
+#endif        
+    
+    //Limit max temperature------------------------------
+      
+        #if HEATER_0_RAW_LO_TEMP > HEATER_0_RAW_HI_TEMP
+          if(current_temperature_raw[0] <= maxttemp_raw[0]) {
+        #else
+          if(current_temperature_raw[0] >= maxttemp_raw[0]) {
+        #endif
+              max_temp_error(0);
+          }
+
+        #if HEATER_0_RAW_LO_TEMP > HEATER_0_RAW_HI_TEMP
+          if(current_temperature_raw[0] >= minttemp_raw[0]) {
+        #else
+          if(current_temperature_raw[0] <= minttemp_raw[0]) {
+        #endif
+              min_temp_error(0);
+          }
+
+        #if EXTRUDERS > 1
+        #if HEATER_1_RAW_LO_TEMP > HEATER_1_RAW_HI_TEMP
+          if(current_temperature_raw[1] <= maxttemp_raw[1]) {
+        #else
+          if(current_temperature_raw[1] >= maxttemp_raw[1]) {
+        #endif
+              max_temp_error(1);
+          }
+        #if HEATER_1_RAW_LO_TEMP > HEATER_1_RAW_HI_TEMP
+          if(current_temperature_raw[1] >= minttemp_raw[1]) {
+        #else
+          if(current_temperature_raw[1] <= minttemp_raw[1]) {
+        #endif
+              min_temp_error(1);
+          }
+        #endif
+        #if EXTRUDERS > 2
+        #if HEATER_2_RAW_LO_TEMP > HEATER_2_RAW_HI_TEMP
+          if(current_temperature_raw[2] <= maxttemp_raw[2]) {
+        #else
+          if(current_temperature_raw[2] >= maxttemp_raw[2]) {
+        #endif
+              max_temp_error(2);
+          }
+        #if HEATER_2_RAW_LO_TEMP > HEATER_2_RAW_HI_TEMP
+          if(current_temperature_raw[2] >= minttemp_raw[2]) {
+        #else
+          if(current_temperature_raw[2] <= minttemp_raw[2]) {
+        #endif
+              min_temp_error(2);
+          }
+        #endif
+
+        /* No bed MINTEMP error? */
+        #if defined(BED_MAXTEMP) && (TEMP_SENSOR_BED != 0)
+        # if HEATER_BED_RAW_LO_TEMP > HEATER_BED_RAW_HI_TEMP
+          if(current_temperature_bed_raw <= bed_maxttemp_raw) {
+        #else
+          if(current_temperature_bed_raw >= bed_maxttemp_raw) {
+        #endif
+             target_temperature_bed = 0;
+             bed_max_temp_error();
+          }
+        #endif
+    }  
 }
 
 #ifdef PIDTEMP

@@ -13,33 +13,33 @@
 int8_t encoderDiff; /* encoderDiff is updated from interrupt context and added to encoderPosition every LCD update */
 
 /* Configuration settings */
-int plaPreheatHotendTemp;
-int plaPreheatHPBTemp;
-int plaPreheatFanSpeed;
+    int     plaPreheatHotendTemp;
+    int     plaPreheatHPBTemp;
+    int     plaPreheatFanSpeed;
 
-int absPreheatHotendTemp;
-int absPreheatHPBTemp;
-int absPreheatFanSpeed;
+    int     absPreheatHotendTemp;
+    int     absPreheatHPBTemp;
+    int     absPreheatFanSpeed;
 
-static float manual_feedrate[] = MANUAL_FEEDRATE;
+    static float    manual_feedrate[]   = MANUAL_FEEDRATE;
 /* !Configuration settings */
 
 //Function pointer to menu functions.
-typedef void (*menuFunc_t)();
+    typedef void (*menuFunc_t)();
 
-uint8_t lcd_status_message_level;
-char lcd_status_message[LCD_WIDTH+1] = WELCOME_MSG;
+    uint8_t     lcd_status_message_level;
+    char        lcd_status_message[LCD_WIDTH+1] = WELCOME_MSG;
 
 #ifdef DOGLCD
-#include "dogm_lcd_implementation.h"
+    #include "dogm_lcd_implementation.h"
 #else
-#include "ultralcd_implementation_hitachi_HD44780.h"
+    #include "ultralcd_implementation_hitachi_HD44780.h"
 #endif
 
 /** forward declerations **/
 
-void copy_and_scalePID_i();
-void copy_and_scalePID_d();
+    void    copy_and_scalePID_i ();
+    void    copy_and_scalePID_d ();
 
 /* Different menus */
 static void lcd_status_screen();
@@ -172,10 +172,10 @@ bool lcd_oldcardstatus;
 #endif
 #endif//ULTIPANEL
 
-menuFunc_t currentMenu = lcd_status_screen; /* function pointer to the currently active menu */
-uint32_t lcd_next_update_millis;
-uint8_t lcd_status_update_delay;
-uint8_t lcdDrawUpdate = 2;                  /* Set to none-zero when the LCD needs to draw, decreased after every draw. Set to 2 in LCD routines so the LCD gets atleast 1 full redraw (first redraw is partial) */
+    menuFunc_t  currentMenu             = lcd_status_screen; /* function pointer to the currently active menu */
+    uint32_t    lcd_next_update_millis;
+    uint8_t     lcd_status_update_delay;
+    uint8_t     lcdDrawUpdate           = 2;                  /* Set to none-zero when the LCD needs to draw, decreased after every draw. Set to 2 in LCD routines so the LCD gets atleast 1 full redraw (first redraw is partial) */
 
 //prevMenu and prevEncoderPosition are used to store the previous menu location when editing settings.
 menuFunc_t prevMenu = NULL;
@@ -273,19 +273,24 @@ static void lcd_sdcard_stop()
 static void lcd_main_menu()
 {
     START_MENU();
+    
     MENU_ITEM(back, MSG_WATCH, lcd_status_screen);
-	#ifdef LASER
-    	if (!(movesplanned() || IS_SD_PRINTING)) {
-    		MENU_ITEM(submenu, "Laser Functions", lcd_laser_menu);
-    	}
-	#endif
+    
+#ifdef LASER
+    if (!(movesplanned() || IS_SD_PRINTING)) {
+            MENU_ITEM(submenu, "Laser Functions", lcd_laser_menu);
+    }
+#endif
+    
     if (movesplanned() || IS_SD_PRINTING)
     {
         MENU_ITEM(submenu, MSG_TUNE, lcd_tune_menu);
     }else{
         MENU_ITEM(submenu, MSG_PREPARE, lcd_prepare_menu);
     }
+    
     MENU_ITEM(submenu, MSG_CONTROL, lcd_control_menu);
+    
 #ifdef SDSUPPORT
     if (card.cardOK)
     {
@@ -309,6 +314,7 @@ static void lcd_main_menu()
 #endif
     }
 #endif
+    
     END_MENU();
 }
 
@@ -757,65 +763,68 @@ static void lcd_control_retract_menu()
 #ifdef LASER
 static void lcd_laser_menu()
 {
-	START_MENU();
-	MENU_ITEM(back, MSG_MAIN, lcd_main_menu);
-	MENU_ITEM(submenu, "Set Focus", lcd_laser_focus_menu);
-	MENU_ITEM(submenu, "Test Fire", lcd_laser_test_fire_menu);
-	#ifdef LASER_PERIPHERALS
-	if (laser_peripherals_ok()) {
-		MENU_ITEM(function, "Turn On Pumps/Fans", action_laser_acc_on);
-	} else if (!(movesplanned() || IS_SD_PRINTING)) {
-		MENU_ITEM(function, "Turn Off Pumps/Fans", action_laser_acc_off);
-	}
-	#endif // LASER_PERIPHERALS
-	END_MENU();
+    START_MENU();
+    
+    MENU_ITEM(back, MSG_MAIN, lcd_main_menu);
+    MENU_ITEM(submenu, "Set Focus", lcd_laser_focus_menu);
+    MENU_ITEM(submenu, "Test Fire", lcd_laser_test_fire_menu);
+    
+#ifdef LASER_PERIPHERALS
+    if (laser_peripherals_ok()) {
+            MENU_ITEM(function, "Turn On Pumps/Fans", action_laser_acc_on);
+    } else if (!(movesplanned() || IS_SD_PRINTING)) {
+            MENU_ITEM(function, "Turn Off Pumps/Fans", action_laser_acc_off);
+    }
+#endif // LASER_PERIPHERALS
+    
+    END_MENU();
 }
 
 static void lcd_laser_test_fire_menu() {
-	START_MENU();
-	MENU_ITEM(back, "Laser Functions", lcd_laser_menu);
-	MENU_ITEM(function, " 20%  50ms", action_laser_test_20_50ms);
-	MENU_ITEM(function, " 20% 100ms", action_laser_test_20_100ms);
-	MENU_ITEM(function, "100%  50ms", action_laser_test_100_50ms);
-	MENU_ITEM(function, "100% 100ms", action_laser_test_100_100ms);
-	MENU_ITEM(function, "Warm-up Laser 2sec", action_laser_test_warm);
-	END_MENU();
+    START_MENU();
+    MENU_ITEM(back, "Laser Functions", lcd_laser_menu);
+    MENU_ITEM(function, " 20%  50ms", action_laser_test_20_50ms);
+    MENU_ITEM(function, " 20% 100ms", action_laser_test_20_100ms);
+    MENU_ITEM(function, "100%  50ms", action_laser_test_100_50ms);
+    MENU_ITEM(function, "100% 100ms", action_laser_test_100_100ms);
+    MENU_ITEM(function, "Warm-up Laser 2sec", action_laser_test_warm);
+    END_MENU();
 }
 
 
 static void action_laser_acc_on() {
-	enquecommand_P(PSTR("M80"));
+    enquecommand_P(PSTR("M80"));
 }
 
 static void action_laser_acc_off() {
-	enquecommand_P(PSTR("M81"));
+    enquecommand_P(PSTR("M81"));
 }
 
 static void action_laser_test_20_50ms() {
-	laser_test_fire(20, 50);
+    laser_test_fire(20, 50);
 }
 
 static void action_laser_test_20_100ms() {
-	laser_test_fire(20, 100);
+    laser_test_fire(20, 100);
 }
 
 static void action_laser_test_100_50ms() {
-	laser_test_fire(100, 50);
+    laser_test_fire(100, 50);
 }
 
 static void action_laser_test_100_100ms() {
-	laser_test_fire(100, 100);
+    laser_test_fire(100, 100);
 }
 
 static void action_laser_test_warm() {
-	laser_test_fire(15, 2000);
+    laser_test_fire(15, 2000);
 }
 
 static void laser_test_fire(uint8_t power, uint8_t dwell) {
-	enquecommand_P(PSTR("M80"));  // Enable laser accessories since we don't know if its been done (and there's no penalty for doing it again).
+    enquecommand_P(PSTR("M80"));  // Enable laser accessories since we don't know if its been done (and there's no penalty for doing it again).
     laser_fire(power);
-	delay(dwell);
-	laser_extinguish();
+    delay(dwell);
+    laser_extinguish();
 }
 float focalLength = 0;
 static void lcd_laser_focus_menu() {
@@ -1371,6 +1380,18 @@ char *itostr2(const uint8_t &x)
   conv[0]=(xx/10)%10+'0';
   conv[1]=(xx)%10+'0';
   conv[2]=0;
+  return conv;
+}
+
+char *itostr21(const uint8_t &x)
+{
+  //sprintf(conv,"%5.1f",x);
+  int xx=x;
+  conv[0]=(xx/10)%10+'0';
+  conv[1]=(xx)%10+'0';
+  conv[2]='.';
+  conv[3]=(xx)%10+'0';
+  conv[4]=0;
   return conv;
 }
 

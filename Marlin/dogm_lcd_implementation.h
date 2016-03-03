@@ -135,7 +135,7 @@ static void lcd_implementation_init()
             
             // Welcome message
             u8g.setFont(u8g_font_7x13B);
-            u8g.drawStr(42,14,NAME_STRING);                         
+            u8g.drawStr(42,14,CUSTOM_MENDEL_NAME);                         
             u8g.setFont(u8g_font_5x8);
             u8g.drawStr(50,30,FIRMWARE_STRING);
             u8g.drawStr(52,40,VERSION_STRING);
@@ -147,9 +147,11 @@ static void lcd_implementation_init()
 
 static void lcd_implementation_status_screen()
 {
-
-    static unsigned char fan_rot = 0;
-
+#ifdef  LASER_JTECHPHOT   // Laser voltage and current
+    extern float   current_laser_voltage; // voltage at laser
+    extern float   current_laser_current; // current at laser
+#endif
+    
     u8g.setColorIndex(1);	// black on white
     
 // LASER  **********************************************************************
@@ -167,13 +169,18 @@ static void lcd_implementation_status_screen()
         u8g.print(itostr3(current_block->laser_intensity));
         lcd_printPGM(PSTR("%"));   
         
+#ifdef  LASER_JTECHPHOT   // Laser voltage and current
+        
         //Laser Current
         u8g.setPrintPos(25, 18);
-        lcd_printPGM(PSTR("2.5A"));
+        u8g.print(itostr21(int(current_laser_current*10)));
+        lcd_printPGM(PSTR("A")); 
         
-        //Laser Power
+        //Laser Voltage
         u8g.setPrintPos(25, 26);
-        lcd_printPGM(PSTR("0.2W"));
+        u8g.print(itostr21(int(current_laser_voltage*10)));
+        lcd_printPGM(PSTR("v")); 
+#endif        
         
     } else {
         u8g.drawBitmapP(5,3, ICON_BYTEWIDTH, ICON_HEIGHT, laseroff_bmp);
@@ -182,26 +189,22 @@ static void lcd_implementation_status_screen()
         u8g.setPrintPos(25, 9);      
         lcd_printPGM(PSTR("---%"));
         
+#ifdef  LASER_JTECHPHOT   // Laser voltage and current
         //Laser Current
         u8g.setPrintPos(25, 18);
-        lcd_printPGM(PSTR("-.-A"));
+        lcd_printPGM(PSTR("--.-A"));
         
         //Laser Power
         u8g.setPrintPos(25, 26);
-        lcd_printPGM(PSTR("-.-W"));
+        lcd_printPGM(PSTR("--.-v"));
+#endif  
+        
     }
     
     //Laser Temperature - T0
         u8g.setPrintPos(4, 25);
         u8g.print(itostr2(int(degHotend(0) + 0.5)));
         lcd_printPGM(PSTR(LCD_STR_DEGREE));
-    
-#ifdef LASER_PERIPHERALS
-    if (laser_peripherals_ok()) 
-    {
-        u8g.drawBitmapP(29,4, LASERENABLE_BYTEWIDTH, LASERENABLE_HEIGHT, laserenable_bmp);
-    }
-#endif // LASER_PERIPHERALS
     
 //SD Card Symbol  **************************************************************    
 #ifdef SDSUPPORT

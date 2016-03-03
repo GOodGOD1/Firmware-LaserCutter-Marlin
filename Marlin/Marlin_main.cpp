@@ -41,7 +41,7 @@
 #include "pins_arduino.h"
 
 #ifdef LASER_RASTER
-#include "Base64.h"
+    #include "Base64.h"
 #endif // LASER_RASTER
 
 #if NUM_SERVOS > 0
@@ -2864,15 +2864,15 @@ void prepare_move()
   }
 #endif //DUAL_X_CARRIAGE
 
-  #ifdef LASER_FIRE_E
-  if (current_position[E_AXIS] != destination[E_AXIS] && ((current_position[X_AXIS] != destination [X_AXIS]) || (current_position[Y_AXIS] != destination [Y_AXIS]))){
-	laser.status = LASER_ON;
-	laser.fired = LASER_FIRE_E;
-  }
-  if (current_position[E_AXIS] == destination[E_AXIS] && laser.fired == LASER_FIRE_E){
-    laser.status = LASER_OFF;
-  }
-  #endif // LASER_FIRE_E
+#ifdef LASER_FIRE_E
+    if (current_position[E_AXIS] != destination[E_AXIS] && ((current_position[X_AXIS] != destination [X_AXIS]) || (current_position[Y_AXIS] != destination [Y_AXIS]))){
+        laser.status = LASER_ON;
+        laser.fired = LASER_FIRE_E;
+    }
+    if (current_position[E_AXIS] == destination[E_AXIS] && laser.fired == LASER_FIRE_E){
+        laser.status = LASER_OFF;
+    }
+#endif // LASER_FIRE_E
 
   // Do not use feedmultiply for E or Z only moves
   if((current_position[X_AXIS] == destination [X_AXIS]) && (current_position[Y_AXIS] == destination [Y_AXIS])) {
