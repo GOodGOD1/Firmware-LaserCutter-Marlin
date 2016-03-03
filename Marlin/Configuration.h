@@ -148,7 +148,7 @@
 
 // changes made in ULTRA_LCD_IMPLEMENTATION_HITACHI_HD44780.H line 473 to allow temperature display 
 // instead of Z position, set to 1 for temperature, 0 for no temperature.
-#define TEMP_SENSOR_0       0
+#define TEMP_SENSOR_0       1
 #define TEMP_SENSOR_1       0
 #define TEMP_SENSOR_2       0
 #define TEMP_SENSOR_BED     0

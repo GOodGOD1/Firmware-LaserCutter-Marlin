@@ -9,14 +9,12 @@
         <group>
             <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/laser.cpp</file>
             <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/stepper.cpp</file>
-            <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/planner.h</file>
-            <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/laserbitmaps.h</file>
             <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/ultralcd.cpp</file>
-            <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/ultralcd.h</file>
+            <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/Makefile</file>
+            <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/temperature.h</file>
             <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/U8glib.h</file>
-            <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/Marlin.h</file>
             <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/Configuration.h</file>
-            <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/pins.h</file>
+            <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/planner.cpp</file>
             <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/Marlin_main.cpp</file>
             <file>file:/E:/Proyectos_Electr/Laser_Cutter_FreakyAttic/Firmware-LaserCutter-Marlin/Marlin/dogm_lcd_implementation.h</file>
         </group>

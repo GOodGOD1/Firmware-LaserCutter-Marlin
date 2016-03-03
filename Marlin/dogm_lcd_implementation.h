@@ -156,29 +156,45 @@ static void lcd_implementation_status_screen()
     u8g.setFont(FONT_STATUSMENU);
     u8g.setColorIndex(1);
     
-    //Laser Temperature
-    u8g.setPrintPos(2,25);
-    lcd_printPGM(PSTR("30\xB0"));
+    u8g.drawFrame(0,0,51,28); // draw box
     
-    if (current_block->laser_status == LASER_ON) {
+    if (current_block->laser_status == LASER_ON) 
+    {
         u8g.drawBitmapP(5,3, ICON_BYTEWIDTH, ICON_HEIGHT, laseron_bmp);
         
         //Laser Power %
-        u8g.setPrintPos(23,10);
+        u8g.setPrintPos(25, 9);
         u8g.print(itostr3(current_block->laser_intensity));
-        lcd_printPGM(PSTR("%"));    
+        lcd_printPGM(PSTR("%"));   
+        
+        //Laser Current
+        u8g.setPrintPos(25, 18);
+        lcd_printPGM(PSTR("2.5A"));
+        
+        //Laser Power
+        u8g.setPrintPos(25, 26);
+        lcd_printPGM(PSTR("0.2W"));
         
     } else {
         u8g.drawBitmapP(5,3, ICON_BYTEWIDTH, ICON_HEIGHT, laseroff_bmp);
         
         //Laser Power %
-        u8g.setPrintPos(23,10);      
+        u8g.setPrintPos(25, 9);      
         lcd_printPGM(PSTR("---%"));
         
         //Laser Current
-        u8g.setPrintPos(23,20);
-        lcd_printPGM(PSTR("2.5A"));
+        u8g.setPrintPos(25, 18);
+        lcd_printPGM(PSTR("-.-A"));
+        
+        //Laser Power
+        u8g.setPrintPos(25, 26);
+        lcd_printPGM(PSTR("-.-W"));
     }
+    
+    //Laser Temperature - T0
+        u8g.setPrintPos(4, 25);
+        u8g.print(itostr2(int(degHotend(0) + 0.5)));
+        lcd_printPGM(PSTR(LCD_STR_DEGREE));
     
 #ifdef LASER_PERIPHERALS
     if (laser_peripherals_ok()) 
@@ -222,16 +238,7 @@ static void lcd_implementation_status_screen()
     
 #endif
  
-// Fan ************************************************************************
-    u8g.setFont(FONT_STATUSMENU);
-    u8g.setPrintPos(104,27);
-    #if defined(FAN_PIN) && FAN_PIN > -1
-    u8g.print(itostr3(int((fanSpeed*100)/256 + 1)));
-    u8g.print("%");
-    #else
-    u8g.print("---");
-    #endif
- 
+
  // X, Y, Z-Coordinates     ***************************************************
     u8g.setFont(FONT_STATUSMENU);
     u8g.drawBox(0,29,128,10);
