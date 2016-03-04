@@ -310,7 +310,7 @@ void Config_ResetDefault()
 #endif//PIDTEMP
 
 #ifdef LASER_JTECHPHOT
-    laser.jtech_Res = 2;
+    laser.jtech_Res = 3; //Default to 1.5A 1.83Ohm
 #endif    
     
 SERIAL_ECHO_START;

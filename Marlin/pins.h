@@ -399,6 +399,12 @@
       #define LASER_FIRING_PIN      5
   #endif
 
+#ifdef  LASER_JTECHPHOT
+    // Configuration for the JTech Photonics Laser board. Enable to display laser current.
+    #define     LASER_JTECHPHOT_PIN_VIN     3      //Analog input for input voltage
+    #define     LASER_JTECHPHOT_PIN_VLASER  4      //Analog input for laser voltage
+#endif
+
   #ifdef LASER_POWER_DOWN
     #define LASER_POWER_PIN 9 // This is currently hard-coded to timer2 which services pins 9, 10
   #endif // LASER_POWER_DOWN

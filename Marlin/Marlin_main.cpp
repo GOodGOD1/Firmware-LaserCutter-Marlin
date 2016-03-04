@@ -407,8 +407,12 @@ void setup()
   SERIAL_ECHOLNPGM("");
   SERIAL_ECHOLNPGM("");
   SERIAL_PROTOCOLLNPGM("start");
+#ifdef __DEBUG
   SERIAL_ECHO_START;
-
+  SERIAL_PROTOCOLLNPGM(" DEBUG MODE ON ------------------");
+#endif  
+  
+  SERIAL_ECHO_START;
   // Check startup - does nothing if bootloader sets MCUSR to 0
   byte mcu = MCUSR;
   if(mcu & 1) SERIAL_ECHOLNPGM(MSG_POWERUP);

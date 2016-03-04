@@ -608,14 +608,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 
     // Laser driver configurations - Change it for your laser.
 #ifdef  LASER_JTECHPHOT
-
-    #define LASER_PWM               3000 // hertz - PWM control freq.
+    #define LASER_PWM               5000 // hertz - PWM control freq.
     #define LASER_POWER             2.5  // Laser Power
     #define LASER_FOCAL_HEIGHT      0 // z axis position at which the laser is focused
-
-    // Configuration for the JTech Photonics Laser board. Enable to display laser current.
-    #define     LASER_JTECHPHOT_PIN_VIN     3      //Analog input for input voltage
-    #define     LASER_JTECHPHOT_PIN_VLASER  4      //Analog input for laser voltage
 #else
 
     //Generic Laser.

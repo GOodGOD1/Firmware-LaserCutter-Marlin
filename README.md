@@ -1,42 +1,20 @@
+RepRap Laser firmware
 ==========================================
-RepRap Laser firmware (Turnkey k40 laser project)
-==========================================
 
-Firmware forked from original repository https://github.com/lansing-makers-network/buildlog-lasercutter-marlin
+This repository holds the firmware for a laser cutter based on Marlin software and RepRap compatible hardware. The original firmware was forked from https://github.com/lansing-makers-network/buildlog-lasercutter-marlin.
 
-Based off Marlin for 3D printers, for more info see https://github.com/MarlinFirmware/Marlin
+Check the other information pages:
+ * [HARDWARE](https://github.com/freakyattic/buildlog-lasercutter-marlin/blob/master/HARDWARE.MD) information about connections, condigurations ...
+ * [FIRMWARE](https://github.com/freakyattic/buildlog-lasercutter-marlin/blob/master/FIRMWARE.MD) information about configurations, how to install, ...
 
-It includes the Graphic Libraries U8glib source code from http://code.google.com/p/u8glib/wiki/u8glib
-
-This firmware is tested and configured for the RAMPS 1.4 + Arduino Mega + Smart LCD controller, but it could work on any other RepRap compatible hardware.
-![](https://github.com/freakyattic/buildlog-lasercutter-marlin/blob/master/ArduinoAddons/ramps.jpg)
-
-
-This copy implements the following modifications from orignal sourcecode:
+# Features
    - Support to be opened with Netbeans 8.1 + Arduino plugin. Easier to be modified.
-   - Display laser power; voltage and current.
-   - Custom start logo.
-
-Safety Warnings
-==================
-Ensure that the Power Supply 5v rail is connected to RAMPS I2C 5v pin and that the D1 diode is removed from the RAMPS board as shown in the wiring diagram. If this pin is not connected the laser will fire when you disconnect your ramps board from USB power.
-
-
-Features of the Turnkey k40 laser repo
-========================
-
-*   Modified for K40 power supplies that use 'Firing Pin Signal Low' to fire.
-*   Design in Inkscape, export to GCode, print!
-*   Raster image support, set your own max power level and have all pixel data appropriately shifted for intensity. Defaults to 270dpi
-*   Set your own feed rate in mm per minute.
-*   Vector cutting of lines and arcs at your given power level.
-*   Pulse Per Millimetre cutting of vector lines at your own ppm rate and power - defaults to 60us pulses.
-
-Added G Codes to Marlin Firmware:
-====================
-
-*  G0  -> Go to a coordinate with laser not firing
-*  G1  - Coordinated Movement X Y Z E with laser firing
-*  G2  - CW ARC with laser firing
-*  G3  - CCW ARC with laser firing
-*  G7  - Raster data in base64 encoding. For more info see https://github.com/TurnkeyTyranny/laser-gcode-exporter-inkscape-plugin
+   - Raster image support, base64.
+   - Different configurations to fire laser; through G1 movements, M3/M5 commands, etc...
+   - Vector cutting of lines and arcs at your given power level.
+   - Display the laser temperature and current.
+   - Add extra display menus to handle the laser.
+   
+![](https://github.com/freakyattic/buildlog-lasercutter-marlin/blob/master/Documents/MarlinLaser_MainScreen.jpg)
+![](https://github.com/freakyattic/buildlog-lasercutter-marlin/blob/master/Documents/MarlinLaser_StatusScreen.jpg)
+![](https://github.com/freakyattic/buildlog-lasercutter-marlin/blob/master/Documents/MarlinLaser_test1.jpg)

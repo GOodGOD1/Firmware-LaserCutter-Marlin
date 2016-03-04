@@ -777,6 +777,14 @@ static void lcd_laser_menu()
     }
 #endif // LASER_PERIPHERALS
     
+#ifdef LASER_JTECHPHOT
+    MENU_ITEM_EDIT(int3, "Curr. Limit val", (int *)&laser.jtech_Res, 1, 5);
+#endif
+    
+#ifdef EEPROM_SETTINGS
+    MENU_ITEM(function, MSG_STORE_EPROM, Config_StoreSettings);
+#endif
+    
     END_MENU();
 }
 

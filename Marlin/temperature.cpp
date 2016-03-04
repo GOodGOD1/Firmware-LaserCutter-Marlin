@@ -693,32 +693,32 @@ static void updateTemperaturesFromRawValues()
 #ifdef  LASER_JTECHPHOT
     float temp;
     //Calculate the Voltage and current of the laser.
-    //current_laser_voltage   = ((float)temp_laser_voltlaser*3.3 / 1023.0)*3.61;  // voltage at laser    //
-    current_laser_voltage   = ((float)temp_laser_voltlaser*5.0 / 1023.0);   // voltage at laser
-    current_laser_current   = ((float)temp_laser_voltin*5.0 / 1023.0);      // current at laser
+    current_laser_voltage   = ((float)temp_laser_voltlaser*5.0 / 1023.0)*3.61;   // voltage at laser
+    current_laser_current   = ((float)temp_laser_voltin*5.0 / 1023.0)*3.61;      // current at laser
     
     //Calculate the Laser current.
-    temp = (current_laser_current - current_laser_current);
+    temp = (current_laser_current - current_laser_voltage);
     switch(laser.jtech_Res) // Current Resistor limit jumper
     {
-        case 0: //0.5A 5.5Ohm
+        case 1: //0.5A 5.5Ohm
             temp /= 5.5;
             break;
-        case 1: //1A 2.75Ohm 
+        case 2: //1A 2.75Ohm 
             temp /= 2.75;
             break;
         default:
-            laser.jtech_Res = 2;            
-        case 2: //1.5A 1.83Ohm
+            laser.jtech_Res = 3;            
+        case 3: //1.5A 1.83Ohm      DEFAULT
             temp /= 1.83;
             break;
-        case 3: //2A 1.38Ohm
+        case 4: //2A 1.38Ohm
             temp /= 1.38;
             break;
-        case 4: //2.5A 1.1Ohm
+        case 5: //2.5A 1.1Ohm
             temp /= 1.1;
             break;
     }
+    current_laser_current = temp;
 #endif
     
     //Reset the watchdog after we know we have a temperature measurement.

@@ -43,6 +43,7 @@
 
 #ifdef LASER
 #include "laserbitmaps.h"
+#include "laser.h"
 #endif
 
 /* Russian language not supported yet, needs custom font
@@ -135,10 +136,13 @@ static void lcd_implementation_init()
             
             // Welcome message
             u8g.setFont(u8g_font_7x13B);
-            u8g.drawStr(42,14,CUSTOM_MENDEL_NAME);                         
+            u8g.drawStr(42,14,CUSTOM_MENDEL_NAME);         
             u8g.setFont(u8g_font_5x8);
-            u8g.drawStr(50,30,FIRMWARE_STRING);
-            u8g.drawStr(52,40,VERSION_STRING);
+#ifdef __DEBUG
+            u8g.drawStr(50,22,"<<< DEBUG >>>");
+#endif            
+            u8g.drawStr(50,35,FIRMWARE_STRING);
+            u8g.drawStr(52,42,VERSION_STRING);
 
             u8g.setFont(u8g_font_6x9);
             u8g.drawStr(43,60,BY_STRING);
@@ -155,65 +159,47 @@ static void lcd_implementation_status_screen()
     u8g.setColorIndex(1);	// black on white
     
 // LASER  **********************************************************************
+    
+    //Icons of warning laser
+    u8g.drawBitmapP(6,4, LASERENABLE_BYTEWIDTH, LASERENABLE_HEIGHT, laserenable_bmp);
+    u8g.drawBitmapP(96,4, LASERENABLE_BYTEWIDTH, LASERENABLE_HEIGHT, laserenable_bmp);
+    
+#define     LCD_LASER_BOX_X     38       //Horizontal position of the laser Box    
+    
     u8g.setFont(FONT_STATUSMENU);
     u8g.setColorIndex(1);
     
-    u8g.drawFrame(0,0,56,28); // draw box
-    
-    if (current_block->laser_status == LASER_ON) 
+    u8g.drawFrame(LCD_LASER_BOX_X, 0,51,28); // draw box
+            
+    if (laser.firing) 
     {
-        u8g.drawBitmapP(6,3, ICON_BYTEWIDTH, ICON_HEIGHT, laseron_bmp);
+        u8g.drawBitmapP(LCD_LASER_BOX_X + 4, 8, ICON_BYTEWIDTH, ICON_HEIGHT, laseron_bmp);
         
         //Laser Power %
-        u8g.setPrintPos(25, 9);
-        u8g.print(itostr3(current_block->laser_intensity));
+        u8g.setPrintPos(LCD_LASER_BOX_X + 22, 9);
+        u8g.print(itostr3(laser.intensity));
         lcd_printPGM(PSTR("%"));   
-        
-#ifdef  LASER_JTECHPHOT   // Laser voltage and current
-        
-        //Laser Current
-        u8g.setPrintPos(25, 18);
-        u8g.print(itostr12(int(current_laser_current*100)));
-        lcd_printPGM(PSTR("A")); 
-        
-        //Laser Voltage
-        u8g.setPrintPos(25, 26);
-        u8g.print(itostr12(int(current_laser_voltage*100)));
-        lcd_printPGM(PSTR("v")); 
-#endif        
-        
+         
     } else {
-        u8g.drawBitmapP(6,3, ICON_BYTEWIDTH, ICON_HEIGHT, laseroff_bmp);
+        u8g.drawBitmapP(LCD_LASER_BOX_X + 4, 8, ICON_BYTEWIDTH, ICON_HEIGHT, laseroff_bmp);
         
         //Laser Power %
-        u8g.setPrintPos(25, 9);      
+        u8g.setPrintPos(LCD_LASER_BOX_X + 22, 9);      
         lcd_printPGM(PSTR("---%"));
-        
-#ifdef  LASER_JTECHPHOT   // Laser voltage and current
-//        //Laser Current
-//        u8g.setPrintPos(25, 18);
-//        lcd_printPGM(PSTR("--.-A"));
-//        
-//        //Laser Power
-//        u8g.setPrintPos(25, 26);
-//        lcd_printPGM(PSTR("--.-v"));
-        
-                //Laser Current
-        u8g.setPrintPos(25, 18);
-        u8g.print(itostr12(int(current_laser_current*100)));
-        lcd_printPGM(PSTR("A")); 
-        
-        //Laser Voltage
-        u8g.setPrintPos(25, 26);
-        u8g.print(itostr12(int(current_laser_voltage*100)));
-        lcd_printPGM(PSTR("v")); 
-#endif  
     }
     
+#ifdef  LASER_JTECHPHOT   // Laser voltage and current
+    //Laser Current
+    u8g.setPrintPos(LCD_LASER_BOX_X + 18, 18);
+    u8g.print(itostr12(int(current_laser_current*100)));
+    lcd_printPGM(PSTR("A")); 
+#endif  
+        
 //Laser Temperature - T0
-    u8g.setPrintPos(4, 25);
+    u8g.setPrintPos(LCD_LASER_BOX_X + 25, 26);
     u8g.print(itostr2(int(degHotend(0) + 0.5)));
     lcd_printPGM(PSTR(LCD_STR_DEGREE));
+    
     
 //SD Card Symbol  **************************************************************    
 #ifdef SDSUPPORT
@@ -352,9 +338,9 @@ static void lcd_implementation_drawmenu_setting_edit_generic(uint8_t row, const 
     static unsigned int fkt_cnt = 0;
 	char c;
     uint8_t n = LCD_WIDTH - 1 - 2 - strlen(data);
-		
-		u8g.setPrintPos(0 * DOG_CHAR_WIDTH, (row + 1) * DOG_CHAR_HEIGHT);
-		u8g.print(pre_char);
+
+    u8g.setPrintPos(0 * DOG_CHAR_WIDTH, (row + 1) * DOG_CHAR_HEIGHT);
+    u8g.print(pre_char);
 	
     while( (c = pgm_read_byte(pstr)) != '\0' )
     {
@@ -364,13 +350,13 @@ static void lcd_implementation_drawmenu_setting_edit_generic(uint8_t row, const 
         n--;
     }
 	
-		u8g.print(':');
+    u8g.print(':');
 
     while(n--){
-					u8g.print(' ');
-			  }
+        u8g.print(' ');
+    }
 
-		u8g.print(data);
+    u8g.print(data);
 }
 
 static void lcd_implementation_drawmenu_setting_edit_generic_P(uint8_t row, const char* pstr, char pre_char, const char* data)
@@ -435,12 +421,12 @@ static void lcd_implementation_drawmenu_setting_edit_generic_P(uint8_t row, cons
 
 void lcd_implementation_drawedit(const char* pstr, char* value)
 {
-		u8g.setPrintPos(0 * DOG_CHAR_WIDTH_LARGE, (u8g.getHeight() - 1 - DOG_CHAR_HEIGHT_LARGE) - (1 * DOG_CHAR_HEIGHT_LARGE) - START_ROW );
-		u8g.setFont(u8g_font_9x18);
-		lcd_printPGM(pstr);
-		u8g.print(':');
-		u8g.setPrintPos((14 - strlen(value)) * DOG_CHAR_WIDTH_LARGE, (u8g.getHeight() - 1 - DOG_CHAR_HEIGHT_LARGE) - (1 * DOG_CHAR_HEIGHT_LARGE) - START_ROW );
-		u8g.print(value);
+    u8g.setPrintPos( 2 , (u8g.getHeight() - 1 - DOG_CHAR_HEIGHT_LARGE) - (1 * DOG_CHAR_HEIGHT_LARGE) - START_ROW );
+    u8g.setFont(u8g_font_8x13);
+    lcd_printPGM(pstr);
+    u8g.setPrintPos( 5 , (u8g.getHeight() - 1 - DOG_CHAR_HEIGHT_LARGE) - (1 * DOG_CHAR_HEIGHT_LARGE) - START_ROW + 13);
+    u8g.print("Value: ");
+    u8g.print(value);
 }
 
 static void lcd_implementation_drawmenu_sdfile_selected(uint8_t row, const char* pstr, const char* filename, char* longFilename)

@@ -98,7 +98,11 @@ void laser_init()
     laser.firing      = LASER_OFF;
     laser.mode        = CONTINUOUS;
     laser.last_firing = 0;
+#ifdef __DEBUG
+    laser.diagnostics = true;
+#else
     laser.diagnostics = false;
+#endif
     laser.time        = 0;
     #ifdef LASER_RASTER
       laser.raster_aspect_ratio   = LASER_RASTER_ASPECT_RATIO;
@@ -111,7 +115,8 @@ void laser_init()
       laser.peel_pause = 0.0;
     #endif // MUVE_Z_PEEL
 
-    laser_extinguish();     //Switch off laser
+    laser.firing = LASER_ON;    //Force the laser_extinguish
+    laser_extinguish();         //Switch off laser
 }
 
 void laser_fire (int intensity = 100.0)
