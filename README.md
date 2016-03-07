@@ -11,6 +11,7 @@ Marlin-based laser cutter/engraver information pages:
 
 # Features
    - Support to be opened with Netbeans 8.1 + Arduino plugin. Easier to be modified.
+   - Add support for external stepper drivers with slower step trigger signal, like TB6560 driver boards.
    - Raster image support, base64.
    - Different configurations to fire laser; through G1 movements, M3/M5 commands, etc...
    - Vector cutting of lines and arcs at your given power level.
