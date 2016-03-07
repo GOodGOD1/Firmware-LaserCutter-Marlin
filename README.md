@@ -3,9 +3,11 @@ Marlin-based Laser Cutter/Engraver Firmware
 
 This repository holds the firmware for a laser cutter/engraver based on Marlin software ( version 1.0.0 ) and RepRap compatible hardware. The original firmware was forked from https://github.com/lansing-makers-network/buildlog-lasercutter-marlin and few modifications have been added.
 
-Check the other information pages:
- * [HARDWARE](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/HARDWARE.md) information about connections, condigurations ...
- * [FIRMWARE](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/FIRMWARE.md) information about configurations, how to install, ...
+This firmware it is developed to support any generic gcode laser software generators, but you can check the other FreakyAttic repository [VisiCut GCode Pluging](https://github.com/freakyattic/LibLaserCut) which implements a plugin for the amazing open-source laser software [VisiCut](https://hci.rwth-aachen.de/visicut), check their webpage.
+
+Marlin-based laser cutter/engraver information pages:
+ * [HARDWARE](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/HARDWARE.md): information about hardware connections, configurations ...
+ * [FIRMWARE](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/FIRMWARE.md): information about software configurations, how to install, ...
 
 # Features
    - Support to be opened with Netbeans 8.1 + Arduino plugin. Easier to be modified.
