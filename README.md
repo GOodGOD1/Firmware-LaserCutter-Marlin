@@ -1,7 +1,7 @@
-RepRap Laser firmware
+Marlin-based Laser Cutter/Engraver Firmware
 ==========================================
 
-This repository holds the firmware for a laser cutter based on Marlin software and RepRap compatible hardware. The original firmware was forked from https://github.com/lansing-makers-network/buildlog-lasercutter-marlin.
+This repository holds the firmware for a laser cutter/engraver based on Marlin software ( version 1.0.0 ) and RepRap compatible hardware. The original firmware was forked from https://github.com/lansing-makers-network/buildlog-lasercutter-marlin and few modifications have been added.
 
 Check the other information pages:
  * [HARDWARE](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/HARDWARE.md) information about connections, condigurations ...
