@@ -761,137 +761,152 @@ static void lcd_control_retract_menu()
 #endif
 
 #ifdef LASER
-static void lcd_laser_menu()
-{
-    START_MENU();
     
-    MENU_ITEM(back, MSG_MAIN, lcd_main_menu);
-    MENU_ITEM(submenu, "Set Focus", lcd_laser_focus_menu);
-    MENU_ITEM(submenu, "Test Fire", lcd_laser_test_fire_menu);
-    
-#ifdef LASER_PERIPHERALS
-    if (laser_peripherals_ok()) {
-            MENU_ITEM(function, "Turn On Pumps/Fans", action_laser_acc_on);
-    } else if (!(movesplanned() || IS_SD_PRINTING)) {
-            MENU_ITEM(function, "Turn Off Pumps/Fans", action_laser_acc_off);
+    static void lcd_laser_config_menu() {
+        
+            START_MENU();
+            MENU_ITEM(back, "Laser Functions", lcd_laser_menu);
+            
+            MENU_ITEM_EDIT( bool , "Fire on G1", (bool *)&laser.conf_fireG1);
+            MENU_ITEM_EDIT( bool , "Fire on M3M5", (bool *)&laser.conf_fireM3M5);
+            MENU_ITEM_EDIT( bool , "Fire on E", (bool *)&laser.conf_fireE);
+            
+            #ifdef LASER_JTECHPHOT
+                MENU_ITEM_EDIT(int3, "Curr. Limit val", (int *)&laser.jtech_Res, 1, 5);
+            #endif
+
+            #ifdef EEPROM_SETTINGS
+                MENU_ITEM(function, MSG_STORE_EPROM, Config_StoreSettings);
+            #endif            
+            
+            END_MENU();
     }
-#endif // LASER_PERIPHERALS
     
-#ifdef LASER_JTECHPHOT
-    MENU_ITEM_EDIT(int3, "Curr. Limit val", (int *)&laser.jtech_Res, 1, 5);
-#endif
+    static void lcd_laser_menu()
+    {
+        START_MENU();
+
+        MENU_ITEM(back, MSG_MAIN, lcd_main_menu);
+        MENU_ITEM(submenu, "Set Focus", lcd_laser_focus_menu);
+        MENU_ITEM(submenu, "Test Fire", lcd_laser_test_fire_menu);
+        MENU_ITEM(submenu, "Laser Config.", lcd_laser_config_menu);
+        
+    #ifdef LASER_PERIPHERALS
+        if (laser_peripherals_ok()) {
+                MENU_ITEM(function, "Turn On Pumps/Fans", action_laser_acc_on);
+        } else if (!(movesplanned() || IS_SD_PRINTING)) {
+                MENU_ITEM(function, "Turn Off Pumps/Fans", action_laser_acc_off);
+        }
+    #endif // LASER_PERIPHERALS
+
+        END_MENU();
+    }
+
+    static void lcd_laser_test_fire_menu() {
+        START_MENU();
+        MENU_ITEM(back, "Laser Functions", lcd_laser_menu);
+        MENU_ITEM(function, " 20%  50ms", action_laser_test_20_50ms);
+        MENU_ITEM(function, " 20% 100ms", action_laser_test_20_100ms);
+        MENU_ITEM(function, "100%  50ms", action_laser_test_100_50ms);
+        MENU_ITEM(function, "100% 100ms", action_laser_test_100_100ms);
+        MENU_ITEM(function, "Warm-up Laser 2sec", action_laser_test_warm);
+        END_MENU();
+    }
+
+    static void action_laser_acc_on() {
+        enquecommand_P(PSTR("M80"));
+    }
+
+    static void action_laser_acc_off() {
+        enquecommand_P(PSTR("M81"));
+    }
+
+    static void action_laser_test_20_50ms() {
+        laser_test_fire(20, 50);
+    }
+
+    static void action_laser_test_20_100ms() {
+        laser_test_fire(20, 100);
+    }
+
+    static void action_laser_test_100_50ms() {
+        laser_test_fire(100, 50);
+    }
+
+    static void action_laser_test_100_100ms() {
+        laser_test_fire(100, 100);
+    }
+
+    static void action_laser_test_warm() {
+        laser_test_fire(15, 2000);
+    }
+
+    static void laser_test_fire(uint8_t power, uint8_t dwell) {
+        enquecommand_P(PSTR("M80"));  // Enable laser accessories since we don't know if its been done (and there's no penalty for doing it again).
+        laser_fire(power);
+        delay(dwell);
+        laser_extinguish();
+    }
+    float focalLength = 0;
+    static void lcd_laser_focus_menu() {
+            START_MENU();
+            MENU_ITEM(back, "Laser Functions", lcd_laser_menu);
+            MENU_ITEM(function, "1mm", action_laser_focus_1mm);
+            MENU_ITEM(function, "2mm", action_laser_focus_2mm);
+            MENU_ITEM(function, "3mm - 1/8in", action_laser_focus_3mm);
+            MENU_ITEM(function, "4mm", action_laser_focus_4mm);
+            MENU_ITEM(function, "5mm", action_laser_focus_5mm);
+            MENU_ITEM(function, "6mm - 1/4in", action_laser_focus_6mm);
+            MENU_ITEM(function, "7mm", action_laser_focus_7mm);
+            MENU_ITEM_EDIT_CALLBACK(float32, "Custom", &focalLength, 0, LASER_FOCAL_HEIGHT, action_laser_focus_custom);
+            END_MENU();
+    }
+
+    static void action_laser_focus_custom() {
+            laser_set_focus(focalLength);
+    }
+
+    static void action_laser_focus_1mm() {
+            laser_set_focus(1);
+    }
+
+    static void action_laser_focus_2mm() {
+            laser_set_focus(2);
+    }
+
+    static void action_laser_focus_3mm() {
+            laser_set_focus(3);
+    }
+
+    static void action_laser_focus_4mm() {
+            laser_set_focus(4);
+    }
+
+    static void action_laser_focus_5mm() {
+            laser_set_focus(5);
+    }
+
+    static void action_laser_focus_6mm() {
+            laser_set_focus(6);
+    }
+
+    static void action_laser_focus_7mm() {
+            laser_set_focus(7);
+    }
+    static void laser_set_focus(float f_length) {
+            if (!has_axis_homed[Z_AXIS]) {
+                    enquecommand_P(PSTR("G28 Z F150"));
+            }
+            focalLength = f_length;
+            float focus = LASER_FOCAL_HEIGHT - f_length;
+            char cmd[20];
+
+            sprintf_P(cmd, PSTR("G0 Z%s F150"), ftostr52(focus));
+            enquecommand(cmd);
+    }
     
-#ifdef EEPROM_SETTINGS
-    MENU_ITEM(function, MSG_STORE_EPROM, Config_StoreSettings);
-#endif
+#endif  //LASER
     
-    END_MENU();
-}
-
-static void lcd_laser_test_fire_menu() {
-    START_MENU();
-    MENU_ITEM(back, "Laser Functions", lcd_laser_menu);
-    MENU_ITEM(function, " 20%  50ms", action_laser_test_20_50ms);
-    MENU_ITEM(function, " 20% 100ms", action_laser_test_20_100ms);
-    MENU_ITEM(function, "100%  50ms", action_laser_test_100_50ms);
-    MENU_ITEM(function, "100% 100ms", action_laser_test_100_100ms);
-    MENU_ITEM(function, "Warm-up Laser 2sec", action_laser_test_warm);
-    END_MENU();
-}
-
-
-static void action_laser_acc_on() {
-    enquecommand_P(PSTR("M80"));
-}
-
-static void action_laser_acc_off() {
-    enquecommand_P(PSTR("M81"));
-}
-
-static void action_laser_test_20_50ms() {
-    laser_test_fire(20, 50);
-}
-
-static void action_laser_test_20_100ms() {
-    laser_test_fire(20, 100);
-}
-
-static void action_laser_test_100_50ms() {
-    laser_test_fire(100, 50);
-}
-
-static void action_laser_test_100_100ms() {
-    laser_test_fire(100, 100);
-}
-
-static void action_laser_test_warm() {
-    laser_test_fire(15, 2000);
-}
-
-static void laser_test_fire(uint8_t power, uint8_t dwell) {
-    enquecommand_P(PSTR("M80"));  // Enable laser accessories since we don't know if its been done (and there's no penalty for doing it again).
-    laser_fire(power);
-    delay(dwell);
-    laser_extinguish();
-}
-float focalLength = 0;
-static void lcd_laser_focus_menu() {
-	START_MENU();
-	MENU_ITEM(back, "Laser Functions", lcd_laser_menu);
-	MENU_ITEM(function, "1mm", action_laser_focus_1mm);
-	MENU_ITEM(function, "2mm", action_laser_focus_2mm);
-	MENU_ITEM(function, "3mm - 1/8in", action_laser_focus_3mm);
-	MENU_ITEM(function, "4mm", action_laser_focus_4mm);
-	MENU_ITEM(function, "5mm", action_laser_focus_5mm);
-	MENU_ITEM(function, "6mm - 1/4in", action_laser_focus_6mm);
-	MENU_ITEM(function, "7mm", action_laser_focus_7mm);
-	MENU_ITEM_EDIT_CALLBACK(float32, "Custom", &focalLength, 0, LASER_FOCAL_HEIGHT, action_laser_focus_custom);
-	END_MENU();
-}
-
-static void action_laser_focus_custom() {
-	laser_set_focus(focalLength);
-}
-
-static void action_laser_focus_1mm() {
-	laser_set_focus(1);
-}
-
-static void action_laser_focus_2mm() {
-	laser_set_focus(2);
-}
-
-static void action_laser_focus_3mm() {
-	laser_set_focus(3);
-}
-
-static void action_laser_focus_4mm() {
-	laser_set_focus(4);
-}
-
-static void action_laser_focus_5mm() {
-	laser_set_focus(5);
-}
-
-static void action_laser_focus_6mm() {
-	laser_set_focus(6);
-}
-
-static void action_laser_focus_7mm() {
-	laser_set_focus(7);
-}
-static void laser_set_focus(float f_length) {
-	if (!has_axis_homed[Z_AXIS]) {
-		enquecommand_P(PSTR("G28 Z F150"));
-	}
-	focalLength = f_length;
-	float focus = LASER_FOCAL_HEIGHT - f_length;
-	char cmd[20];
-
-	sprintf_P(cmd, PSTR("G0 Z%s F150"), ftostr52(focus));
-	enquecommand(cmd);
-}
-#endif
 #if SDCARDDETECT == -1
 static void lcd_sd_refresh()
 {

@@ -165,19 +165,19 @@
 #ifdef SDSUPPORT
     CardReader card;
 #endif
-float homing_feedrate[] = HOMING_FEEDRATE;
-bool axis_relative_modes[] = AXIS_RELATIVE_MODES;
-int feedmultiply=100; //100->1 200->2
-int saved_feedmultiply;
-int extrudemultiply=100; //100->1 200->2
-float current_position[NUM_AXIS] = { 0.0, 0.0, 0.0, 0.0 };
-bool has_axis_homed[NUM_AXIS] = {false, false, false, false };
-float add_homeing[3]={0,0,0};
+float   homing_feedrate[] = HOMING_FEEDRATE;
+bool    axis_relative_modes[] = AXIS_RELATIVE_MODES;
+int     feedmultiply=100; //100->1 200->2
+int     saved_feedmultiply;
+int     extrudemultiply=100; //100->1 200->2
+float   current_position[NUM_AXIS] = { 0.0, 0.0, 0.0, 0.0 };
+bool    has_axis_homed[NUM_AXIS] = {false, false, false, false };
+float   add_homeing[3]={0,0,0};
 #ifdef DELTA
 float endstop_adj[3]={0,0,0};
 #endif
-float min_pos[3] = { X_MIN_POS, Y_MIN_POS, Z_MIN_POS };
-float max_pos[3] = { X_MAX_POS, Y_MAX_POS, Z_MAX_POS };
+float   min_pos[3] = { X_MIN_POS, Y_MIN_POS, Z_MIN_POS };
+float   max_pos[3] = { X_MAX_POS, Y_MAX_POS, Z_MAX_POS };
 
 // Extruder offset
 #if EXTRUDERS > 1
@@ -221,12 +221,12 @@ float delta[3] = {0.0, 0.0, 0.0};
 //===========================================================================
 //=============================private variables=============================
 //===========================================================================
-const char axis_codes[NUM_AXIS] = {'X', 'Y', 'Z', 'E'};
-static float destination[NUM_AXIS] = {  0.0, 0.0, 0.0, 0.0};
-static float offset[3] = {0.0, 0.0, 0.0};
-static bool home_all_axis = true;
-static float feedrate = 1500.0, next_feedrate, saved_feedrate;
-static long gcode_N, gcode_LastN, Stopped_gcode_LastN = 0;
+const char      axis_codes[NUM_AXIS]    = {'X', 'Y', 'Z', 'E'};
+static float    destination[NUM_AXIS]   = {  0.0, 0.0, 0.0, 0.0};
+static float    offset[3]               = {0.0, 0.0, 0.0};
+static bool     home_all_axis = true;
+float           feedrate = 1500.0, next_feedrate, saved_feedrate;
+static long     gcode_N, gcode_LastN, Stopped_gcode_LastN = 0;
 
 static bool relative_mode = false;  //Determines Absolute or Relative Coordinates
 
@@ -891,6 +891,7 @@ void process_commands()
     {
     case 0: // G0
       if(Stopped == false) {
+        feedrate = ABSOLUTE_MAX_FEEDRATE;     //Set max feedrate
         get_coordinates(); // For X Y Z E F
         prepare_move();
         //ClearToSend();
@@ -901,7 +902,8 @@ void process_commands()
       if(Stopped == false) {
         get_coordinates(); // For X Y Z E F
 
-        #ifdef LASER_FIRE_G1
+        if(laser.conf_fireG1)
+        {
           if (code_seen('S') && !IsStopped()) laser.intensity = (float) code_value();
           if (code_seen('L') && !IsStopped()) laser.duration = (unsigned long) labs(code_value());
           if (code_seen('P') && !IsStopped()) laser.ppm = (float) code_value();
@@ -910,13 +912,14 @@ void process_commands()
 
           laser.status = LASER_ON;
           laser.fired = LASER_FIRE_G1;
-        #endif // LASER_FIRE_G1
+        }
 
         prepare_move();
 
-        #ifdef LASER_FIRE_G1
+        if(laser.conf_fireG1)
+        {
           laser.status = LASER_OFF;
-        #endif // LASER_FIRE_G1
+        }
 
         //ClearToSend();
         return;
@@ -926,7 +929,8 @@ void process_commands()
       if(Stopped == false) {
         get_arc_coordinates();
         
-        #ifdef LASER_FIRE_G1
+        if(laser.conf_fireG1)
+        {
           if (code_seen('S') && !IsStopped()) laser.intensity = (float) code_value();
           if (code_seen('L') && !IsStopped()) laser.duration = (unsigned long) labs(code_value());
           if (code_seen('P') && !IsStopped()) laser.ppm = (float) code_value();
@@ -935,21 +939,24 @@ void process_commands()
 
           laser.status = LASER_ON;
           laser.fired = LASER_FIRE_G1;
-        #endif // LASER_FIRE_G1
+        }
         
         prepare_arc_move(true);
         
-        #ifdef LASER_FIRE_G1
+        if(laser.conf_fireG1)
+        {
           laser.status = LASER_OFF;
-        #endif // LASER_FIRE_G1
+        }
         
         return;
       }
     case 3: // G3  - CCW ARC
       if(Stopped == false) {
+          
         get_arc_coordinates();
         
-        #ifdef LASER_FIRE_G1
+        if(laser.conf_fireG1)
+        {
           if (code_seen('S') && !IsStopped()) laser.intensity = (float) code_value();
           if (code_seen('L') && !IsStopped()) laser.duration = (unsigned long) labs(code_value());
           if (code_seen('P') && !IsStopped()) laser.ppm = (float) code_value();
@@ -958,13 +965,14 @@ void process_commands()
 
           laser.status = LASER_ON;
           laser.fired = LASER_FIRE_G1;
-        #endif // LASER_FIRE_G1
+        }
         
         prepare_arc_move(false);
         
-        #ifdef LASER_FIRE_G1
+        if(laser.conf_fireG1)
+        {
           laser.status = LASER_OFF;
-        #endif // LASER_FIRE_G1
+        }
         
         return;
       }
@@ -1363,27 +1371,33 @@ void process_commands()
     }
     break;
 #endif
-#ifdef LASER_FIRE_SPINDLE
-    case 3:  //M3 - fire laser
-      if (code_seen('S') && !IsStopped()) laser.intensity = (float) code_value();
-      if (code_seen('L') && !IsStopped()) laser.duration = (unsigned long) labs(code_value());
-      if (code_seen('P') && !IsStopped()) laser.ppm = (float) code_value();
-      if (code_seen('D') && !IsStopped()) laser.diagnostics = (bool) code_value();
-      if (code_seen('B') && !IsStopped()) laser_set_mode((int) code_value());
-          
-      laser.status = LASER_ON;
-      laser.fired = LASER_FIRE_SPINDLE;      
-//*=*=*=*=*=*
-          lcd_update();
     
-      prepare_move();
-      break;
+    case 3:  //M3 - fire laser
+        if(laser.conf_fireM3M5)
+        {
+            if (code_seen('S') && !IsStopped()) laser.intensity = (float) code_value();
+            if (code_seen('L') && !IsStopped()) laser.duration = (unsigned long) labs(code_value());
+            if (code_seen('P') && !IsStopped()) laser.ppm = (float) code_value();
+            if (code_seen('D') && !IsStopped()) laser.diagnostics = (bool) code_value();
+            if (code_seen('B') && !IsStopped()) laser_set_mode((int) code_value());
+
+            laser.status = LASER_ON;
+            laser.fired = LASER_FIRE_SPINDLE;      
+
+            lcd_update();
+            prepare_move();
+            break;
+        }
+        
     case 5:  //M5 stop firing laser
-	  laser.status = LASER_OFF;
-          lcd_update();
-	  prepare_move();
-      break;
-#endif // LASER_FIRE_SPINDLE
+        if(laser.conf_fireM3M5)
+        {
+            laser.status = LASER_OFF;
+            lcd_update();
+            prepare_move();
+            break;
+        }
+        
     case 17:
         LCD_MESSAGEPGM(MSG_NO_MOVE);
         enable_x();
@@ -2439,20 +2453,19 @@ void process_commands()
 	#ifdef LASER
 	case 649: // M649 set laser options
 	{
-	  if (code_seen('S') && !IsStopped()) {
-          laser.intensity = (float) code_value();
-          laser.rasterlaserpower =  laser.intensity;
-      }
-      if (code_seen('L') && !IsStopped()) laser.duration = (unsigned long) labs(code_value());
-      if (code_seen('P') && !IsStopped()) laser.ppm = (float) code_value();
-      if (code_seen('D') && !IsStopped()) laser.diagnostics = (bool) code_value();
-      if (code_seen('B') && !IsStopped()) laser_set_mode((int) code_value());
-      if (code_seen('R') && !IsStopped()) laser.raster_mm_per_pulse = ((float) code_value());
-      if (code_seen('F')) {
-        next_feedrate = code_value();
-        if(next_feedrate > 0.0) feedrate = next_feedrate;
-      }
-      
+            if (code_seen('S') && !IsStopped()) {
+                laser.intensity = (float) code_value();
+                laser.rasterlaserpower =  laser.intensity;
+            }
+            if (code_seen('L') && !IsStopped()) laser.duration = (unsigned long) labs(code_value());
+            if (code_seen('P') && !IsStopped()) laser.ppm = (float) code_value();
+            if (code_seen('D') && !IsStopped()) laser.diagnostics = (bool) code_value();
+            if (code_seen('B') && !IsStopped()) laser_set_mode((int) code_value());
+            if (code_seen('R') && !IsStopped()) laser.raster_mm_per_pulse = ((float) code_value());
+            if (code_seen('F')) {
+              next_feedrate = code_value();
+              if(next_feedrate > 0.0) feedrate = next_feedrate;
+            }
 	}
 	break;
 	#endif // LASER
@@ -2697,6 +2710,7 @@ void get_coordinates()
   }
   if(code_seen('F')) {
     next_feedrate = code_value();
+    if(next_feedrate > ABSOLUTE_MAX_FEEDRATE) next_feedrate = ABSOLUTE_MAX_FEEDRATE;
     if(next_feedrate > 0.0) feedrate = next_feedrate;
   }
   #ifdef FWRETRACT
@@ -2877,15 +2891,16 @@ void prepare_move()
   }
 #endif //DUAL_X_CARRIAGE
 
-#ifdef LASER_FIRE_E
-    if (current_position[E_AXIS] != destination[E_AXIS] && ((current_position[X_AXIS] != destination [X_AXIS]) || (current_position[Y_AXIS] != destination [Y_AXIS]))){
-        laser.status = LASER_ON;
-        laser.fired = LASER_FIRE_E;
+    if(laser.conf_fireE)
+    {
+        if (current_position[E_AXIS] != destination[E_AXIS] && ((current_position[X_AXIS] != destination [X_AXIS]) || (current_position[Y_AXIS] != destination [Y_AXIS]))){
+            laser.status = LASER_ON;
+            laser.fired = LASER_FIRE_E;
+        }
+        if (current_position[E_AXIS] == destination[E_AXIS] && laser.fired == LASER_FIRE_E){
+            laser.status = LASER_OFF;
+        }
     }
-    if (current_position[E_AXIS] == destination[E_AXIS] && laser.fired == LASER_FIRE_E){
-        laser.status = LASER_OFF;
-    }
-#endif // LASER_FIRE_E
 
   // Do not use feedmultiply for E or Z only moves
   if((current_position[X_AXIS] == destination [X_AXIS]) && (current_position[Y_AXIS] == destination [Y_AXIS])) {

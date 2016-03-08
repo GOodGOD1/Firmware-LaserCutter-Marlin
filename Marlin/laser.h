@@ -52,8 +52,11 @@ typedef struct {
     float           peel_pause;
     #endif // MUVE_Z_PEEL
 #ifdef  LASER_JTECHPHOT
-    uint8_t         jtech_Res;      // Current Resistor limit jumper 0: 0.5A 5.5Ohm, 1: 1A 2.75Ohm, 2: 1.5A 1.83Ohm, 3: 2A 1.38Ohm, 4: 2.5A 1.1Ohm
+    int             jtech_Res;      // Current Resistor limit jumper 0: 0.5A 5.5Ohm, 1: 1A 2.75Ohm, 2: 1.5A 1.83Ohm, 3: 2A 1.38Ohm, 4: 2.5A 1.1Ohm
 #endif
+    uint8_t         conf_fireG1;        //Fire on G1 moves
+    uint8_t         conf_fireM3M5;      //Fire on M3 M5 commands
+    uint8_t         conf_fireE;         //Fire on E movements
 } laser_t;
 
     extern  laser_t laser;
@@ -77,5 +80,10 @@ typedef struct {
     #define     CONTINUOUS  0
     #define     PULSED      1
     #define     RASTER      2
+
+    //Definitions 
+    #define     LASER_FIRE_G1       10
+    #define     LASER_FIRE_SPINDLE  11
+    #define     LASER_FIRE_E        12
 
 #endif // LASER_H

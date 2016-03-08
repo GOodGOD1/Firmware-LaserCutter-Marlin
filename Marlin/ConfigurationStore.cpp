@@ -33,7 +33,7 @@ void _EEPROM_readData(int &pos, uint8_t* value, uint8_t size)
 // the default values are used whenever there is a change to the data, to prevent
 // wrong data being written to the variables.
 // ALSO:  always make sure the variables in the Store and retrieve sections are in the same order.
-#define     EEPROM_VERSION      "V10"
+#define     EEPROM_VERSION      "013"
 
 #ifdef EEPROM_SETTINGS
 void Config_StoreSettings()
@@ -57,7 +57,10 @@ void Config_StoreSettings()
   EEPROM_WRITE_VAR(i,endstop_adj);
   #endif
 #ifdef LASER
-  EEPROM_WRITE_VAR(i,laser.lifetime);
+    EEPROM_WRITE_VAR(i,laser.lifetime);
+    EEPROM_WRITE_VAR(i,laser.conf_fireG1);
+    EEPROM_WRITE_VAR(i,laser.conf_fireM3M5);
+    EEPROM_WRITE_VAR(i,laser.conf_fireE);
     #ifdef LASER_JTECHPHOT
       EEPROM_WRITE_VAR(i,laser.jtech_Res);
     #endif  
@@ -212,35 +215,38 @@ void Config_RetrieveSettings()
         EEPROM_READ_VAR(i,max_z_jerk);
         EEPROM_READ_VAR(i,max_e_jerk);
         EEPROM_READ_VAR(i,add_homeing);
-        #ifdef DELTA
+    #ifdef DELTA
         EEPROM_READ_VAR(i,endstop_adj);
-        #endif
-        #ifdef LASER
+    #endif
+    #ifdef LASER
         EEPROM_READ_VAR(i,laser.lifetime);
-            #ifdef LASER_JTECHPHOT
-              EEPROM_READ_VAR(i,laser.jtech_Res);
-            #endif          
-        #endif
-        #ifndef ULTIPANEL
+        EEPROM_READ_VAR(i,laser.conf_fireG1);
+        EEPROM_READ_VAR(i,laser.conf_fireM3M5);
+        EEPROM_READ_VAR(i,laser.conf_fireE);
+        #ifdef LASER_JTECHPHOT
+          EEPROM_READ_VAR(i,laser.jtech_Res);
+        #endif          
+    #endif
+    #ifndef ULTIPANEL
         int plaPreheatHotendTemp, plaPreheatHPBTemp, plaPreheatFanSpeed;
         int absPreheatHotendTemp, absPreheatHPBTemp, absPreheatFanSpeed;
-        #endif
+    #endif
         EEPROM_READ_VAR(i,plaPreheatHotendTemp);
         EEPROM_READ_VAR(i,plaPreheatHPBTemp);
         EEPROM_READ_VAR(i,plaPreheatFanSpeed);
         EEPROM_READ_VAR(i,absPreheatHotendTemp);
         EEPROM_READ_VAR(i,absPreheatHPBTemp);
         EEPROM_READ_VAR(i,absPreheatFanSpeed);
-        #ifndef PIDTEMP
+    #ifndef PIDTEMP
         float Kp,Ki,Kd;
-        #endif
+    #endif
         // do not need to scale PID values as the values in EEPROM are already scaled
         EEPROM_READ_VAR(i,Kp);
         EEPROM_READ_VAR(i,Ki);
         EEPROM_READ_VAR(i,Kd);
-        #ifndef DOGLCD
+    #ifndef DOGLCD
         int lcd_contrast;
-        #endif
+    #endif
         EEPROM_READ_VAR(i,lcd_contrast);
 
 		// Call updatePID (similar to when we have processed M301)
@@ -309,9 +315,17 @@ void Config_ResetDefault()
 #endif//PID_ADD_EXTRUSION_RATE
 #endif//PIDTEMP
 
-#ifdef LASER_JTECHPHOT
-    laser.jtech_Res = 3; //Default to 1.5A 1.83Ohm
-#endif    
+#ifdef LASER
+    
+    laser.conf_fireG1       = LASER_FIREON_G1;
+    laser.conf_fireM3M5     = LASER_FIREON_SPINDLE;
+    laser.conf_fireE        = LASER_FIREON_E;
+    
+    #ifdef LASER_JTECHPHOT
+        laser.jtech_Res = 3; //Default to 1.5A 1.83Ohm
+    #endif    
+
+#endif
     
 SERIAL_ECHO_START;
 SERIAL_ECHOLNPGM("Hardcoded Default Settings Loaded");

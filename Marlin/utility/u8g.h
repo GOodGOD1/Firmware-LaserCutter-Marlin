@@ -155,11 +155,11 @@ typedef struct _u8g_dev_arg_irgb_t u8g_dev_arg_irgb_t;
 /*===============================================================*/
 /* generic */
 #if defined(U8G_16BIT)
-typedef uint16_t u8g_uint_t;
-typedef int16_t u8g_int_t;
+    typedef uint16_t    u8g_uint_t;
+    typedef int16_t     u8g_int_t;
 #else
-typedef uint8_t u8g_uint_t;
-typedef int8_t u8g_int_t;
+    typedef uint8_t     u8g_uint_t;
+    typedef int8_t      u8g_int_t;
 #endif
 
 #ifdef OBSOLETE

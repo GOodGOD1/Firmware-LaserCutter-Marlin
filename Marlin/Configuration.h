@@ -323,24 +323,19 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 
 //// MOVEMENT SETTINGS
 #define NUM_AXIS            4 // The axis order in all axis related arrays is X, Y, Z, E
-#define HOMING_FEEDRATE     {3000, 3000, 240, 0}  // set the homing speeds (mm/min)
 
 // default settings
 
-// AMRI Laser Cutter
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   {167.20882, 167.20882, 4000/25.4, 1380/4}
-//#define DEFAULT_MAX_FEEDRATE          {165, 165, 50, 200000}    // (mm/sec)    
-//#define DEFAULT_MAX_ACCELERATION      {5000,5000,5000,500}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
-//#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E max acceleration in mm/s^2 for printing moves 
-//#define DEFAULT_RETRACT_ACCELERATION  3000   // X, Y, Z and E max acceleration in mm/s^2 for r retracts
-
 // FreakyAttic CNC machine CNC6040 parameters
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {400      , 400       , 400   , 100 }  // default steps per unit for Ultimaker
-#define DEFAULT_MAX_FEEDRATE          {1500     , 1500      , 1500  , 25 }    // (mm/sec)
-#define DEFAULT_MAX_ACCELERATION      {100      , 100       , 50    , 2.5 }    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
+    #define ABSOLUTE_MAX_FEEDRATE         3000
 
-#define DEFAULT_ACCELERATION          2000   // X, Y, Z and E max acceleration in mm/s^2 for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  2000   // X, Y, Z and E max acceleration in mm/s^2 for retracts
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   {400      , 400       , 400   , 100 }  // default steps per unit for Ultimaker
+    #define DEFAULT_MAX_FEEDRATE          {ABSOLUTE_MAX_FEEDRATE, ABSOLUTE_MAX_FEEDRATE, 500, 25 }    // (mm/sec
+    #define HOMING_FEEDRATE               {ABSOLUTE_MAX_FEEDRATE, ABSOLUTE_MAX_FEEDRATE, 240, 0 }  // set the homing speeds (mm/min))
+    #define DEFAULT_MAX_ACCELERATION      {100      , 100       , 50    , 2.5 }    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
+
+    #define DEFAULT_ACCELERATION          2000   // X, Y, Z and E max acceleration in mm/s^2 for printing moves
+    #define DEFAULT_RETRACT_ACCELERATION  2000   // X, Y, Z and E max acceleration in mm/s^2 for retracts
 
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
@@ -582,10 +577,10 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
         #define LASER_CONTROL       1
 
     // The following defines select which G codes tell the laser to fire.  It's OK to uncomment more than one.
-        //#define LASER_FIRE_G1       10 // fire the laser on a G1 move, extinguish when the move ends
-        #define LASER_FIRE_SPINDLE  11 // fire the laser on M3, extinguish on M5
-        // #define LASER_FIRE_E        12 // fire the laser when the E axis moves
-
+        #define LASER_FIREON_G1         0   // Fire laser on G1 moves. 0:Disable 1:Enable
+        #define LASER_FIREON_SPINDLE    1   // Fire laser on M3 M5 commands. 0:Disable 1:Enable
+        #define LASER_FIREON_E          0   // Fire laser on E moves. 0:Disable 1:Enable
+        
     // Raster mode enables the laser to etch bitmap data at high speeds.  Increases command buffer size substantially.
     // Comment to disable raster.
         #define LASER_RASTER

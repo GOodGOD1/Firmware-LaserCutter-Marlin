@@ -151,8 +151,9 @@ static void lcd_implementation_init()
 
 static void lcd_implementation_status_screen()
 {
+    extern float    feedrate;
+    
 #ifdef  LASER_JTECHPHOT   // Laser voltage and current
-    extern float   current_laser_voltage; // voltage at laser
     extern float   current_laser_current; // current at laser
 #endif
     
@@ -209,21 +210,21 @@ static void lcd_implementation_status_screen()
     u8g.drawFrame(42,49,10,4);
     u8g.drawPixel(50,43);
     
-    // Progress bar
-    u8g.drawFrame(54,49,73,4);
-
     // SD Card Progress bar and clock
     u8g.setFont(FONT_STATUSMENU);
-
+    u8g.drawFrame(54,49,73,4);
+    
     if (IS_SD_PRINTING)
     {
         // Progress bar
         u8g.drawBox(55,50, (unsigned int)( (71 * card.percentDone())/100) ,2);
     }
     else {
-                         // do nothing
+        // do nothing
     }
-    u8g.setPrintPos(80,47);
+    
+//TIME
+    u8g.setPrintPos(62,47);
     if(starttime != 0)
     {
         uint16_t time = millis()/60000 - starttime/60000;
@@ -233,6 +234,10 @@ static void lcd_implementation_status_screen()
     }else{
         lcd_printPGM(PSTR("--:--"));
     }
+
+//FEEDRATE
+    u8g.setPrintPos(104,47);
+    u8g.print(itostr4((int)feedrate));
     
 #endif
  
