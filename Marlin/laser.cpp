@@ -98,11 +98,7 @@ void laser_init()
     laser.firing      = LASER_OFF;
     laser.mode        = CONTINUOUS;
     laser.last_firing = 0;
-#ifdef __DEBUG
-    laser.diagnostics = true;
-#else
     laser.diagnostics = false;
-#endif
     laser.time        = 0;
     #ifdef LASER_RASTER
       laser.raster_aspect_ratio   = LASER_RASTER_ASPECT_RATIO;

@@ -194,14 +194,19 @@
 #endif //DUAL_X_CARRIAGE
     
 //homing hits the endstop, then retracts by this distance, before it tries to slowly bump again:
-#define X_HOME_RETRACT_MM 5 
-#define Y_HOME_RETRACT_MM 5 
-#define Z_HOME_RETRACT_MM 1 
+#define X_HOME_RETRACT_MM   5 
+#define Y_HOME_RETRACT_MM   5 
+#define Z_HOME_RETRACT_MM   1 
 #define QUICK_HOME  //if this is defined, if both x and y are to be homed, a diagonal move will be performed initially.
 
 #define AXIS_RELATIVE_MODES {false, false, false, false}
 
-#define MAX_STEP_FREQUENCY 40000 // Max step frequency for Ultimaker (5000 pps / half step)
+#ifdef STEPPERS_STEPWIDTH_INCREASE
+    #define MAX_STEP_FREQUENCY  40000 // Max step frequency for Ultimaker
+#else
+    #define MAX_STEP_FREQUENCY  40000 // Max step frequency for Ultimaker (5000 pps / half step)
+#endif 
+
 
 //By default pololu step drivers require an active high signal. However, some high power drivers require an active low signal as step.
 #define INVERT_X_STEP_PIN false
@@ -241,11 +246,11 @@
 #define MINIMUM_PLANNER_SPEED 0.05// (mm/sec)
 
 // MS1 MS2 Stepper Driver Microstepping mode table
-#define MICROSTEP1 LOW,LOW
-#define MICROSTEP2 HIGH,LOW
-#define MICROSTEP4 LOW,HIGH
-#define MICROSTEP8 HIGH,HIGH
-#define MICROSTEP16 HIGH,HIGH
+#define MICROSTEP1      LOW,LOW
+#define MICROSTEP2      HIGH,LOW
+#define MICROSTEP4      LOW,HIGH
+#define MICROSTEP8      HIGH,HIGH
+#define MICROSTEP16     HIGH,HIGH
 
 // Microstep setting (Only functional when stepper driver microstep pins are connected to MCU.
 #define MICROSTEP_MODES {16,16,16,16,16} // [1,2,4,8,16]

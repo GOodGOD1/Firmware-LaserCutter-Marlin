@@ -246,9 +246,13 @@ void st_wake_up() {
   ENABLE_STEPPER_DRIVER_INTERRUPT();
 }
 
-void step_wait(){
-    for(int8_t i=0; i < 6; i++){
-    }
+void step_wait(){   //Tunned for 
+    
+    unsigned int x, i;
+    for(i=0; i <= 60000; i++)
+    {
+        x++;
+    };
 }
 
 
@@ -569,11 +573,12 @@ ISR(TIMER1_COMPA_vect)
 
 
     for(int8_t i=0; i < step_loops; i++) { // Take multiple steps per interrupt (For high speed moves)
-      #ifndef AT90USB
+        
+#ifndef AT90USB
       MSerial.checkRx(); // Check for serial chars.
-      #endif
+#endif
 
-      #ifdef ADVANCE
+#ifdef ADVANCE
       counter_e += current_block->steps_e;
       if (counter_e > 0) {
         counter_e -= current_block->step_event_count;
@@ -584,11 +589,72 @@ ISR(TIMER1_COMPA_vect)
           e_steps[current_block->active_extruder]++;
         }
       }
-      #endif //ADVANCE
+#endif //ADVANCE
 
         counter_x += current_block->steps_x;
+        
+#ifdef STEPPERS_STEPWIDTH_INCREASE
+	/* CODE FROM: https://github.com/buserror/Marlin
+         * The externa stepper controller require much longer pulses
+	 * therfore we 'stage' decompose the pulses between high, and
+	 * low instead of doing each in turn. The extra tests add enough
+	 * lag to allow it work with without needing NOPs */ 
+      if (counter_x > 0) {
+        WRITE(X_STEP_PIN, HIGH);
+      }
+
+      counter_y += current_block->steps_y;
+      if (counter_y > 0) {
+        WRITE(Y_STEP_PIN, HIGH);
+        step_wait();
+      }
+
+      counter_z += current_block->steps_z;
+      if (counter_z > 0) {
+        WRITE(Z_STEP_PIN, HIGH);
+        step_wait();
+      }
+
+      #ifndef ADVANCE
+        counter_e += current_block->steps_e;
+        if (counter_e > 0) {
+          WRITE_E_STEP(HIGH);
+        }
+      #endif //!ADVANCE
+
+      //Wait a few microseconds
+        unsigned int x = micros() + 300;
+        while(micros() < x){};
+        
+      if (counter_x > 0) {
+        counter_x -= current_block->step_event_count;
+        count_position[X_AXIS]+=count_direction[X_AXIS];  
+        WRITE(X_STEP_PIN, LOW);
+      }
+
+      if (counter_y > 0) {
+        counter_y -= current_block->step_event_count;
+        count_position[Y_AXIS]+=count_direction[Y_AXIS];
+        WRITE(Y_STEP_PIN, LOW);
+      }
+
+      if (counter_z > 0) {
+        counter_z -= current_block->step_event_count;
+        count_position[Z_AXIS]+=count_direction[Z_AXIS];
+        WRITE(Z_STEP_PIN, LOW);
+      }
+
+    #ifndef ADVANCE
+        if (counter_e > 0) {
+          counter_e -= current_block->step_event_count;
+          count_position[E_AXIS]+=count_direction[E_AXIS];
+          WRITE_E_STEP(LOW);
+        }
+    #endif //!ADVANCE
+#else //STEPPERS_STEPWIDTH_INCREASE
+        
         if (counter_x > 0) {
-        #ifdef DUAL_X_CARRIAGE
+#ifdef DUAL_X_CARRIAGE
           if (extruder_duplication_enabled){
             WRITE(X_STEP_PIN, !INVERT_X_STEP_PIN);
             WRITE(X2_STEP_PIN, !INVERT_X_STEP_PIN);
@@ -599,12 +665,12 @@ ISR(TIMER1_COMPA_vect)
             else
               WRITE(X_STEP_PIN, !INVERT_X_STEP_PIN);
           }
-        #else
+#else
           WRITE(X_STEP_PIN, !INVERT_X_STEP_PIN);
-        #endif
+#endif
           counter_x -= current_block->step_event_count;
           count_position[X_AXIS]+=count_direction[X_AXIS];
-        #ifdef DUAL_X_CARRIAGE
+#ifdef DUAL_X_CARRIAGE
           if (extruder_duplication_enabled){
             WRITE(X_STEP_PIN, INVERT_X_STEP_PIN);
             WRITE(X2_STEP_PIN, INVERT_X_STEP_PIN);
@@ -615,9 +681,9 @@ ISR(TIMER1_COMPA_vect)
             else
               WRITE(X_STEP_PIN, INVERT_X_STEP_PIN);
           }
-        #else
+#else
           WRITE(X_STEP_PIN, INVERT_X_STEP_PIN);
-        #endif
+#endif
         }
 
         counter_y += current_block->steps_y;
@@ -632,9 +698,9 @@ ISR(TIMER1_COMPA_vect)
       if (counter_z > 0) {
         WRITE(Z_STEP_PIN, !INVERT_Z_STEP_PIN);
 
-        #ifdef Z_DUAL_STEPPER_DRIVERS
+#ifdef Z_DUAL_STEPPER_DRIVERS
           WRITE(Z2_STEP_PIN, !INVERT_Z_STEP_PIN);
-        #endif
+#endif
 
         counter_z -= current_block->step_event_count;
         count_position[Z_AXIS]+=count_direction[Z_AXIS];
@@ -645,7 +711,7 @@ ISR(TIMER1_COMPA_vect)
         #endif
       }
 
-      #ifndef ADVANCE
+#ifndef ADVANCE
         counter_e += current_block->steps_e;
         if (counter_e > 0) {
           WRITE_E_STEP(!INVERT_E_STEP_PIN);
@@ -653,37 +719,41 @@ ISR(TIMER1_COMPA_vect)
           count_position[E_AXIS]+=count_direction[E_AXIS];
           WRITE_E_STEP(INVERT_E_STEP_PIN);
         }
-      #endif //!ADVANCE
+#endif //!ADVANCE
 
-      // steps_l = step count between laser firings
-      //
-      #ifdef LASER
-		counter_l += current_block->steps_l;
-		  if (counter_l > 0) {
-			if (current_block->laser_mode == PULSED && current_block->laser_status == LASER_ON) { // Pulsed Firing Mode
-		  	  laser_fire(current_block->laser_intensity);
-		  	  if (laser.diagnostics) {
-		  	    SERIAL_ECHOPAIR("X: ", counter_x);
-		  	    SERIAL_ECHOPAIR("Y: ", counter_y);
-		  	    SERIAL_ECHOPAIR("L: ", counter_l);
-			  }
-			}
-			#ifdef LASER_RASTER
-			if (current_block->laser_mode == RASTER && current_block->laser_status == LASER_ON) { // Raster Firing Mode
-			  laser_fire(current_block->laser_raster_data[counter_raster]); //For some reason, when comparing raster power to ppm line burns the rasters were around 2% more powerful - going from darkened paper to burning through paper.
-			  if (laser.diagnostics) {
-			    SERIAL_ECHOPAIR("Pixel: ", (float)current_block->laser_raster_data[counter_raster]);
-		      }
-		      counter_raster++;
-			}
-			#endif // LASER_RASTER
-		  counter_l -= current_block->step_event_count;
-		  }
-		  if (current_block->laser_duration != 0 && (laser.last_firing + current_block->laser_duration < micros())) {
-			if (laser.diagnostics) SERIAL_ECHOLN("Laser firing duration elapsed, in interrupt fast loop");
-		    laser_extinguish();
-		  }
-      #endif // LASER
+#endif //STEPPERS_STEPWIDTH_INCREASE
+        
+// steps_l = step count between laser firings
+//
+#ifdef LASER
+        
+    counter_l += current_block->steps_l;
+    if (counter_l > 0) {
+          if (current_block->laser_mode == PULSED && current_block->laser_status == LASER_ON) { // Pulsed Firing Mode
+            laser_fire(current_block->laser_intensity);
+            if (laser.diagnostics) {
+              SERIAL_ECHOPAIR("X: ", counter_x);
+              SERIAL_ECHOPAIR("Y: ", counter_y);
+              SERIAL_ECHOPAIR("L: ", counter_l);
+            }
+          }
+          #ifdef LASER_RASTER
+          if (current_block->laser_mode == RASTER && current_block->laser_status == LASER_ON) { // Raster Firing Mode
+            laser_fire(current_block->laser_raster_data[counter_raster]); //For some reason, when comparing raster power to ppm line burns the rasters were around 2% more powerful - going from darkened paper to burning through paper.
+            if (laser.diagnostics) {
+              SERIAL_ECHOPAIR("Pixel: ", (float)current_block->laser_raster_data[counter_raster]);
+        }
+        counter_raster++;
+          }
+          #endif // LASER_RASTER
+    counter_l -= current_block->step_event_count;
+    }
+    
+    if (current_block->laser_duration != 0 && (laser.last_firing + current_block->laser_duration < micros())) {
+          if (laser.diagnostics) SERIAL_ECHOLN("Laser firing duration elapsed, in interrupt fast loop");
+      laser_extinguish();
+    }
+#endif // LASER
 
       step_events_completed += 1;
       if(step_events_completed >= current_block->step_event_count) break;
