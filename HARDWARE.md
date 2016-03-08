@@ -3,7 +3,7 @@
 The firmware has been tested and configured for the RAMPS 1.4 + Arduino Mega + Smart LCD controller.
 It could work on any other RepRap compatible hardware, you will need to modify the pins.h definitions for your board.
 
-![](https://github.com/freakyattic/buildlog-lasercutter-marlin/blob/master/ArduinoAddons/ramps.jpg)
+![](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/ArduinoAddons/ramps.jpg)
 
 The low power laser module used it is from [J. Tech. Photonics](http://http://jtechphotonics.com/), the 2.8W Laser and Driver kit that includes
 
@@ -12,4 +12,4 @@ The low power laser module used it is from [J. Tech. Photonics](http://http://jt
 * Power Adapter 12V 2.5A, US Style Plug
 * Laser Safety Goggles for 445nm Lasers
 
-![](http://jtechphotonics.com/?product=new-2-8w-laser-and-2-5amp-safety-compliant-driver-kit-with-us-style-power-adapter#)
+![](http://jtechphotonics.com/wp-content/uploads/2014/10/Highlight-FDA-Laser-Kit-800.jpg)
