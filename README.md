@@ -17,7 +17,8 @@ Marlin-based laser cutter/engraver information pages:
    - Vector cutting of lines and arcs at your given power level.
    - Display the laser temperature and current.
    - Add extra display menus to handle the laser.
-   
+
+[![](http://img.youtube.com/vi/5hRFJhGyTA4/0.jpg)](https://www.youtube.com/watch?v=5hRFJhGyTA4)   
 ![](https://github.com/freakyattic/buildlog-lasercutter-marlin/blob/master/Documents/MarlinLaser_MainScreen.jpg)
 ![](https://github.com/freakyattic/buildlog-lasercutter-marlin/blob/master/Documents/MarlinLaser_StatusScreen.jpg)
 ![](https://github.com/freakyattic/buildlog-lasercutter-marlin/blob/master/Documents/MarlinLaser_test1.jpg)
