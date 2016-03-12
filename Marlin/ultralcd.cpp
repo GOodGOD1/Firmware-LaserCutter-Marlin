@@ -63,7 +63,7 @@ static void lcd_sdcard_menu();
 	static void lcd_laser_focus_menu();
 	static void lcd_laser_menu();
 	static void lcd_laser_test_fire_menu();
-	static void laser_test_fire(uint8_t power, uint8_t dwell);
+	static void laser_test_fire(uint8_t power, int dwell);
 	static void laser_set_focus(float f_length);
 	static void action_laser_focus_custom();
 	static void action_laser_focus_1mm();
@@ -387,22 +387,30 @@ static void lcd_prepare_menu()
 {
     START_MENU();
     MENU_ITEM(back, MSG_MAIN, lcd_main_menu);
+    
 #ifdef SDSUPPORT
     //MENU_ITEM(function, MSG_AUTOSTART, lcd_autostart_sd);
 #endif
-    MENU_ITEM(gcode, MSG_DISABLE_STEPPERS, PSTR("M84"));
-    MENU_ITEM(gcode, "Enable Steppers", PSTR("M17"));
+    
+    MENU_ITEM(gcode, "Go to ZERO", PSTR("G0 X0 Y0 Z0"));
+    MENU_ITEM(submenu, MSG_MOVE_AXIS, lcd_move_menu);
+    MENU_ITEM(gcode, MSG_SET_ORIGIN, PSTR("G92 X0 Y0 Z0"));
+    
 #ifdef LASER
     MENU_ITEM(gcode, MSG_AUTO_HOME, PSTR("G28 X Y F2000"));
 #else
     MENU_ITEM(gcode, MSG_AUTO_HOME, PSTR("G28"));
 #endif
-    MENU_ITEM(gcode, MSG_SET_ORIGIN, PSTR("G92 X0 Y0 Z0"));
+    
+    MENU_ITEM(gcode, MSG_DISABLE_STEPPERS, PSTR("M84"));
+    MENU_ITEM(gcode, "Enable Steppers",    PSTR("M17"));
+    
 #ifndef LASER
     MENU_ITEM(function, MSG_PREHEAT_PLA, lcd_preheat_pla);
     MENU_ITEM(function, MSG_PREHEAT_ABS, lcd_preheat_abs);
     MENU_ITEM(function, MSG_COOLDOWN, lcd_cooldown);
 #endif
+    
 #if PS_ON_PIN > -1
     if (powersupply)
     {
@@ -411,7 +419,7 @@ static void lcd_prepare_menu()
         MENU_ITEM(gcode, MSG_SWITCH_PS_ON, PSTR("M80"));
     }
 #endif
-    MENU_ITEM(submenu, MSG_MOVE_AXIS, lcd_move_menu);
+    
     END_MENU();
 }
 
@@ -787,8 +795,11 @@ static void lcd_control_retract_menu()
         START_MENU();
 
         MENU_ITEM(back, MSG_MAIN, lcd_main_menu);
-        MENU_ITEM(submenu, "Set Focus", lcd_laser_focus_menu);
+#ifdef LASER_JTECHPHOT        
+        MENU_ITEM(function,"LaserOn     8%  5sec", action_laser_test_20_100ms);
+#endif        
         MENU_ITEM(submenu, "Test Fire", lcd_laser_test_fire_menu);
+        MENU_ITEM(submenu, "Set Focus", lcd_laser_focus_menu);
         MENU_ITEM(submenu, "Laser Config.", lcd_laser_config_menu);
         
     #ifdef LASER_PERIPHERALS
@@ -805,8 +816,8 @@ static void lcd_control_retract_menu()
     static void lcd_laser_test_fire_menu() {
         START_MENU();
         MENU_ITEM(back, "Laser Functions", lcd_laser_menu);
+        MENU_ITEM(function, " 8%   5sec", action_laser_test_20_100ms);
         MENU_ITEM(function, " 20%  50ms", action_laser_test_20_50ms);
-        MENU_ITEM(function, " 20% 100ms", action_laser_test_20_100ms);
         MENU_ITEM(function, "100%  50ms", action_laser_test_100_50ms);
         MENU_ITEM(function, "100% 100ms", action_laser_test_100_100ms);
         MENU_ITEM(function, "Warm-up Laser 2sec", action_laser_test_warm);
@@ -826,7 +837,7 @@ static void lcd_control_retract_menu()
     }
 
     static void action_laser_test_20_100ms() {
-        laser_test_fire(20, 100);
+        laser_test_fire(8, 5000);
     }
 
     static void action_laser_test_100_50ms() {
@@ -841,7 +852,7 @@ static void lcd_control_retract_menu()
         laser_test_fire(15, 2000);
     }
 
-    static void laser_test_fire(uint8_t power, uint8_t dwell) {
+    static void laser_test_fire(uint8_t power, int dwell) {
         enquecommand_P(PSTR("M80"));  // Enable laser accessories since we don't know if its been done (and there's no penalty for doing it again).
         laser_fire(power);
         delay(dwell);

@@ -53,6 +53,8 @@ extern float current_temperature_bed;
   extern float bedKp,bedKi,bedKd;
 #endif
   
+void max_temp_error (uint8_t e);  
+
 //high level conversion routines, for use outside of temperature.cpp
 //inline so that there is no performance decrease.
 //deg=degreeCelsius

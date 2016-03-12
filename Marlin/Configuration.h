@@ -62,7 +62,7 @@
 // #define CUSTOM_MENDEL_NAME "This Mendel"
 
 // This defines the number of extruders
-#define EXTRUDERS 1
+#define EXTRUDERS    1
 
 //// The following define selects which power supply you have. Please choose the one that matches your setup
 // 1 = ATX
@@ -141,6 +141,7 @@
 #define PIDTEMP
 #define BANG_MAX 255 // limits current to nozzle while in bang-bang mode; 255=full current
 #define PID_MAX 255 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+
 #ifdef PIDTEMP
   //#define PID_DEBUG // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1 // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
@@ -211,8 +212,8 @@
 //if PREVENT_DANGEROUS_EXTRUDE is on, you can still disable (uncomment) very long bits of extrusion separately.
 //#define PREVENT_LENGTHY_EXTRUDE
 
-#define EXTRUDE_MINTEMP 170
-#define EXTRUDE_MAXLENGTH (X_MAX_LENGTH+Y_MAX_LENGTH) //prevent extrusion of very large distances.
+    #define EXTRUDE_MINTEMP     170
+    #define EXTRUDE_MAXLENGTH   (X_MAX_LENGTH+Y_MAX_LENGTH) //prevent extrusion of very large distances.
 
 //===========================================================================
 //=============================Mechanical Settings===========================
@@ -327,7 +328,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // default settings
 
 // FreakyAttic CNC machine CNC6040 parameters
-    #define ABSOLUTE_MAX_FEEDRATE         3000
+    #define ABSOLUTE_MAX_FEEDRATE         2500
 
     #define DEFAULT_AXIS_STEPS_PER_UNIT   {400      , 400       , 400   , 100 }  // default steps per unit for Ultimaker
     #define DEFAULT_MAX_FEEDRATE          {ABSOLUTE_MAX_FEEDRATE, ABSOLUTE_MAX_FEEDRATE, 500, 25 }    // (mm/sec
@@ -568,7 +569,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
         #define LASER_JTECHPHOT     // Attached to a JTech Phonotincs Laser board - Measure laser current.
 
     // Stepper motors Step pulse width increment
-    #define STEPPERS_STEPWIDTH_INCREASE     //Uncomment to increase the step signal width, commend for standar stepper motor controller.
+        #define STEPPERS_STEPWIDTH_INCREASE     //Uncomment to increase the step signal width, commend for standar stepper motor controller.
 
     // The following define selects how to control the laser.  Please choose the one that matches your setup.
     // NOTE: check <pins.h> for the pin numbers of LASER_FIRING_PIN and LASER_INTENSITY_PIN for your board.
@@ -576,10 +577,17 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
     //      2 = Two pin control - A firing pin for which LOW = off, HIGH = on, and a seperate intensity pin which carries a constant PWM signal and adjusts duty cycle to control intensity
         #define LASER_CONTROL       1
 
-    // The following defines select which G codes tell the laser to fire.  It's OK to uncomment more than one.
-        #define LASER_FIREON_G1         0   // Fire laser on G1 moves. 0:Disable 1:Enable
-        #define LASER_FIREON_SPINDLE    1   // Fire laser on M3 M5 commands. 0:Disable 1:Enable
-        #define LASER_FIREON_E          0   // Fire laser on E moves. 0:Disable 1:Enable
+    // Laser temperature control.
+        #define LASER_MAX_TEMP              40    // Max allowed laser case temp. Uncomment to disable error display.
+        
+    // Active laser cooling using Termical Electric Cooling (TEC)
+        //#define  LASER_ENABLE_TECOOLING         // Enable Termical Electric Cooling (TEC) to cooldown laser head. Using Temp T0 and Heater0 output. Comment to disable
+        #define LASER_TECOOLING_TEMP        24  // Termical Electric Cooling (TEC) to cooldown laser head. Using Temp T0 and Heater0 output
+
+    // Default values : defines select which G codes tell the laser to fire.  It's OK to uncomment more than one.
+        #define LASER_FIREON_G1             0   // Fire laser on G1 moves. 0:Disable 1:Enable
+        #define LASER_FIREON_SPINDLE        1   // Fire laser on M3 M5 commands. 0:Disable 1:Enable
+        #define LASER_FIREON_E              0   // Fire laser on E moves. 0:Disable 1:Enable
         
     // Raster mode enables the laser to etch bitmap data at high speeds.  Increases command buffer size substantially.
     // Comment to disable raster.
@@ -597,18 +605,20 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
     // #define G5_BEZIER
 
     // Laser driver configurations - Change it for your laser.
-#ifdef  LASER_JTECHPHOT
-    #define LASER_PWM               5000 // hertz - PWM control freq.
-    #define LASER_POWER             2.5  // Laser Power
-    #define LASER_FOCAL_HEIGHT      0 // z axis position at which the laser is focused
-#else
+    #ifdef  LASER_JTECHPHOT
+        #define LASER_PWM               5000 // hertz - PWM control freq.
+        #define LASER_POWER             2.5  // Laser Power
+        #define LASER_FOCAL_HEIGHT      0 // z axis position at which the laser is focused
+    #else
+        //Generic Laser.
+        #define LASER_POWER             40  // Laser Power
+        #define LASER_PWM               25000 // hertz - PWM control freq.
+        #define LASER_FOCAL_HEIGHT      74.50 // z axis position at which the laser is focused
+    #endif
 
-    //Generic Laser.
-    #define LASER_POWER             40  // Laser Power
-    #define LASER_PWM               25000 // hertz - PWM control freq.
-    #define LASER_FOCAL_HEIGHT      74.50 // z axis position at which the laser is focused
+//===========================================================================
 
-#endif
+
 
 #include "Configuration_adv.h"
 #include "thermistortables.h"

@@ -55,6 +55,58 @@
 // look here for descriptions of gcodes: http://linuxcnc.org/handbook/gcode/g-code.html
 // http://objects.reprap.org/wiki/Mendel_User_Manual:_RepRapGCodes
 
+//=============================================================================
+//    LASER RELATED COMMANDS   -   GCODES MCODES
+//=============================================================================
+// G0  - G1 Similar 
+// G1  - Coordinated Movement X Y Z E F
+//          Sxx -   Laser Power 0-100
+//          Lxx -   Laser Duration (microseconds)
+//          Pxx -   Laser PPM (pulses per millimeter) for pulsed firing mode
+//          Bxx -   Laser Mode 0:CONTINUOUS, 1:PULSED, 2:RASTER
+//          Dxx -   Laser Serial Debug, 0:off 1:on  
+// G2  - CW ARC
+//          Sxx -   Laser Power 0-100
+//          Lxx -   Laser Duration (microseconds)
+//          Pxx -   Laser PPM (pulses per millimeter) for pulsed firing mode
+//          Bxx -   Laser Mode 0:CONTINUOUS, 1:PULSED, 2:RASTER
+//          Dxx -   Laser Serial Debug, 0:off 1:on
+// G3  - CCW ARC
+//          Sxx -   Laser Power 0-100
+//          Lxx -   Laser Duration (microseconds)
+//          Pxx -   Laser PPM (pulses per millimeter) for pulsed firing mode
+//          Bxx -   Laser Mode 0:CONTINUOUS, 1:PULSED, 2:RASTER
+//          Dxx -   Laser Serial Debug, 0:off 1:on
+// G4  - Dwell S<seconds> or P<milliseconds>
+// G5  - Bezier curve - from http://forums.reprap.org/read.php?147,93577
+// G7  - Execute Laser Raster line - Base64
+//          Lxx     -   Number of pixels
+//          $x      -   Raseter direction 0:toRight, 1:toLeft
+//          Dxxxxx  -   Base64 pixel encoding
+//
+// M80  - Turn on Power Supply
+// M81  - Turn off Power Supply
+// M104 - Set TE Cooling target temp, if enabled. Sxx:Temp
+// M106 - Fan on
+// M107 - Fan off
+// M649 - Set laser options     -- USED???????????????????????
+//          Sxx -   Laser Power Intensity 0-100
+//          Lxx -   Laser Duration (microseconds)
+//          Pxx -   Laser PPM (pulses per millimeter) for pulsed firing mode
+//          Bxx -   Laser Mode 0:CONTINUOUS, 1:PULSED, 2:RASTER
+//          Dxx -   Laser Serial Debug, 0:off 1:on
+//          Rxx -   Laser raster mm per pulse
+//          Fxx -   Feed rate
+// M650 - Set peel distance    -- USED???????????????????????
+//          Dxx -   Peel Distance
+//          Sxx -   Peel Speed
+//          Pxx -   Peel Pause
+// M651 - Run peel move
+//
+//=============================================================================
+//=============================================================================
+
+
 //Implemented Codes
 //-------------------
 // G0  -> G1
@@ -1094,33 +1146,35 @@ void process_commands()
 	#endif // G5_BEZIER
     #ifdef LASER_RASTER
     case 7: //G7 Execute raster line
-      if (code_seen('L')) laser.raster_raw_length = int(code_value());
-	  if (code_seen('$')) {
-		laser.raster_direction = (bool)code_value();
-		destination[Y_AXIS] = current_position[Y_AXIS] + (laser.raster_mm_per_pulse * laser.raster_aspect_ratio); // increment Y axis
-	  }
-      if (code_seen('D')) laser.raster_num_pixels = base64_decode(laser.raster_data, &cmdbuffer[bufindr][strchr_pointer - cmdbuffer[bufindr] + 1], laser.raster_raw_length);
-	  if (!laser.raster_direction) {
-	    destination[X_AXIS] = current_position[X_AXIS] - (laser.raster_mm_per_pulse * laser.raster_num_pixels);
-	    if (laser.diagnostics) {
-          SERIAL_ECHO_START;
-          SERIAL_ECHOLN("Negative Raster Line");
+        if (code_seen('L')) laser.raster_raw_length = int(code_value());
+        if (code_seen('$')) {
+            laser.raster_direction = (bool)code_value();
+            destination[Y_AXIS] = current_position[Y_AXIS] + (laser.raster_mm_per_pulse * laser.raster_aspect_ratio); // increment Y axis
         }
-	  } else {
+        
+        if (code_seen('D')) laser.raster_num_pixels = base64_decode(laser.raster_data, &cmdbuffer[bufindr][strchr_pointer - cmdbuffer[bufindr] + 1], laser.raster_raw_length);
+        
+        if (!laser.raster_direction) {
+            destination[X_AXIS] = current_position[X_AXIS] - (laser.raster_mm_per_pulse * laser.raster_num_pixels);
+            if (laser.diagnostics) {
+                SERIAL_ECHO_START;
+                SERIAL_ECHOLN("Negative Raster Line");
+            }
+        } else {
 	    destination[X_AXIS] = current_position[X_AXIS] + (laser.raster_mm_per_pulse * laser.raster_num_pixels);
 	    if (laser.diagnostics) {
-          SERIAL_ECHO_START;
-          SERIAL_ECHOLN("Positive Raster Line");
+                SERIAL_ECHO_START;
+                SERIAL_ECHOLN("Positive Raster Line");
+            }
         }
-	  }
 	  
-	  laser.ppm = 1 / laser.raster_mm_per_pulse; //number of pulses per millimetre
-	  laser.duration = (1000000 / ( feedrate / 60)) / laser.ppm; // (1 second in microseconds / (time to move 1mm in microseconds)) / (pulses per mm) = Duration of pulse, taking into account feedrate as speed and ppm
-	  
-	  laser.mode = RASTER;
-	  laser.status = LASER_ON;
-	  laser.fired = RASTER;
-	  prepare_move();
+        laser.ppm = 1 / laser.raster_mm_per_pulse; //number of pulses per millimetre
+        laser.duration = (1000000 / ( feedrate / 60)) / laser.ppm; // (1 second in microseconds / (time to move 1mm in microseconds)) / (pulses per mm) = Duration of pulse, taking into account feedrate as speed and ppm
+
+        laser.mode = RASTER;
+        laser.status = LASER_ON;
+        laser.fired = RASTER;
+        prepare_move();
 
       break;
 	#endif // LASER_RASTER
@@ -1536,10 +1590,13 @@ void process_commands()
         }
       }
      break;
+     
     case 104: // M104
-      if(setTargetedHotend(104)){
-        break;
-      }
+      
+        //Check if there is active extruders
+            if(setTargetedHotend(104)){
+              break;
+            }
       if (code_seen('S')) setTargetHotend(code_value(), tmp_extruder);
 #ifdef DUAL_X_CARRIAGE
       if (dual_x_carriage_mode == DXC_DUPLICATION_MODE && tmp_extruder == 0)

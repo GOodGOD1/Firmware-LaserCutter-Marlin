@@ -66,6 +66,7 @@ typedef struct {
     void    laser_extinguish();
     void    laser_update_lifetime();
     void    laser_set_mode(int mode);
+    
 #ifdef LASER_PERIPHERALS
     bool    laser_peripherals_ok();
     void    laser_peripherals_on();

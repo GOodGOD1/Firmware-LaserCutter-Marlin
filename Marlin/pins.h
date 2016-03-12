@@ -391,106 +391,118 @@
     #define SDSS               53
     #define LED_PIN            13
 
-  #if LASER_CONTROL == 1
-      #define LASER_FIRING_PIN      5
-    #endif
-  #if LASER_CONTROL == 2
-      #define LASER_INTENSITY_PIN   6 // Digital pins 2, 3, 5, 6, 7, 8 are attached to timers we can use
-      #define LASER_FIRING_PIN      5
+//-----------------------------------------------------------------------------
+//      LASER PIN DEFINITIONS
+//
+//  NOTE: If other board it is used, copy this section in pins.h
+//-----------------------------------------------------------------------------
+
+        #if LASER_CONTROL == 1
+            #define LASER_FIRING_PIN      5
+        #endif
+
+        #if LASER_CONTROL == 2
+            #define LASER_INTENSITY_PIN   6 // Digital pins 2, 3, 5, 6, 7, 8 are attached to timers we can use
+            #define LASER_FIRING_PIN      5
+        #endif
+
+        #ifdef  LASER_JTECHPHOT
+            // Configuration for the JTech Photonics Laser board. Enable to display laser current.
+            #define     LASER_JTECHPHOT_PIN_VIN     3      //Analog input for input voltage
+            #define     LASER_JTECHPHOT_PIN_VLASER  4      //Analog input for laser voltage
+        #endif
+
+        #ifdef LASER_POWER_DOWN
+            #define LASER_POWER_PIN 9 // This is currently hard-coded to timer2 which services pins 9, 10
+        #endif // LASER_POWER_DOWN
+
+        #ifdef LASER_PERIPHERALS
+            #define LASER_COOLANT       64
+            #define LASER_AIR           40
+            #define LASER_POWER         44
+            #define LASER_EXHAUST       42
+        #endif // LASER_PERIPHERALS
+
+//-----------------------------------------------------------------------------
+
   #endif
 
-#ifdef  LASER_JTECHPHOT
-    // Configuration for the JTech Photonics Laser board. Enable to display laser current.
-    #define     LASER_JTECHPHOT_PIN_VIN     3      //Analog input for input voltage
-    #define     LASER_JTECHPHOT_PIN_VLASER  4      //Analog input for laser voltage
-#endif
-
-  #ifdef LASER_POWER_DOWN
-    #define LASER_POWER_PIN 9 // This is currently hard-coded to timer2 which services pins 9, 10
-  #endif // LASER_POWER_DOWN
-  #ifdef LASER_PERIPHERALS
-    #define LASER_COOLANT       64
-    #define LASER_AIR           40
-    #define LASER_POWER         44
-    #define LASER_EXHAUST       42
-  #endif // LASER_PERIPHERALS
-
-  #endif
-
-  #if MOTHERBOARD == 33 || MOTHERBOARD == 35 || MOTHERBOARD == 67
-    #define FAN_PIN            9 // (Sprinter config)
-  #else
-    #define FAN_PIN            4 // IO pin. Buffer needed
-  #endif
-
-  #if MOTHERBOARD == 77
-    #define FAN_PIN            8
-  #endif
-
-  #if MOTHERBOARD == 35
-    #define CONTROLLERFAN_PIN  10 //Pin used for the fan to cool controller
-  #endif
-
-  #define PS_ON_PIN          12
-
-  #if defined(REPRAP_DISCOUNT_SMART_CONTROLLER) || defined(G3D_PANEL)
-    #define KILL_PIN           41
-  #else
-    #define KILL_PIN           -1
-  #endif
-
-  #if MOTHERBOARD == 35
-    #define HEATER_0_PIN       8
-  #else
-    #define HEATER_0_PIN       10   // EXTRUDER 1
-  #endif
-
-  #if MOTHERBOARD == 33 || MOTHERBOARD == 67
-    #define HEATER_1_PIN       -1
-  #else
-    #define HEATER_1_PIN       9    // EXTRUDER 2 (FAN On Sprinter)
-  #endif
-
-  #define HEATER_2_PIN       -1
-
-  #if MOTHERBOARD == 77
-    #define HEATER_0_PIN       10
-    #define HEATER_1_PIN       12
-    #define HEATER_2_PIN       6
-  #endif
-
-  #define TEMP_0_PIN         13   // ANALOG NUMBERING
-  #define TEMP_1_PIN         15   // ANALOG NUMBERING
-  #define TEMP_2_PIN         -1   // ANALOG NUMBERING
-
-  #if MOTHERBOARD == 35
-    #define HEATER_BED_PIN     -1    // NO BED
-  #else
-    #if MOTHERBOARD == 77
-      #define HEATER_BED_PIN     9    // BED
+    #if MOTHERBOARD == 33 || MOTHERBOARD == 35 || MOTHERBOARD == 67
+        #define FAN_PIN            9 // (Sprinter config)
     #else
-      #define HEATER_BED_PIN     8    // BED
-    #endif
-  #endif
-  #define TEMP_BED_PIN       14   // ANALOG NUMBERING
-
-
-
-  #ifdef NUM_SERVOS
-    #define SERVO0_PIN         11
-
-    #if NUM_SERVOS > 1
-      #define SERVO1_PIN         6
+        #define FAN_PIN            4 // IO pin. Buffer needed
     #endif
 
-    #if NUM_SERVOS > 2
-      #define SERVO2_PIN         5
+    #if MOTHERBOARD == 77
+        #define FAN_PIN            8
     #endif
 
-    #if NUM_SERVOS > 3
-      #define SERVO3_PIN         4
+    #if MOTHERBOARD == 35
+        #define CONTROLLERFAN_PIN  10 //Pin used for the fan to cool controller
     #endif
-  #endif
+
+    #define PS_ON_PIN          12
+
+    #if defined(REPRAP_DISCOUNT_SMART_CONTROLLER) || defined(G3D_PANEL)
+        #define KILL_PIN           41
+    #else
+        #define KILL_PIN           -1
+    #endif
+
+    #if MOTHERBOARD == 35
+        //#define HEATER_0_PIN       8    //  Default
+        #define HEATER_0_PIN       10   // LASER - used for the TE Cooling
+    #else
+        #define HEATER_0_PIN       10   // EXTRUDER 1
+    #endif
+
+    #if MOTHERBOARD == 33 || MOTHERBOARD == 67
+        #define HEATER_1_PIN       -1
+    #else
+        #define HEATER_1_PIN       9    // EXTRUDER 2 (FAN On Sprinter)
+    #endif
+
+    #define HEATER_2_PIN       -1
+
+    #if MOTHERBOARD == 77
+      #define HEATER_0_PIN       10
+      #define HEATER_1_PIN       12
+      #define HEATER_2_PIN       6
+    #endif
+
+    #define TEMP_0_PIN         13   // ANALOG NUMBERING
+    #define TEMP_1_PIN         15   // ANALOG NUMBERING
+    #define TEMP_2_PIN         -1   // ANALOG NUMBERING
+
+    #if MOTHERBOARD == 35
+      #define HEATER_BED_PIN     -1    // NO BED
+    #else
+      #if MOTHERBOARD == 77
+        #define HEATER_BED_PIN     9    // BED
+      #else
+        #define HEATER_BED_PIN     8    // BED
+      #endif
+    #endif
+
+    #define TEMP_BED_PIN       14   // ANALOG NUMBERING
+
+
+
+    #ifdef NUM_SERVOS
+        #define SERVO0_PIN         11
+
+        #if NUM_SERVOS > 1
+            #define SERVO1_PIN         6
+        #endif
+
+        #if NUM_SERVOS > 2
+            #define SERVO2_PIN         5
+        #endif
+
+        #if NUM_SERVOS > 3
+            #define SERVO3_PIN         4
+        #endif
+    #endif
 
   #ifdef ULTRA_LCD
 
@@ -1823,14 +1835,6 @@
     #define BLEN_A 0
   #endif
 #endif //ULTRA_LCD
-
-  #if LASER_CONTROL == 1
-      #define LASER_FIRING_PIN    5
-    #endif
-  #if LASER_CONTROL == 2
-      #define LASER_INTENSITY_PIN 5 // Digital pins 2, 3, 5, 6, 7, 8 are attached to timers we can use
-      #define LASER_FIRING_PIN  2
-  #endif
 
 #endif
 

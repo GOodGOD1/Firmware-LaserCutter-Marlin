@@ -37,7 +37,12 @@
 //===========================================================================
 //=============================public variables============================
 //===========================================================================
+#ifdef  LASER_ENABLE_TECOOLING
+    int     target_temperature[EXTRUDERS]       = { LASER_TECOOLING_TEMP };
+#else
     int     target_temperature[EXTRUDERS]       = { 0 };
+#endif    
+    
     int     target_temperature_bed              = 0;
     int     current_temperature_raw[EXTRUDERS]  = { 0 };
     float   current_temperature[EXTRUDERS]      = { 0.0 };
@@ -425,7 +430,13 @@ void manage_heater()
     pid_input = current_temperature[e];
 
     #ifndef PID_OPENLOOP
-        pid_error[e] = target_temperature[e] - pid_input;
+
+        #ifdef  LASER_ENABLE_TECOOLING
+            pid_error[e] = pid_input - target_temperature[e];
+        #else
+            pid_error[e] = target_temperature[e] - pid_input;
+        #endif    
+        
         if(pid_error[e] > PID_FUNCTIONAL_RANGE) {
           pid_output = BANG_MAX;
           pid_reset[e] = true;
@@ -719,6 +730,13 @@ static void updateTemperaturesFromRawValues()
             break;
     }
     current_laser_current = temp;
+
+#ifdef LASER_MAX_TEMP        
+    //CHECK THE LASER TEMPERATURE MAXIMUM TEMP
+    if(current_temperature[0] > LASER_MAX_TEMP)
+        max_temp_error(0);  //Trigger max temperature error.
+#endif
+        
 #endif
     
     //Reset the watchdog after we know we have a temperature measurement.

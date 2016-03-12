@@ -5,6 +5,17 @@ It could work on any other RepRap compatible hardware, you will need to modify t
 
 ![](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/ArduinoAddons/ramps.jpg)
 
+# Connections
+
+The firmware has been configure to be connected using the following pin connections.
+
+![](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/ArduinoAddons/Ramps_1.4_Freakyattic_MarlinLaser_Connections.png)
+
+# CNC Machine
+
+The RAMPS board controlls a CNC machine model CNC6040, connecting the CNC controller board port to the STEP/DIR pins in the RAMPS board, with the Stepper drivers removed.
+
+# Laser Unit
 The low power laser module used it is from [J. Tech. Photonics](http://http://jtechphotonics.com/), the 2.8W Laser and Driver kit that includes
 
 * 2.8W 445nm 9mm Laser Diode Component (with 2.5′ Mini Fit Jr. Connector Cable included)
