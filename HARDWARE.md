@@ -3,13 +3,11 @@
 The firmware has been tested and configured for the RAMPS 1.4 + Arduino Mega + Smart LCD controller.
 It could work on any other RepRap compatible hardware, you will need to modify the pins.h definitions for your board.
 
-![](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/ArduinoAddons/ramps.jpg)
-
-# Connections
-
 The firmware has been configure to be connected using the following pin connections.
 
-![](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/ArduinoAddons/Ramps_1.4_Freakyattic_MarlinLaser_Connections.png)
+![](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/Documents/Ramps_1.4_Freakyattic_MarlinLaser_Connections.png)
+
+![](https://github.com/freakyattic/Firmware-LaserCutter-Marlin/blob/master/ArduinoAddons/ramps.jpg)
 
 # CNC Machine
 
